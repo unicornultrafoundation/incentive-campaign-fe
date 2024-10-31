@@ -103,4 +103,12 @@
     max-width: 100vw; /* Giới hạn container theo viewport */
     overflow: hidden; /* Ngăn nội dung tràn ra ngoài */
   }
+
+  .text-gradient {
+    /* Background text */
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
 }

@@ -20,7 +20,7 @@ const config: Config = {
         'revert-layer': 'revert-layer',
       },
       screens: {
-        mobile: '480px',
+        mobile: '430px',
         tablet: '768px',
         laptop: '1280px',
         desktop: '1512px',

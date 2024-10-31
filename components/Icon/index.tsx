@@ -44,6 +44,11 @@ import NoDataImg from '@/assets/Image/NoData.png';
 import WalletConnect from '@/assets/Image/walletconnect.png';
 import SearchIcon from '@/components/Icon/Search';
 import U2UWalletIcon from '@/components/Icon/U2UWallet';
+import HomeSection2Ellipse from '@/components/Icon/home-section2-ellipse-bg.png';
+import HomeSection2Ellipse2 from '@/components/Icon/home-section2-ellipse-2.png';
+import HomeSection2Bg from '@/components/Icon/home-section2-bg.png';
+import IconWarning from '@/components/Icon/icon-warning.png';
+import LogoCoinList from '@/components/Icon/logo-coinlist.png';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -135,4 +140,20 @@ Icon.NoDataImg = (props: Omit<ImageProps, 'src' | 'alt'>) => (
 );
 Icon.WalletConnect = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="" src={WalletConnect} {...props} />
+);
+
+Icon.HomeSection2Ellipse = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="" src={HomeSection2Ellipse} {...props} />
+);
+Icon.HomeSection2Ellipse2 = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="" src={HomeSection2Ellipse2} {...props} />
+);
+Icon.HomeSection2Bg = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="" src={HomeSection2Bg} {...props} />
+);
+Icon.IconWarning = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="" src={IconWarning} {...props} />
+);
+Icon.LogoCoinList = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="" src={LogoCoinList} {...props} />
 );
