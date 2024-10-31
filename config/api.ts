@@ -7,12 +7,12 @@ export const BASE_REQUEST_OPTIONS = {
 
 /** API endpoints for proxy api requests **/
 export const SERVER_ENDPOINTS = {
-  CONNECT: '/public/verify',
+  CONNECT: '/auth/connect',
 };
 
 /** API endpoints for client-side api requests **/
 export const API_ENDPOINTS = {
-  CONNECT: '/api/public/verify',
+  CONNECT: '/auth/connect',
   DISCONNECT: '/public/disconnect',
   GET_PROFILE: '/api/user/info',
   GET_MEMBER: '/api/user/members',

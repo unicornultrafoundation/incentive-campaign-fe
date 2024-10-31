@@ -19,9 +19,7 @@ export namespace APIParams {
 
   /** Mutation Apis **/
   export interface Connect {
-    refCode?: string;
-    address: string;
-    message: string;
+    signer: string;
     signature: string;
   }
 
