@@ -15,11 +15,8 @@ import { useAuth } from '@/hooks/useAuth';
 import useWalletStore from '@/store/connect-wallet';
 import { FormState } from '@/types/form';
 import { shortenAddress } from '@/utils/string';
-
-import HeaderSearchIcon from '../Icon/HeaderSearch';
-
-import CheckNode from './CheckNode';
-
+import useIsMobile from '@/hooks/useIsMobile';
+import Button from '../Button';
 // import LocaleSwitcher from '@/components/LocaleSwitcher/LocaleSwithcer';
 
 const LandingHeader = () => {
@@ -36,9 +33,9 @@ const LandingHeader = () => {
   ];
   const { isValidSession, onLogout } = useAuth();
   const [activeNavIndex, setActiveNavIndex] = useState(0);
-  const [isOpenCheckNode, setIsOpenCheckNode] = useState(false);
   const router = useRouter();
   const { setOpen } = useWalletStore();
+  const isMobile = useIsMobile();
 
   const toggleNav = (index: any) => {
     if (activeNavIndex !== index) {
@@ -66,15 +63,22 @@ const LandingHeader = () => {
 
   return (
     <FormProvider {...method}>
-      <nav className="p-4 bg-[#141414] tablet:px-[100px] tablet:py-4 w-full">
-        <div className="flex w-full tablet:flex-row tablet:gap-2 desktop:gap-0 tablet:items-center justify-between">
+      <nav className="p-4 bg-[#141414] tablet:px-[100px] tablet:py-4 w-full flex">
+        <div className="flex w-full tablet:flex-row tablet:gap-2 desktop:gap-0 tablet:items-center justify-between desktop:py-10 desktop:px-8 mobile:px-5">
           <div className="flex gap-6">
             {/* Logo */}
             <Link
               href="/"
               className="min-w-[150px] flex items-center tablet:mb-0"
             >
-              <Icon.Logo className="tablet:w-10 tablet:h-10 w-[32px] h-[32px]" />
+              {isMobile ? (
+                <Icon.Logo
+                  width={'80%'}
+                  className="tablet:w-10 tablet:h-10 w-[32px] h-[32px]"
+                />
+              ) : (
+                <Icon.Logo className="tablet:w-10 tablet:h-10 w-[32px] h-[32px]" />
+              )}
             </Link>
           </div>
           <button
@@ -84,35 +88,40 @@ const LandingHeader = () => {
             <Icon.Menu width={24} height={24} />
           </button>
           {/* Action Buttons */}
-          <div className="gap-2 mt-4 tablet:mt-0 hidden laptop:flex">
-            <ConnectWalletButton
-              className="px-3 !py-0 tablet:px-4 bg-[#141414] flex items-center gap-1 rounded-[24px] tablet:rounded-[32px] text-[#7EFFC5]"
-              showConnectButton
-            >
-              <div>
-                <button
-                  onClick={() => setShowDisconnect(!showDisconnect)}
-                  className="px-3 py-2 tablet:px-4 tablet:py-2 bg-[#141414] flex items-center gap-1 border border-solid border-[#8C8C99] rounded-[24px] tablet:rounded-[32px] text-[#7EFFC5]"
-                >
-                  <p className="text-xs tablet:text-sm text-[#7EFFC5] font-semibold text-center">
-                    {shortenAddress(address)}
-                  </p>
-                  <ArrowRightIcon
-                    stroke="#7EFFC5"
-                    className="w-4 h-4 tablet:w-5 tablet:h-5"
-                  />
-                </button>
-                {showDisconnect && (
+          <div className="desktop:flex hidden flex-1 justify-end gap-3">
+            <button className="font-semibold text-xs tablet:text-sm text-center text-nowrap cursor-pointer px-10 !py-1 tablet:px-4 bg-[#4651F6] !border-[#4651F6] items-center gap-1 rounded-[24px] tablet:rounded-[32px] text-[white]">
+              Claim your Gas fee
+            </button>
+            <div className="gap-2 mt-4 tablet:mt-0 hidden laptop:flex">
+              <ConnectWalletButton
+                className="px-3 !py-0 tablet:px-4 bg-[#7EFFC5] flex items-center gap-1 rounded-[24px] tablet:rounded-[32px] text-[#141414]"
+                showConnectButton
+              >
+                <div>
                   <button
-                    onClick={handleLogout}
-                    className="mt-2 w-[150px] px-3 py-2 tablet:px-4 tablet:py-2 bg-[#282828] text-[14px] text-gray-400 rounded-[24px] tablet:rounded-[32px] absolute z-20"
+                    onClick={() => setShowDisconnect(!showDisconnect)}
+                    className="px-3 py-2 tablet:px-4 tablet:py-2 bg-[#7EFFC5] flex items-center gap-1 border border-solid border-[#8C8C99] rounded-[24px] tablet:rounded-[32px] text-[#141414]"
                   >
-                    {t('common.disconnect')}
+                    <p className="text-xs tablet:text-sm text-[#141414] font-semibold text-center">
+                      {shortenAddress(address)}
+                    </p>
+                    <ArrowRightIcon
+                      stroke="#141414"
+                      className="w-4 h-4 tablet:w-5 tablet:h-5"
+                    />
                   </button>
-                )}
-              </div>
-            </ConnectWalletButton>
-            <LanguageDropdown />
+                  {showDisconnect && (
+                    <button
+                      onClick={handleLogout}
+                      className="mt-2 w-[150px] px-3 py-2 tablet:px-4 tablet:py-2 bg-[#282828] text-[14px] text-gray-400 rounded-[24px] tablet:rounded-[32px] absolute z-20"
+                    >
+                      {t('common.disconnect')}
+                    </button>
+                  )}
+                </div>
+              </ConnectWalletButton>
+              <LanguageDropdown />
+            </div>
           </div>
         </div>
       </nav>

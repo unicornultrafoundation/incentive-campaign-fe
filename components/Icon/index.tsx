@@ -58,7 +58,9 @@ export type IconProps = React.SVGProps<SVGSVGElement>;
 export default function Icon() {
   return null;
 }
-Icon.Logo = (props: IconProps) => <Logo {...props} />;
+Icon.Logo = (props: IconProps & { width?: string; height?: string }) => (
+  <Logo {...props} />
+);
 Icon.UnicornUltra = (props: IconProps) => <UnicornUltra {...props} />;
 Icon.ArrowRightIcon = (props: IconProps) => <ArrowRightIcon {...props} />;
 Icon.StarsIcon = (props: IconProps) => <StarsIcon {...props} />;

@@ -42,11 +42,11 @@ export default function ConnectWalletButton({
             onClick={handleConnectWallet}
             className={`${className} py-4 w-full h-full rounded-lg border-[#7EFFC5] border font-roboto flex justify-center items-center text-center `}
           >
-            <p className="w-full text-xs tablet:text-sm text-[#7EFFC5] font-semibold text-center text-nowrap">
+            <p className="w-full text-xs tablet:text-sm text-[#141414] font-semibold text-center text-nowrap">
               {t('common.connect_wallet')}
             </p>
             <ArrowRightIcon
-              stroke="#7EFFC5"
+              stroke="#141414"
               className="w-4 h-4 tablet:w-5 tablet:h-5"
             />
           </button>

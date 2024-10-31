@@ -1,7 +1,8 @@
+import { useState } from 'react';
+
 import Icon from '@/components/Icon';
 import Button from '@/components/Button';
 import ApproveModal from '@/components/Modal/ApproveModal';
-import { useState } from 'react';
 
 export default function HomeSectionTwo() {
   const [isOpen, setIsOpen] = useState(true);
@@ -28,7 +29,10 @@ export default function HomeSectionTwo() {
     },
   ];
   return (
-    <div className="relative mt-10 laptop:mt-[110px] mb-[80px] laptop:mb-[125px] w-full min-h-screen overflow-hidden">
+    <div
+      id="section_2"
+      className="relative mt-10 laptop:mt-[110px] mb-[80px] laptop:mb-[125px] w-full min-h-screen overflow-hidden"
+    >
       <div className="absolute top-0 left-0 z-0">
         <Icon.HomeSection2Ellipse className="w-full h-full" />
       </div>
@@ -51,7 +55,9 @@ export default function HomeSectionTwo() {
               <div className="p-5 rounded-2xl bg-[#141414]">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-4">
-                    <p className="text-base laptop:text-xl font-semibold">Staking Amount:</p>
+                    <p className="text-base laptop:text-xl font-semibold">
+                      Staking Amount:
+                    </p>
                     <p className="text-xl laptop:text-2xl font-bold text-[#7EFFC5]">
                       5000$pUSDT
                     </p>
@@ -73,7 +79,9 @@ export default function HomeSectionTwo() {
                   />
                 </div>
                 <div className="flex laptop:hidden gap-2 items-center mt-3">
-                  <p className="text-[#4A4A4A] text-base laptop:text-xl">U2U Available:</p>
+                  <p className="text-[#4A4A4A] text-base laptop:text-xl">
+                    U2U Available:
+                  </p>
                   <p className="text-[#AFAFAF] text-base laptop:text-xl font-semibold">
                     50 000 U2U
                   </p>
@@ -100,8 +108,12 @@ export default function HomeSectionTwo() {
             <div className="">
               <div className="flex flex-col gap-5">
                 <div className="flex justify-between items-center">
-                  <p className="text-lg laptop:text-xl font-semibold">Default Term</p>
-                  <p className="text-xl laptop:text-2xl font-bold text-[#929292]">90 Days</p>
+                  <p className="text-lg laptop:text-xl font-semibold">
+                    Default Term
+                  </p>
+                  <p className="text-xl laptop:text-2xl font-bold text-[#929292]">
+                    90 Days
+                  </p>
                 </div>
                 <div className="flex justify-between items-center">
                   <p className="text-xl font-semibold">Estimate rewards</p>
@@ -112,7 +124,9 @@ export default function HomeSectionTwo() {
                 <div className="flex justify-between items-start laptop:items-center">
                   <div className="flex flex-1 flex-col gap-1 laptop:flex-row items-start">
                     <p className="text-xl font-semibold">Current rate</p>
-                    <p className="text-base text-[#AFAFAF]">(Interest in U2U can be withdrawn instantly)</p>
+                    <p className="text-base text-[#AFAFAF]">
+                      (Interest in U2U can be withdrawn instantly)
+                    </p>
                   </div>
                   <p className="text-2xl font-bold text-[#7EFFC5]">
                     10 U2U/day

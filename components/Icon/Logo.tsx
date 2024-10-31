@@ -1,19 +1,15 @@
-import { useEffect, useState } from 'react';
-
-import { generateRandomString } from '@/utils';
-
-export default function Logo() {
-  const [random, setRandom] = useState<string>('');
-  useEffect(() => {
-    if (!random) {
-      setRandom(generateRandomString(5));
-    }
-  }, [random]);
+export default function Logo({
+  width = '405px',
+  height = '41px',
+}: {
+  width?: string;
+  height?: string;
+}) {
   return (
     <svg
-      width="405"
-      height="41"
-      viewBox="0 0 405 41"
+      width={`${width}`}
+      height={`${height}`}
+      viewBox={`0 0 405 41`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"

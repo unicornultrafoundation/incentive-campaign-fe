@@ -6,6 +6,35 @@ import useIsMobile from '@/hooks/useIsMobile';
 import { useTranslations } from 'next-intl';
 import Marquee from 'react-fast-marquee';
 
+type Step = {
+  title: React.ReactNode;
+  description: React.ReactNode;
+  isCompleted: boolean;
+};
+
+const initialSteps: Step[] = [
+  {
+    title: 'Bridge & Start - Move $USDT with Owlto',
+    description: 'Begin by bridging your $USDT to the U2U Chain with Owlto.',
+    isCompleted: true,
+  },
+  {
+    title: (
+      <>
+        Claim Your Free Gas Fees at &nbsp;
+        <span className="text-[#9299FF] underline cursor-pointer">Here</span>
+      </>
+    ),
+    description: 'Receive free gas fees to kickstart your journey.',
+    isCompleted: true,
+  },
+  {
+    title: 'Stake & Earn Big - Boost Your U2U Rewards',
+    description: 'Stake your $USDT to earn U2U tokens instantly!',
+    isCompleted: true,
+  },
+];
+
 const TitleWithDes = () => {
   const t = useTranslations();
   return (
@@ -36,93 +65,64 @@ const Crystal = () => {
   );
 };
 
-const Steps = () => {
+const Steps = ({ steps }: { steps: Step[] }) => {
   const t = useTranslations();
   return (
     <div className="flex w-[100%] flex-col gap-0">
-      <div className="w-full flex flex-row items-center">
-        <div className="w-[50px] h-[120px] flex flex-col items-center justify-center">
-          <div className="w-[6px] h-[35px] bg-[#5FCC8A] rounded-t-lg"></div>
-          <div
-            style={{
-              background: '#5FCC8A',
-              color: '#4651F6',
-            }}
-            className="w-[50px] h-[50px] bg-[black] flex items-center justify-center rounded-full font-jockey font-medium text-[20px]"
-          >
-            1
+      {steps.map((step, stepIndex) => (
+        <div key={stepIndex} className="w-full flex flex-row items-center">
+          <div className="w-[50px] h-[120px] max-[728px]:h-[180px] flex flex-col items-center justify-center">
+            <div
+              style={{
+                background: step.isCompleted ? '#5FCC8A' : '#4451BB',
+                opacity: step.isCompleted ? 1 : 0.25,
+                borderRadius: stepIndex === 0 ? '8px 8px 0px 0px' : 0,
+              }}
+              className="w-[6px] h-[35px]"
+            ></div>
+            <div
+              style={{
+                background: '#5FCC8A',
+                color: '#4651F6',
+              }}
+              className="w-[50px] h-[50px] bg-[black] flex items-center justify-center rounded-full font-jockey font-medium text-[20px]"
+            >
+              {stepIndex + 1}
+            </div>
+            <div
+              style={{
+                background: step.isCompleted ? '#5FCC8A' : '#4451BB',
+                opacity:
+                  stepIndex !== steps.length - 1
+                    ? step.isCompleted
+                      ? 1
+                      : 0.25
+                    : 0,
+              }}
+              className="w-[6px] flex-1"
+            ></div>
           </div>
-          <div className="w-[6px] flex-1 bg-[#4451BB] opacity-25"></div>
-        </div>
-        <div className="flex-1 flex justify-center flex-col px-5 gap-1">
-          <div className="font-jockey font-normal text-white text-[24px]">
-            Bridge & Start - Move $USDT with Owlto
-          </div>
-          <div className="font-normal text-[#AFAFAF] text-[20px]">
-            Begin by bridging your $USDT to the U2U Chain with Owlto.
-          </div>
-        </div>
-      </div>
-      <div className="w-full flex flex-row items-center">
-        <div className="w-[50px] h-[120px] flex flex-col items-center justify-center">
-          <div className="w-[6px] flex-1 bg-[#4451BB] opacity-25"></div>
-          <div
-            style={{
-              border: '1px solid #242424',
-              background: 'linear-gradient(180deg, #4A4C54 0%, #202020 100%)',
-              boxShadow: '0px 2px 2px 0px rgba(255, 255, 255, 0.25) inset',
-            }}
-            className="w-[50px] h-[50px] bg-[black] text-[white] flex items-center justify-center rounded-full font-jockey font-medium text-[20px]"
-          >
-            2
-          </div>
-          <div className="w-[6px] flex-1 bg-[#4451BB] opacity-25"></div>
-        </div>
-        <div className="flex-1 flex justify-center flex-col px-5 gap-1">
-          <div className="font-jockey font-normal text-white text-[24px]">
-            Claim Your Free Gas Fees at &nbsp;
-            <span className="text-[#9299FF] underline cursor-pointer">
-              Here
-            </span>
-          </div>
-          <div className="font-normal text-[#AFAFAF] text-[20px]">
-            Receive free gas fees to kickstart your journey.
+          <div className="flex-1 flex justify-center flex-col px-5 gap-1">
+            <div className="font-jockey font-normal text-white text-[24px]">
+              {step.title}
+            </div>
+            <div className="font-normal text-[#AFAFAF] text-[20px]">
+              {step.description}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="w-full flex flex-row items-center">
-        <div className="w-[50px] h-[120px] flex flex-col items-center justify-center">
-          <div className="w-[6px] flex-1 bg-[#4451BB] opacity-25"></div>
-          <div
-            style={{
-              border: '1px solid #242424',
-              background: 'linear-gradient(180deg, #4A4C54 0%, #202020 100%)',
-              boxShadow: '0px 2px 2px 0px rgba(255, 255, 255, 0.25) inset',
-            }}
-            className="w-[50px] h-[50px] bg-[black] text-[white] flex items-center justify-center rounded-full font-jockey font-medium text-[20px]"
-          >
-            3
-          </div>
-          <div className="w-[6px] flex-1 bg-transparent"></div>
-        </div>
-        <div className="flex-1 flex justify-center flex-col px-5 gap-1">
-          <div className="font-jockey font-normal text-white text-[24px]">
-            Stake & Earn Big - Boost Your U2U Rewards
-          </div>
-          <div className="font-normal text-[#AFAFAF] text-[20px]">
-            Stake your $USDT to earn U2U tokens instantly!
-          </div>
-        </div>
-      </div>
+      ))}
       <div className="w-full mt-5">
         <Button
           style={{
             fontFamily: 'Inter Bolder',
           }}
-          onClick={() =>
-            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
-          }
-          className="px-16 py-5 bg-[#7EFFC5] text-black rounded-lg text-[20px] cursor-pointer max-[1000px]:w-[100%]"
+          onClick={() => {
+            const section2Ele = document.getElementById('section_2');
+            if (!section2Ele) return;
+            window.scrollTo({ top: section2Ele.offsetTop, behavior: 'smooth' });
+          }}
+          className="px-16 h-[56px] bg-[#7EFFC5] text-black rounded-lg text-[20px] cursor-pointer max-[1000px]:w-[100%]"
         >
           Stake pUSDT
         </Button>
@@ -172,13 +172,17 @@ const SectionMarquee = () => {
   );
 };
 
-export default function SectionOne() {
+export default function SectionOne({
+  steps = initialSteps,
+}: {
+  steps: Step[];
+}) {
   const t = useTranslations();
   const isMobile = useIsMobile(1000);
 
   const renderMobile = () => {
     return (
-      <div className="w-full flex flex-col py-10 px-5">
+      <div className="w-full z-10 flex flex-col py-10 px-5">
         <div className="w-[100%] flex flex-col text-center text-balance">
           <TitleWithDes />
         </div>
@@ -186,7 +190,7 @@ export default function SectionOne() {
           <Crystal />
         </div>
         <div className="w-full mt-16">
-          <Steps />
+          <Steps steps={steps} />
         </div>
       </div>
     );
@@ -203,7 +207,7 @@ export default function SectionOne() {
         <div className="w-[55%] flex flex-col">
           <TitleWithDes />
           <div className="w-full mt-16">
-            <Steps />
+            <Steps steps={steps} />
           </div>
         </div>
         <div className="w-[45%]">
@@ -215,11 +219,23 @@ export default function SectionOne() {
 
   return (
     <div className="w-[100%] desktop:max-w-[100%] min-h-[100vh] relative flex flex-col items-center">
-      <div className="absolute z-0 landing-page w-full h-full px-4 tablet:px-8 desktop:px-[10%] flex flex-col items-center justify-center pb-10 tablet:pb-0">
-        <Icon.EllipseSectionOne className="absolute hidden tablet:block  z-0 -translate-x-[30%]" />
-        <div className="relative">
-          <div className="absolute flex w-full justify-center z-0 ">
-            <Icon.EllipseSectionOne className="z-0 h-revert-layer" />
+      <div className="absolute left-0 top-0 w-[100%] h-[100%]">
+        <div className="absolute z-0 landing-page w-full h-full px-4 tablet:px-8 desktop:px-[10%] top-5 flex flex-col items-center justify-center tablet:pb-0">
+          <Icon.EllipseSectionOne className="absolute tablet:block z-0 -translate-x-[50%] max-[728px]:translate-x-0 max-[728px]:-top-[15%]" />
+          <div className="relative">
+            <div className="absolute flex w-full justify-center z-0 ">
+              <Icon.EllipseSectionOne className="z-0 h-revert-layer" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute left-0 top-0 w-[100%] h-[100%] overflow-hidden">
+        <div className="absolute z-0 w-full h-full px-4 tablet:px-8 flex flex-col items-center justify-center tablet:pb-0">
+          <Icon.EllipseBackground className="absolute tablet:block z-0 translate-x-[110%] translate-y-[30%] max-[728px]:translate-x-[30%] max-[728px]:top-[20%]" />
+          <div className="relative">
+            <div className="absolute flex w-full justify-center z-0 ">
+              <Icon.EllipseBackground className="z-0 h-revert-layer" />
+            </div>
           </div>
         </div>
       </div>

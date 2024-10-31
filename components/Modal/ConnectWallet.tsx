@@ -1,14 +1,14 @@
 'use client';
 
 import { Connector, useAccount, useConnect, useDisconnect } from 'wagmi';
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useState } from 'react';
 import { WalletButton } from '@rainbow-me/rainbowkit';
 
 import Icon from '@/components/Icon';
-import CloseIcon from '@/components/Icon/Close';
 import SignConnectMessageModal from '@/components/Modal/SignConnectMessageModal';
 import useWalletStore from '@/store/connect-wallet';
+import Modal from '@/components/Modal';
 // import { useAuthStore } from '@/store/auth';
 
 export default function ConnectWallet() {
@@ -17,7 +17,7 @@ export default function ConnectWallet() {
   const { connectors, connectAsync } = useConnect();
   // const [metaMaskConnector, coinbaseConnector] = connectors.slice(2);
   const { disconnectAsync } = useDisconnect();
-  const t = useTranslations();
+  // const t = useTranslations();
   const [isMobile, setIsMobile] = useState(false);
   const [showSignMessage, setShowSignMessage] = useState(false);
   // const [showChooseChain, setShowChooseChain] = useState(false);
@@ -81,119 +81,112 @@ export default function ConnectWallet() {
   return (
     <>
       {/* Wallet Connect Modal */}
-      <div
-        className={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm ${isOpen ? 'block' : 'hidden'}`}
+      <Modal
+        isOpen={isOpen}
+        onClose={() => {
+          onClosed();
+        }}
+        title="Connect Wallet"
+        description="To participate in the airdrop, your wallet must have one successful $10 USDT bridge transaction to the U2U Network."
+        className="relative border border-[#7EFFC5] max-w-[390px] tablet:max-w-[450px] p-6 w-full flex flex-col gap-5"
       >
-        <div className="relative w-[90%] max-w-[400px] p-5 bg-[#1F1F1F] rounded-lg shadow-lg border-2 border-solid border-[#7EFFC5]">
-          <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-4%] left-[-10px] rotate-45 "></div>
-          <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-4%] right-[-10px] rotate-45 "></div>
-          <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-4%] left-[-10px] rotate-45 "></div>
-          <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-4%] right-[-10px] rotate-45 "></div>
-
-          {/* Modal Header */}
-          <div className="flex justify-between mb-4">
-            <h2 className="font-inter text-lg tablet:text-2xl text-[#7EFFC5] font-semibold">
-              {t('modal_connect_wallet.connect_wallet')}
-            </h2>
-            <CloseIcon
-              className="cursor-pointer"
-              width={24}
-              height={24}
-              onClick={() => onClosed?.()}
-            />
-          </div>
-          <div className="w-full flex flex-col gap-5">
-            <div
-              key={connectors[0].id}
-              className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-gray-300 hover:border-transparent hover:text-black"
+        <div className="w-full flex flex-col gap-5">
+          <div
+            style={{
+              background: 'linear-gardient(to left,#9299FF,#4651F6)',
+            }}
+            className="w-full h-[1px] bg-[#9299FF] mb-2"
+          />
+          <div
+            key={connectors[0].id}
+            className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]"
+          >
+            <button
+              onClick={() => handleConnect(connectors[0])}
+              className="flex justify-between items-center w-full"
             >
-              <button
-                onClick={() => handleConnect(connectors[0])}
-                className="flex justify-between items-center w-full"
-              >
-                <p>{connectors[0].name}</p>
-                {renderIcon(connectors[0].name)}
-              </button>
-            </div>
-            <WalletButton.Custom wallet="okx">
+              <p>{connectors[0].name}</p>
+              {renderIcon(connectors[0].name)}
+            </button>
+          </div>
+          <WalletButton.Custom wallet="okx">
+            {({ connect, connector }) => {
+              return (
+                <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
+                  <button
+                    onClick={() =>
+                      isMobile
+                        ? handleConnect(connector, connect)
+                        : handleConnect(connector)
+                    }
+                    className="flex justify-between items-center w-full"
+                  >
+                    <p>{connector.name}</p>
+                    {renderIcon(connector.name)}
+                  </button>
+                </div>
+              );
+            }}
+          </WalletButton.Custom>
+          <WalletButton.Custom wallet="bitget">
+            {({ connect, connector }) => {
+              return (
+                <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
+                  <button
+                    onClick={() =>
+                      isMobile
+                        ? handleConnect(connector, connect)
+                        : handleConnect(connector)
+                    }
+                    className="flex justify-between items-center w-full"
+                  >
+                    <p>Bitget</p>
+                    {renderIcon(connector.name)}
+                  </button>
+                </div>
+              );
+            }}
+          </WalletButton.Custom>
+          {isClient && window.ReactNativeWebView && (
+            <WalletButton.Custom wallet="injected">
               {({ ready, connect, connector }) => {
                 return (
-                  <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-gray-300 hover:border-transparent hover:text-black">
-                    <button
-                      onClick={() =>
-                        isMobile
-                          ? handleConnect(connector, connect)
-                          : handleConnect(connector)
-                      }
-                      className="flex justify-between items-center w-full"
-                    >
-                      <p>{connector.name}</p>
-                      {renderIcon(connector.name)}
-                    </button>
-                  </div>
-                );
-              }}
-            </WalletButton.Custom>
-            <WalletButton.Custom wallet="bitget">
-              {({ ready, connect, connector }) => {
-                return (
-                  <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-gray-300 hover:border-transparent hover:text-black">
-                    <button
-                      onClick={() =>
-                        isMobile
-                          ? handleConnect(connector, connect)
-                          : handleConnect(connector)
-                      }
-                      className="flex justify-between items-center w-full"
-                    >
-                      <p>Bitget</p>
-                      {renderIcon(connector.name)}
-                    </button>
-                  </div>
-                );
-              }}
-            </WalletButton.Custom>
-            {isClient && window.ReactNativeWebView && (
-              <WalletButton.Custom wallet="injected">
-                {({ ready, connect, connector }) => {
-                  return (
-                    <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-gray-300 hover:border-transparent hover:text-black">
-                      <button
-                        disabled={!ready}
-                        onClick={() =>
-                          isMobile
-                            ? handleConnect(connector, connect)
-                            : handleConnect(connector)
-                        }
-                        className="flex justify-between items-center w-full"
-                      >
-                        <p>Injected</p>
-                        {renderIcon(connector.name)}
-                      </button>
-                    </div>
-                  );
-                }}
-              </WalletButton.Custom>
-            )}
-            <WalletButton.Custom wallet="walletconnect">
-              {({ ready, connect, connector }) => {
-                return (
-                  <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-gray-300 hover:border-transparent hover:text-black">
+                  <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
                     <button
                       disabled={!ready}
-                      onClick={connect}
+                      onClick={() =>
+                        isMobile
+                          ? handleConnect(connector, connect)
+                          : handleConnect(connector)
+                      }
                       className="flex justify-between items-center w-full"
                     >
-                      <p>{connector.name}</p>
+                      <p>Injected</p>
                       {renderIcon(connector.name)}
                     </button>
                   </div>
                 );
               }}
             </WalletButton.Custom>
-          </div>
+          )}
+          <WalletButton.Custom wallet="walletconnect">
+            {({ ready, connect, connector }) => {
+              return (
+                <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
+                  <button
+                    disabled={!ready}
+                    onClick={connect}
+                    className="flex justify-between items-center w-full"
+                  >
+                    <p>{connector.name}</p>
+                    {renderIcon(connector.name)}
+                  </button>
+                </div>
+              );
+            }}
+          </WalletButton.Custom>
         </div>
-      </div>
+      </Modal>
 
       {/*Sign Connect Message Modal*/}
       <SignConnectMessageModal
