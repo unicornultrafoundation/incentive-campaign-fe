@@ -23,7 +23,7 @@ const config: Config = {
         mobile: '480px',
         tablet: '768px',
         laptop: '1280px',
-        desktop: '1536px',
+        desktop: '1512px',
       },
       animation: {
         'slide-in-right': 'slide-in-right 1s ease-in-out forwards',
