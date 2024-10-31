@@ -1,0 +1,130 @@
+@tailwind components;
+
+@layer components {
+  .base-btn {
+    @apply transition-all duration-[500ms] cursor-pointer text-ellipsis
+     whitespace-nowrap overflow-hidden  border border-[#7EFFC5] hover:bg-[#7EFFC5] hover:text-[#141414];
+
+    &.btn-inner {
+      @apply flex justify-center items-center gap-1;
+    }
+
+    /* Button Variants */
+    &.icon {
+      &.sm {
+        @apply p-2 rounded-full w-fit;
+        box-shadow: 0 3px 0 0 #2c3034;
+      }
+
+      &.md {
+        @apply p-3 rounded-full w-fit;
+        box-shadow: 0 3px 0 0 #2c3034;
+      }
+
+      &.lg {
+        @apply w-[120px] h-[120px] flex justify-center items-center rounded-full;
+        box-shadow: 0 4px 0 0 #2c3034;
+      }
+    }
+
+    /* Variant = default, trapezoid */
+    &:not(.icon) {
+      @apply inline-flex justify-center items-center font-semibold;
+
+      &.sm {
+        @apply text-xs leading-4 rounded-lg;
+        //box-shadow: 0 4px 0 0 #2c3034;
+      }
+
+      &.md {
+        @apply text-xl font-semibold leading-6 rounded-lg;
+        //box-shadow: 0 5px 0 0 #2c3034;
+      }
+
+      &.lg {
+        @apply rounded-[32px];
+        //box-shadow: 0 8px 0 -2px #2c3034;
+      }
+    }
+
+    &.trapezoid {
+      &.lg {
+        transform: perspective(80px) rotateX(10deg);
+      }
+    }
+
+    &.transparent {
+      &.sm {
+        @apply border-gray-400;
+        box-shadow: none;
+        background: none;
+        color: green;
+      }
+    }
+
+    &.back {
+      &.sm {
+        @apply p-3 desktop:p-2 text-sm leading-4 rounded-lg;
+        box-shadow: 0 4px 0 0 #2c3034;
+        background: #ffe5a8;
+      }
+    }
+
+    /* Button Variants End */
+
+    /* Button State */
+    &:active {
+      &:not(&:disabled) {
+        &.sm {
+          box-shadow: none;
+        }
+
+        &.md {
+          box-shadow: none;
+        }
+
+        &.lg {
+          box-shadow: none;
+        }
+      }
+    }
+
+    &:disabled {
+      @apply cursor-not-allowed bg-gray-300;
+      background: #ccd2d5;
+      border: 1px solid #9da9af;
+
+      &.sm {
+        box-shadow: 0 4px 0 0 #a8b3b8;
+      }
+
+      &.md {
+        box-shadow: 0 4px 0 0 #a8b3b8;
+      }
+
+      &.lg {
+        box-shadow: 0 8px 0 -2px #a8b3b8;
+      }
+    }
+
+    &:hover &:not(.icon) {
+      &:not(&:disabled) {
+        background: linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0.2) 100%
+          ),
+          radial-gradient(
+            173.65% 156.19% at 48.3% 156.19%,
+            #10d9d6 0%,
+            #7756ff 100%
+          );
+      }
+    }
+
+    &.loading {
+      @apply opacity-50 pointer-events-none cursor-not-allowed;
+    }
+    /* Button States End */
+  }
+}

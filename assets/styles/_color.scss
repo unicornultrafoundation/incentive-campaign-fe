@@ -1,0 +1,75 @@
+@tailwind components;
+
+@layer components {
+  .card-img-bg {
+    background: linear-gradient(169deg, #7effc5 -347.96%, #131313 91.95%);
+  }
+
+  .btn-bg {
+    background: #7effc5;
+  }
+
+  .text-green {
+    color: #7effc5;
+  }
+
+  .bg-banner {
+    background: linear-gradient(102deg, #9299ff 8.71%, #4651f6 143.68%);
+  }
+  .bg-gradient-banner {
+    background: linear-gradient(53deg, #1f1f1f 8.76%, #858585 220.62%);
+  }
+  .bg-presale {
+    background: var(
+      --Gradient-Gradient-1,
+      linear-gradient(90deg, #9299ff 0%, #4651f6 100%)
+    );
+  }
+
+  .text-xsm {
+    @apply font-inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.588px;
+  }
+
+  /* Text Gradient Color START */
+  .text-gradient {
+    /* Background text */
+    @apply bg-gradient-to-r;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-to-b {
+    /* Background text */
+    @apply bg-gradient-to-b;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-purple {
+    @apply text-gradient from-[#9299FF] to-[#4651F6];
+  }
+
+  .custom-progress::-webkit-progress-bar {
+    background-color: #1f1f1f; /* Màu nền của thanh progress */
+    border-radius: 8px; /* Giữ bo tròn */
+  }
+
+  .custom-progress::-webkit-progress-value {
+    background: #7effc5;
+    border-radius: 9999px;
+  }
+
+  .custom-progress::-moz-progress-bar {
+    background-color: #7effc5; /* Màu đỏ cho giá trị */
+    border-radius: 8px;
+  }
+}

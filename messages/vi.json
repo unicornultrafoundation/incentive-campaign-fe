@@ -1,0 +1,224 @@
+{
+  "api": {
+    "error": "Failed to {action}",
+    "success": "{action} successfully"
+  },
+  "auth": {
+    "error": "Failed to authenticate",
+    "success": "Authenticated successfully"
+  },
+  "common": {
+    "connect_wallet": "Connect Wallet",
+    "loading": "Loading...",
+    "disconnect_wallet": "Disconnect Wallet",
+    "disconnect": "Disconnect",
+    "node_empty": "Node empty",
+    "no_data": "No data",
+    "switch_network": "Switch Network",
+    "error": "Error",
+    "error_report": "Error Report",
+    "try_again": "Try Again",
+    "close": "Close",
+    "close_and_continue": "Close and Continue",
+    "node_sale": "Node Sale",
+    "no_referral": "No Referral"
+  },
+  "header": {
+    "node_sale": "Node Sale",
+    "my_node": "My Node",
+    "apply_to_whitelist": "Apply to Whitelist",
+    "become_promoter": "Become Promoter",
+    "title": "U2U DePin Subnet Nodes",
+    "description": "Unlocking the limitless potential of a decentralized future - Building a digital world where power belongs to the users - Offering promising investment opportunities for early adopters."
+  },
+  "footer": {
+    "node_type": "Node Types",
+    "step_into_our_world": "Step into our world"
+  },
+  "node_sale": {
+    "title_1": "DePIN Subnet Node",
+    "subtitle": "Public Sale is coming",
+    "purchase_now": "Purchase Now",
+    "document": "Document",
+    "title_3": "Tier Categories",
+    "whitelist_node": "Whitelist Nodes",
+    "public_node": "Public Nodes",
+    "filter": "Filter",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "user_already_registered": "Users already registered",
+    "hurry_up": "Hurry! Limited slots available",
+    "sale_date_and_countdown": "Sale Date and Countdown",
+    "node_sale_start_on": "Node Sale starts on",
+    "claim_now": "Claim Now",
+    "join_whitelist": "Join Waitlist"
+  },
+  "my_node": {
+    "menu": {
+      "my_node": "My Node",
+      "referral": "Referral",
+      "admin": {
+        "title": "Admin",
+        "transaction": "Transaction",
+        "early_sale_time": "Early Sale Time",
+        "config": "Config"
+      },
+      "take_me_zone": "Take Me Zone"
+    },
+    "my_node": {
+      "title": "My Node",
+      "submit_form": "Submit Form",
+      "upload_file": "Upload File",
+      "agency_name": "Agency Name",
+      "email": "Email",
+      "telegram_contact": "Telegram Contact",
+      "date_of_form_submission": "Date of Form Submission",
+      "referral_user": "Referral User",
+      "node_purchase_wallet_address": "Node's purchaserd wallet address",
+      "submit_now": "Submit Now",
+      "drag_and_drop": "Drag and drop files here or choose file",
+      "claim_license": "Claim License",
+      "file_name": "File Name"
+    },
+    "referral": {
+      "title": "Referral",
+      "description": "Invite friends and earn rewards when they purchase nodes through your referral link!",
+      "total_referral": "Total Referral",
+      "total_earned": "Total Earned",
+      "your_referral_id": "Your Referral ID",
+      "referral_desc": "Referral ID is activated after first successful node purchase",
+      "referral_level": "Referral Level",
+      "project_participated": "Project participated",
+      "referral_user": "Referral User"
+    },
+    "transaction": {
+      "title": "Admin",
+      "search": "Find something...",
+      "update_percent_commission": "Update Percent Commission",
+      "wallet_address": "Wallet Address",
+      "enter_wallet_address": "Enter your wallet address...",
+      "submit_user": "Submit User",
+      "commission": "Commission",
+      "commission_adjustment": "Commission Adjustment",
+      "username": "Username",
+      "cancel": "Cancel",
+      "confirm_adjustment": "Confirm Adjustment",
+      "transaction": "Transaction"
+    },
+    "transaction_detail": {
+      "description": "Manage user information, monitor transactions, and update commissions with detailed and accurate oversight.",
+      "title": "Transaction Details",
+      "transaction_id": "Transaction ID",
+      "transaction_hash": "Transaction Hash",
+      "timestamp": "Timestamp",
+      "project_participated": "Project participated",
+      "node_name": "Node Name",
+      "quantity": "Quantity",
+      "purchased": "Purchased",
+      "commission": "Commission",
+      "admin_notes": "Admin Notes",
+      "type_something": "Type something..."
+    },
+    "early_sale_time": {
+      "title": "Admin",
+      "pre_sale_claim": "Pre-sale Information Claim",
+      "sale_date_and_countdown": "Sale Date and Countdown",
+      "node_sale_start_on": "Node Sale starts on",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds",
+      "list_id": "List ID",
+      "early_opening_time": "Early Opening Time",
+      "early_closing_time": "Early Closing Time",
+      "node_per_user": "Node per User",
+      "total_node": "Total Node",
+      "discount": "Discount (%)",
+      "submit": "Submit"
+    },
+    "config": {
+      "title": "Admin",
+      "active_round": "Active Round",
+      "list_id": "List ID",
+      "update_percent": "Update Percent",
+      "address": "Address",
+      "enter_address": "Enter your address...",
+      "percent": "Percent",
+      "enter_percent": "Enter your percent..."
+    }
+  },
+  "table": {
+    "project": "Project",
+    "type": "Type",
+    "node_type": "Node Type",
+    "qty": "Qty",
+    "status": "Status",
+    "tx_hash": "TxHash",
+    "user": "User",
+    "project_participated": "Project participated",
+    "node_name": "Node Name",
+    "x": "X",
+    "no": "No",
+    "transaction_id": "Transaction ID",
+    "purchased": "Purchased"
+  },
+  "card": {
+    "price_per_node": "Price per Node",
+    "node_for_sale": "Node for Sale",
+    "purchase": "Purchase",
+    "comming_soon": "Coming Soon"
+  },
+  "modal_purchase": {
+    "title_1": "Unlock Discounts",
+    "description_1": "Enter your referral code and unlock the gateway to ultimate rewards!",
+    "promotion_code": "Promotion Code",
+    "enter_promotion_code": "Enter your promotion code...",
+    "enter_referral_code": "Enter your referral code...",
+    "referral_code": "Referral Code",
+    "referral_address": "Referral Address",
+    "continue": "Continue",
+    "number_of_nodes": "Number of Nodes",
+    "name": "Name",
+    "balance": "Balance",
+    "discount": "Discount",
+    "original_price": "Original Price",
+    "total_price": "Total Price",
+    "price_after_discount": "Price after Discount",
+    "back": "Back",
+    "approve": "Approve"
+  },
+  "modal_success": {
+    "title": "Congratulations!",
+    "description": "Congratulations! You've officially secured your spot on our exclusive Whitelist!",
+    "description_2": "This will auto-close in 30 seconds. Thank you!",
+    "close": "Close"
+  },
+  "modal_connect_wallet": {
+    "title": "Connect Wallet",
+    "description": "To access and manage your nodes, please connect your wallet.",
+    "connect_wallet": "Connect Wallet",
+    "authenticating": "Authenticating...",
+    "description_2": "Connecting your wallet to U2U DePIN Subnet Node"
+  },
+  "modal_choose_blockchain": {
+    "title": "Choose Blockchain",
+    "description": "Choose your blockchain network to power your node journey."
+  },
+  "modal_pre_sale": {
+    "title": "Pre-Sale Claim",
+    "description": "Get a 10% discount for early access!",
+    "claim_now": "Claim Now",
+    "sale_date_and_countdown": "Sale Date and Countdown",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "enter_referral_code": "Enter your referral code...",
+    "referral_code": "Referral Code",
+    "referral_address": "Referral Address",
+    "return_to_dashboard": "Return to Dashboard",
+    "claim_your_spot": "Claim Your Spot"
+  }
+}

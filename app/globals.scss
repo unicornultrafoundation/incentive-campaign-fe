@@ -1,0 +1,86 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import 'assets/styles/layout';
+@import 'assets/styles/page/landing';
+@import 'assets/styles/color';
+@import 'assets/styles/components/modal';
+@import 'assets/styles/components/uploader';
+@import 'assets/styles/components/button';
+@import 'assets/styles/common';
+
+@font-face {
+  font-family: 'Roboto Bold';
+  src: url('../public/fonts/Roboto/Roboto-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Inter Bold';
+  src: url('../public/fonts/Inter/static/Inter_18pt-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Jockey One';
+  src: url('../public/fonts/Jockey-One/JockeyOne-Regular.ttf');
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: white;
+  font-family: 'Roboto Bold', sans-serif;
+
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+.base-modal {
+  z-index: 49;
+}
+
+.app-loading {
+  z-index: 50;
+}
+
+.network-switcher {
+  z-index: 40;
+}
+
+//.app-settings {
+//  z-index: 40;
+//}
+
+.no-scroll-bar {
+  &::-webkit-scrollbar {
+    @apply hidden;
+  }
+}

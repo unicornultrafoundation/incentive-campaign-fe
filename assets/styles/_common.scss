@@ -1,0 +1,106 @@
+@tailwind components;
+
+@layer components {
+  .title-block {
+    @apply relative inline-flex text-white uppercase justify-center items-center
+    font-semibold leading-6 h-11 w-[178px];
+
+    &:before {
+      @apply absolute left-0 top-0 right-0 w-full h-full bg-gradient-03 rounded-lg -z-10;
+      box-shadow: 0 8px 0 -2px #2c3034;
+      transform: perspective(120px) rotateX(-13deg);
+      content: ' ';
+    }
+
+    * {
+      @apply z-[1];
+    }
+  }
+
+  .app-loading {
+    @apply w-screen h-screen fixed top-0 left-0 right-0 bottom-0;
+
+    .background {
+      @apply w-full h-full absolute pointer-events-none select-none flex justify-center items-center;
+      background-color: rgba(0, 0, 0, 0.6);
+
+      .text {
+        @apply text-white text-center;
+      }
+    }
+  }
+
+  .network-switcher {
+    @apply fixed w-screen h-screen bg-none top-0 left-0;
+  }
+
+  .point-wrapper {
+    @apply flex items-center gap-1 text-medium;
+  }
+
+  .separator {
+    @apply h-[1px] bg-gray-300 w-full;
+  }
+
+  .overlay {
+    @apply w-full h-full;
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .close-btn {
+    @apply absolute;
+  }
+
+  .modal-content {
+    @apply rounded-2xl bg-[#141414]  p-6 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+
+    .close-btn {
+      @apply left-1/2 -translate-x-1/2 bottom-[-16px];
+    }
+  }
+
+  .custom-checkbox input[type='checkbox']:checked + .checkbox-custom {
+    background-color: #7effc5;
+  }
+
+  .custom-checkbox input[type='checkbox']:checked + .checkbox-custom::after {
+    display: block;
+  }
+
+  .custom-swiper-pagination {
+    @apply mt-4 tablet:mt-6;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .custom-swiper-pagination-bullet {
+    background-color: #7effc5;
+    width: 16px;
+    height: 16px;
+    opacity: 0.5;
+    border-radius: 0;
+    transform: rotate(45deg);
+    transition:
+      opacity 0.3s,
+      transform 0.3s;
+  }
+
+  .custom-swiper-pagination-bullet-active {
+    opacity: 1;
+    background-color: #7effc5;
+    transform: scale(1.2);
+  }
+
+  .swiper-slide {
+    width: 100%;
+    max-width: 100vw;
+  }
+  .my-slide-content {
+    max-width: 100%; /* Đảm bảo nội dung bên trong không vượt quá kích thước slide */
+  }
+  .swiper-container {
+    max-width: 100vw; /* Giới hạn container theo viewport */
+    overflow: hidden; /* Ngăn nội dung tràn ra ngoài */
+  }
+}

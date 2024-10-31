@@ -1,0 +1,22 @@
+@tailwind components;
+
+@layer components {
+  .file-uploader {
+    @apply relative cursor-pointer w-full shadow-md rounded-lg;
+
+    input {
+      @apply absolute left-0 right-0 w-full h-full opacity-0 cursor-pointer;
+    }
+
+    .input-wrapper {
+      @apply w-full aspect-square flex flex-col justify-center items-center gap-4;
+    }
+
+    .image-preview {
+      @apply w-full h-auto object-cover rounded-lg;
+    }
+  }
+  .clear-icon {
+    @apply cursor-pointer fill-gray-400;
+  }
+}

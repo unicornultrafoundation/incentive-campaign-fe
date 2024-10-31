@@ -1,0 +1,224 @@
+{
+  "api": {
+    "error": "Failed to {action}",
+    "success": "{action} successfully"
+  },
+  "auth": {
+    "error": "Failed to authenticate",
+    "success": "Authenticated successfully"
+  },
+  "common": {
+    "connect_wallet": "지갑 연결",
+    "loading": "로드 중....",
+    "disconnect_wallet": "Disconnect Wallet",
+    "disconnect": "연결 해제",
+    "node_empty": "Node empty",
+    "no_data": "No data",
+    "switch_network": "Switch Network",
+    "error": "Error",
+    "error_report": "Error Report",
+    "try_again": "Try Again",
+    "close": "Close",
+    "close_and_continue": "Close and Continue",
+    "node_sale": "노드 세일",
+    "no_referral": "No Referral"
+  },
+  "header": {
+    "node_sale": "노드 세일",
+    "my_node": "내 노드",
+    "apply_to_whitelist": "Apply to Whitelist",
+    "become_promoter": "프로모터 되기",
+    "title": "U2U 디핀 서브넷 노드",
+    "description": "탈중앙화된 미래의 무한한 잠재력 실현 - 권력이 사용자에게 있는 디지털 세상 구축 - 얼리어답터에게 유망한 투자 기회 제공."
+  },
+  "footer": {
+    "node_type": "노드 유형",
+    "step_into_our_world": "우리의 세계로 들어오세요"
+  },
+  "node_sale": {
+    "title_1": "디핀 서브넷 노드",
+    "subtitle": "퍼블릭 세일이 곧 시작됩니다.",
+    "purchase_now": "지금 구매하기",
+    "document": "문서",
+    "title_3": "티어 카테고리",
+    "whitelist_node": "화이트리스트 노드",
+    "public_node": "퍼블릭 노드",
+    "filter": "필터",
+    "days": "일",
+    "hours": "시간",
+    "minutes": "분",
+    "seconds": "초",
+    "user_already_registered": "이미 등록한 사용자",
+    "hurry_up": "서두르세요! 사용 가능한 슬롯이 제한되어 있습니다.",
+    "sale_date_and_countdown": "판매 일자와 카운트다운",
+    "node_sale_start_on": "노드 세일이 시작됩니다:",
+    "claim_now": "지금 신청하기",
+    "join_whitelist": "화이트리스트 조인"
+  },
+  "my_node": {
+    "menu": {
+      "my_node": "내 노드",
+      "referral": "추천",
+      "admin": {
+        "title": "관리자",
+        "transaction": "거래",
+        "early_sale_time": "조기 판매 시간",
+        "config": "구성"
+      },
+      "take_me_zone": "홈으로 이동"
+    },
+    "my_node": {
+      "title": "내 노드",
+      "submit_form": "양식 제출",
+      "upload_file": "파일 업로드",
+      "agency_name": "에이전시 이름",
+      "email": "이메일",
+      "telegram_contact": "텔레그램 연락처",
+      "date_of_form_submission": "제출 날짜",
+      "referral_user": "추천 사용자",
+      "node_purchase_wallet_address": "Node's purchaserd wallet address",
+      "submit_now": "지금 제출",
+      "drag_and_drop": "여기에 파일을 드래그 앤 드롭하거나 파일을 선택하세요.",
+      "claim_license": "라이센스 요청",
+      "file_name": "File Name"
+    },
+    "referral": {
+      "title": "추천",
+      "description": "친구를 초대하고 추천 링크를 통해 노드를 구매하면 보상을 받을 수 있습니다!",
+      "total_referral": "총 추천인",
+      "total_earned": "총 수익",
+      "your_referral_id": "귀하의 추천 ID",
+      "referral_desc": "첫 번째 노드 구매 성공 후 추천 ID가 활성화됩니다.",
+      "referral_level": "추천 레벨",
+      "project_participated": "프로젝트 참여",
+      "referral_user": "추천 사용자"
+    },
+    "transaction": {
+      "title": "추천",
+      "search": "찾기...",
+      "update_percent_commission": "커미션 비율 업데이트",
+      "wallet_address": "지갑 주소",
+      "enter_wallet_address": "주소를 입력하세요...",
+      "submit_user": "사용자 제출",
+      "commission": "수수료",
+      "commission_adjustment": "수수료 조정",
+      "username": "사용자 이름",
+      "cancel": "취소",
+      "confirm_adjustment": "수수료 조정",
+      "transaction": "거래"
+    },
+    "transaction_detail": {
+      "description": "상세하고 정확한 감독을 통해 사용자 정보 관리, 거래 모니터링, 커미션 업데이트",
+      "title": "거래내역",
+      "transaction_id": "거래 ID",
+      "transaction_hash": "거래 해시",
+      "timestamp": "타임스탬프",
+      "project_participated": "프로젝트 참여",
+      "node_name": "노드 이름",
+      "quantity": "품질",
+      "purchased": "구매함",
+      "commission": "수수료",
+      "admin_notes": "관리자 메모",
+      "type_something": "뭔가를 입력하세요..."
+    },
+    "early_sale_time": {
+      "title": "추천",
+      "pre_sale_claim": "사전 판매 정보 청구",
+      "sale_date_and_countdown": "판매 날짜 및 카운트다운",
+      "node_sale_start_on": "노드 판매 시작일",
+      "days": "일",
+      "hours": "시",
+      "minutes": "분",
+      "seconds": "초",
+      "list_id": "목록 ID",
+      "early_opening_time": "조기 개장 시간",
+      "early_closing_time": "조기 마감 시간",
+      "node_per_user": "사용자당 노드",
+      "total_node": "총 노드",
+      "discount": "할인 (%)",
+      "submit": "지금 제출"
+    },
+    "config": {
+      "title": "추천",
+      "active_round": "활성 라운드",
+      "list_id": "목록 ID",
+      "update_percent": "업데이트 비율",
+      "address": "주소",
+      "enter_address": "주소를 입력하세요...",
+      "percent": "퍼센트",
+      "enter_percent": "업데이트 비율..."
+    }
+  },
+  "table": {
+    "project": "프로젝트",
+    "type": "유형",
+    "node_type": "노드 유형",
+    "qty": "수량",
+    "status": "상태",
+    "tx_hash": "TxHash",
+    "user": "사용자",
+    "project_participated": "프로젝트 참여",
+    "node_name": "노드 이름",
+    "x": "X",
+    "no": "숫자",
+    "transaction_id": "거래 ID",
+    "purchased": "구매함"
+  },
+  "card": {
+    "price_per_node": "노드당 가격",
+    "node_for_sale": "판매용 노드",
+    "purchase": "구입",
+    "comming_soon": "곧 출시 예정"
+  },
+  "modal_purchase": {
+    "title_1": "할인 잠금 해제",
+    "description_1": "추천 코드를 입력하고 최고의 보상을 받을 수 있는 관문을 잠금 해제하세요!",
+    "promotion_code": "프로모션 코드",
+    "enter_promotion_code": "프로모션 코드를 입력하세요...",
+    "enter_referral_code": "추천코드를 입력하세요...",
+    "referral_code": "추천 코드",
+    "referral_address": "추천 주소",
+    "continue": "계속하다",
+    "number_of_nodes": "노드 수",
+    "name": "이름",
+    "balance": "잔액",
+    "discount": "할인",
+    "original_price": "원가격",
+    "total_price": "총 가격",
+    "price_after_discount": "할인 후 가격",
+    "back": "뒤로가기",
+    "approve": "승인하다"
+  },
+  "modal_success": {
+    "title": "성공!",
+    "description": "축하합니다! 귀하는 당사의 독점적인 화이트리스트에 공식적으로 귀하의 자리를 확보했습니다!",
+    "description_2": "30초 후에 자동으로 닫힙니다. 감사합니다!",
+    "close": "Close"
+  },
+  "modal_connect_wallet": {
+    "title": "지갑 연결",
+    "description": "노드에 접근하고 관리하려면 지갑을 연결하세요.",
+    "connect_wallet": "지갑 연결",
+    "authenticating": "인증 중...",
+    "description_2": "지갑을 U2U DePIN 서브넷 노드에 연결"
+  },
+  "modal_choose_blockchain": {
+    "title": "블록체인을 선택하세요",
+    "description": "노드 여정을 강화할 블록체인 네트워크를 선택하세요"
+  },
+  "modal_pre_sale": {
+    "title": "Pre-Sale Claim",
+    "description": "Get a 10% discount for early access!",
+    "claim_now": "지금 신청하기",
+    "sale_date_and_countdown": "판매 날짜 및 카운트다운",
+    "days": "일",
+    "hours": "시",
+    "minutes": "분",
+    "seconds": "초",
+    "enter_referral_code": "추천코드를 입력하세요...",
+    "referral_code": "추천 코드",
+    "referral_address": "추천 주소",
+    "return_to_dashboard": "Return to Dashboard",
+    "claim_your_spot": "Claim Your Spot"
+  }
+}

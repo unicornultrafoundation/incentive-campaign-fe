@@ -1,0 +1,94 @@
+@tailwind components;
+
+@layer components {
+  .landing-page {
+    font-family: 'Roboto Thin', serif;
+  }
+
+  .progress-container {
+    background: linear-gradient(71deg, #d3f982 22.4%, #79d770 183.17%), #7d97ff !important;
+    border-radius: 2px;
+  }
+
+  progress::-webkit-progress-bar {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+  }
+
+  progress::-webkit-progress-value {
+    background: linear-gradient(270deg, #4651f6 0%, #9299ff 100%);
+    border-radius: 16px;
+  }
+
+  /* Icon Menu */
+  .menu-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 70;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  /* Full-screen menu */
+  .fullscreen-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #141414;
+    color: white;
+    padding: 16px;
+    display: flex;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 60;
+  }
+
+  .fullscreen-menu.open {
+    transform: translateX(0);
+  }
+
+  .fullscreen-menu ul {
+    @apply py-10 uppercase;
+  }
+
+  .fullscreen-menu ul li {
+    margin: 20px 0;
+  }
+
+  .fullscreen-menu ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+  }
+
+  .my-swiper {
+    @media (min-width: 768px) {
+      .swiper-pagination-bullet {
+        margin-left: 4px !important;
+        margin-right: 4px !important;
+        width: 25px !important;
+        height: 4px !important;
+        border-radius: 0 !important;
+        color: red !important;
+        opacity: 1 !important;
+        background: [#FFFFFF]/[.5] !important;
+      }
+      .swiper-pagination-bullet-active {
+        width: 60px !important;
+        background: #ffffff !important;
+      }
+    }
+
+    .swiper-slide {
+      display: flex !important;
+      align-items: center !important;
+
+      @media (min-width: 768px) {
+        margin-right: 24px !important;
+      }
+    }
+  }
+}
