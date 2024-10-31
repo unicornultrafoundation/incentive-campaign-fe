@@ -36,10 +36,10 @@ export default function SignConnectMessageModal({ isOpen, onClose }: Props) {
       setIsAuthenticating(true);
       await onSignMessage();
 
-      const data = await getProfile();
-      if (data) {
-        setProfile(data.data);
-      }
+      // const data = await getProfile();
+      // if (data) {
+      //   setProfile(data.data);
+      // }
 
       setIsCheckingChain(true);
       // setValue('isShowChooseChain', true);

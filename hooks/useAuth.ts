@@ -1,7 +1,6 @@
 'use client';
 
 import { signMessage } from '@wagmi/core';
-import { useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 import { useAccount, useDisconnect, useSwitchChain } from 'wagmi';
 
@@ -25,18 +24,14 @@ export const useAuth = () => {
 
   const onSignMessage = async () => {
     if (!address) return;
-    const now = new Date().toISOString();
-
     const message = await signMessage(config, {
-      message: `${now}#NodeSale`,
+      message: 'hello',
     });
 
     const result = await connectWallet({
-      message: `${now}#NodeSale`,
       signature: message,
-      address: address.toLowerCase(),
+      signer: address.toLowerCase(),
     });
-
     if (result) {
       setAuthCredential(true);
     }

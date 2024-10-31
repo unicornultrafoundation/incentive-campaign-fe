@@ -6,7 +6,7 @@ import { setAuthCredential } from '@/store/auth';
 
 /** Client-side API **/
 export const nextAPI = axios.create({
-  baseURL: '/',
+  baseURL: '/api',
   ...BASE_REQUEST_OPTIONS,
 });
 nextAPI.interceptors.request.use(

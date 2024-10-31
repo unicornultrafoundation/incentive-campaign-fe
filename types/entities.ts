@@ -6,13 +6,11 @@ export interface UserCredentials {
 }
 
 export interface Credentials {
-  data: {
-    accessToken: string;
-    refreshToken: string;
-    tokenType: string;
-  };
-  message: string;
-  status: string;
+  refreshToken: string;
+  refreshTokenExpire: number;
+  accessToken: string;
+  accessTokenExpire: number;
+  userId: string;
 }
 
 export interface User {

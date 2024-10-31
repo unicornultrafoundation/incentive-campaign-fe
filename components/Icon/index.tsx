@@ -49,6 +49,9 @@ import HomeSection2Ellipse2 from '@/components/Icon/home-section2-ellipse-2.png'
 import HomeSection2Bg from '@/components/Icon/home-section2-bg.png';
 import IconWarning from '@/components/Icon/icon-warning.png';
 import LogoCoinList from '@/components/Icon/logo-coinlist.png';
+import EllipseSection1 from '@/components/Icon/EllipseSection1.png';
+import Crystal from '@/components/Icon/Crystal.png';
+import Star from '@/components/Icon/Star.png';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -156,4 +159,14 @@ Icon.IconWarning = (props: Omit<ImageProps, 'src' | 'alt'>) => (
 );
 Icon.LogoCoinList = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="" src={LogoCoinList} {...props} />
+);
+
+Icon.EllipseSectionOne = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={EllipseSection1} {...props} />
+);
+Icon.Crystal = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={Crystal} {...props} />
+);
+Icon.Star = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={Star} {...props} />
 );
