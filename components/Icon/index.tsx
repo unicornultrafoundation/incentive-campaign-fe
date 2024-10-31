@@ -44,6 +44,9 @@ import NoDataImg from '@/assets/Image/NoData.png';
 import WalletConnect from '@/assets/Image/walletconnect.png';
 import SearchIcon from '@/components/Icon/Search';
 import U2UWalletIcon from '@/components/Icon/U2UWallet';
+import EllipseSection1 from '@/components/Icon/EllipseSection1.png';
+import Crystal from '@/components/Icon/Crystal.png';
+import Star from '@/components/Icon/Star.png';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -135,4 +138,13 @@ Icon.NoDataImg = (props: Omit<ImageProps, 'src' | 'alt'>) => (
 );
 Icon.WalletConnect = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="" src={WalletConnect} {...props} />
+);
+Icon.EllipseSectionOne = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={EllipseSection1} {...props} />
+);
+Icon.Crystal = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={Crystal} {...props} />
+);
+Icon.Star = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={Star} {...props} />
 );

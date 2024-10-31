@@ -74,7 +74,7 @@ const LandingHeader = () => {
               href="/"
               className="min-w-[150px] flex items-center tablet:mb-0"
             >
-              <Icon.Logo className="tablet:w-10 tablet:h-10 w-[32px] h-[32px] " />
+              <Icon.Logo className="tablet:w-10 tablet:h-10 w-[32px] h-[32px]" />
             </Link>
           </div>
           <button
@@ -105,7 +105,7 @@ const LandingHeader = () => {
                 {showDisconnect && (
                   <button
                     onClick={handleLogout}
-                    className="mt-2 w-[150px] px-3 py-2 tablet:px-4 tablet:py-2 bg-[#282828] text-[14px] text-gray-400 rounded-[24px] tablet:rounded-[32px] absolute z-10"
+                    className="mt-2 w-[150px] px-3 py-2 tablet:px-4 tablet:py-2 bg-[#282828] text-[14px] text-gray-400 rounded-[24px] tablet:rounded-[32px] absolute z-20"
                   >
                     {t('common.disconnect')}
                   </button>
