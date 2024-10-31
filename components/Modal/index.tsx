@@ -7,6 +7,7 @@ export interface BaseModalProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
+  description?: string;
 }
 
 export interface ModalProps
@@ -20,6 +21,7 @@ export default function Modal({
   className,
   isOpen,
   title,
+  description,
   onClose,
 }: ModalProps) {
   return (
@@ -37,6 +39,7 @@ export default function Modal({
             onClick={onClose}
           />
         </div>
+        {description && <p className="font-semibold mt-[8px]">{description}</p>}
         {children}
       </div>
     </div>
