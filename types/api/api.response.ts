@@ -247,5 +247,7 @@ export namespace APIResponse {
   export type SearchNode = APISuccessfulResponse<{
     data: SearchNodeData[];
   }>;
-  export type UserClaimStatusAPIResponse = APISuccessfulResponse<{ data: UserClaimStatus }>;
+  export type UserClaimStatusAPIResponse = APISuccessfulResponse<{
+    data: UserClaimStatus;
+  }>;
 }

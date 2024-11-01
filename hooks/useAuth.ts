@@ -5,7 +5,10 @@ import { useMemo } from 'react';
 import { useAccount, useDisconnect, useSwitchChain } from 'wagmi';
 
 import { config } from '@/config/wagmi';
-import { useConnectWalletApi, useGetUserClaimStatusApi } from '@/hooks/useMutationApi';
+import {
+  useConnectWalletApi,
+  useGetUserClaimStatusApi,
+} from '@/hooks/useMutationApi';
 import useUserStore, { setAuthCredential, useAuthStore } from '@/store/auth';
 import { clearAuthCookiesAction } from '@/actions';
 import { CHAINS } from '@/config/env';
@@ -34,13 +37,13 @@ export const useAuth = () => {
       signature: message,
       signer: address.toLowerCase(),
     });
+    const response = await getUserClaimStatus();
+    if (response.data) {
+      setUserClaimStatus(response.data.data);
+    }
     if (result) {
       setAuthCredential(true);
     }
-    const userClaimStatus = await getUserClaimStatus()
-
-    const b = userClaimStatus.data
-    setUserClaimStatus(userClaimStatus.data.data)
   };
 
   const onLogout = async () => {

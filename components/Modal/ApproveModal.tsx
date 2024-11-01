@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import Modal from '@/components/Modal';
-import Button from '@/components/Button';
 
 interface UpdatePercentSuccessModalProps {
   isOpen: boolean;

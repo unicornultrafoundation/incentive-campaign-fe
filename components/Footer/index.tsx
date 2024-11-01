@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 
 import TwitterIcon from '@/components/Icon/Twitter';
 import TelegramIcon from '@/components/Icon/Telegram';
@@ -12,21 +12,21 @@ import LinkedinIcon from '@/components/Icon/Linkedin';
 import useIsMobile from '@/hooks/useIsMobile';
 
 const Footer = () => {
-  const t = useTranslations();
+  // const t = useTranslations();
   const isMobile = useIsMobile();
 
   return (
     <footer className="w-full h-full desktop:px-[100px] px-4 bg-[#141414]">
       <div className="items-center gap-4 flex-col tablet:flex-row flex justify-between desktop:py-9 py-4 border-t border-[#7EFFC5] ">
         <div className="flex items-center gap-4">
-        {isMobile ? (
-                <Icon.Logo
-                  width={'80%'}
-                  className="tablet:w-10 tablet:h-10 w-[32px] h-[32px]"
-                />
-              ) : (
-                <Icon.Logo className="tablet:w-10 tablet:h-10 w-[32px] h-[32px]" />
-              )}
+          {isMobile ? (
+            <Icon.Logo
+              width={'80%'}
+              className="tablet:w-10 tablet:h-10 w-[32px] h-[32px]"
+            />
+          ) : (
+            <Icon.Logo className="tablet:w-10 tablet:h-10 w-[32px] h-[32px]" />
+          )}
           {/* <Icon.Logo className="flex-1 tablet:w-10 tablet:h-10 w-[26px] h-[32px] " /> */}
         </div>
         <div className="flex gap-4 tablet:gap-6">

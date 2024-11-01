@@ -1,7 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { useState } from 'react'; // Import useRouter từ Next.js
 import { FormProvider, useForm } from 'react-hook-form';
 import { useAccount } from 'wagmi';
@@ -12,7 +12,7 @@ import SidebarMenu from '@/components/Header/SidebarMenu';
 import Icon from '@/components/Icon';
 import ArrowRightIcon from '@/components/Icon/ArrowRight';
 import { useAuth } from '@/hooks/useAuth';
-import useWalletStore from '@/store/connect-wallet';
+// import useWalletStore from '@/store/connect-wallet';
 import { FormState } from '@/types/form';
 import { shortenAddress } from '@/utils/string';
 import useIsMobile from '@/hooks/useIsMobile';
@@ -26,27 +26,27 @@ const LandingHeader = () => {
     },
   });
   const t = useTranslations();
-  const navs = [
-    { label: t('header.node_sale'), href: '/' },
-    { label: t('header.my_node'), href: '/mynode' },
-  ];
-  const { isValidSession, onLogout } = useAuth();
-  const [activeNavIndex, setActiveNavIndex] = useState(0);
-  const router = useRouter();
-  const { setOpen } = useWalletStore();
+  // const navs = [
+  //   { label: t('header.node_sale'), href: '/' },
+  //   { label: t('header.my_node'), href: '/mynode' },
+  // ];
+  const { onLogout } = useAuth();
+  // const [activeNavIndex, setActiveNavIndex] = useState(0);
+  // const router = useRouter();
+  // const { setOpen } = useWalletStore();
   const isMobile = useIsMobile();
 
-  const toggleNav = (index: any) => {
-    if (activeNavIndex !== index) {
-      if (index === 1) {
-        if (!isValidSession) {
-          return setOpen(true);
-        }
-      }
-      setActiveNavIndex(index);
-      router.push(navs[index].href);
-    }
-  };
+  // const toggleNav = (index: any) => {
+  //   if (activeNavIndex !== index) {
+  //     if (index === 1) {
+  //       if (!isValidSession) {
+  //         return setOpen(true);
+  //       }
+  //     }
+  //     setActiveNavIndex(index);
+  //     router.push(navs[index].href);
+  //   }
+  // };
   const [showDisconnect, setShowDisconnect] = useState(false);
 
   const { address } = useAccount();

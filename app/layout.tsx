@@ -1,7 +1,5 @@
-import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { getLocale, getMessages } from 'next-intl/server';
-import Script from 'next/script';
 import React from 'react';
 import './globals.scss';
 

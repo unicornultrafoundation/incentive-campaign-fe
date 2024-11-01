@@ -185,7 +185,10 @@ export const useClaimNFTApi = (
   );
 
 export const useGetUserClaimStatusApi = (
-  config?: ExtendSWRMutationConfiguration<APIResponse.UserClaimStatusAPIResponse, any>,
+  config?: ExtendSWRMutationConfiguration<
+    APIResponse.UserClaimStatusAPIResponse,
+    any
+  >,
 ) =>
   useExtendedSWRMutation<APIResponse.UserClaimStatusAPIResponse, any>(
     API_ENDPOINTS.GET_USER_CLAIM_STATUS,

@@ -1,11 +1,10 @@
 'use client';
 
-import Icon from '@/components/Icon';
 import HomeSectionTwo from '@/components/Pages/Home/SectionTwo';
+import SectionOne from '@/components/Pages/Home/SectionOne';
 
 import Footer from '../components/Footer';
 import LandingHeader from '../components/Header';
-import SectionOne from '@/components/Pages/Home/SectionOne';
 
 export default function Home() {
   return (

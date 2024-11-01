@@ -1,17 +1,18 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import Marquee from 'react-fast-marquee';
 
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import useIsMobile from '@/hooks/useIsMobile';
-import AirdropModal from '../../../Modal/airdrop-modal';
 import { useAuth } from '@/hooks/useAuth';
 import useUserStore from '@/store/auth';
 import { ClaimStatus } from '@/types/entities';
 import useWalletStore from '@/store/connect-wallet';
+
+import AirdropModal from '../../../Modal/airdrop-modal';
 
 type Step = {
   title: React.ReactNode;
@@ -21,7 +22,7 @@ type Step = {
 };
 
 const TitleWithDes = () => {
-  const t = useTranslations();
+  // const t = useTranslations();
   return (
     <div className="flex flex-col gap-6 max-[1000px]:gap-1 w-[100%]">
       <h1 className=" text-white font-jockey text-2xl tablet:text-3xl desktop:text-[64px] max-[1000px]:text-[30px] font-normal mb-4">
@@ -42,7 +43,7 @@ const TitleWithDes = () => {
 };
 
 const Crystal = () => {
-  const t = useTranslations();
+  // const t = useTranslations();
   return (
     <div className="flex items-center justify-center w-[100%] flex-1 !pointer-events-none">
       <Icon.Crystal />
@@ -51,7 +52,7 @@ const Crystal = () => {
 };
 
 const Steps = ({ steps }: { steps: Step[] }) => {
-  const t = useTranslations();
+  // const t = useTranslations();
   return (
     <div className="flex w-[100%] flex-col gap-0">
       {steps.map((step, stepIndex) => (
@@ -59,7 +60,7 @@ const Steps = ({ steps }: { steps: Step[] }) => {
           <div className="w-[50px] h-[172px] max-[728px]:h-[270px] flex flex-col items-center justify-center">
             <div
               style={{
-                background: step.isCompleted ? '#5FCC8A' : '#4451BB',
+                background: step.isCompleted ? '#7EFFC5' : '#4451BB',
                 opacity: step.isCompleted ? 1 : 0.25,
                 borderRadius: stepIndex === 0 ? '8px 8px 0px 0px' : 0,
               }}
@@ -68,7 +69,7 @@ const Steps = ({ steps }: { steps: Step[] }) => {
             <div
               style={{
                 background: step.isCompleted
-                  ? '#5FCC8A'
+                  ? '#7EFFC5'
                   : 'linear-gradient(180deg, #4A4C54 0%, #202020 100%)',
                 color: step.isCompleted ? '#4651F6' : 'white',
                 border: step.isCompleted ? 'none' : '1px solid #242424',
@@ -82,7 +83,7 @@ const Steps = ({ steps }: { steps: Step[] }) => {
             </div>
             <div
               style={{
-                background: step.isCompleted ? '#5FCC8A' : '#4451BB',
+                background: step.isCompleted ? '#7EFFC5' : '#4451BB',
                 opacity:
                   stepIndex !== steps.length - 1
                     ? step.isCompleted
@@ -155,7 +156,7 @@ export default function SectionOne() {
   const { isValidSession } = useAuth();
   const { setOpen } = useWalletStore();
   const { userClaimStatus } = useUserStore();
-  const t = useTranslations();
+  // const t = useTranslations();
   const isMobile = useIsMobile(1000);
   const [isOpenAirdropModal, setOpenAidropModal] = useState(false);
   const steps: Step[] = [
@@ -176,7 +177,7 @@ export default function SectionOne() {
               behavior: 'smooth',
             });
           }}
-          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white] hover:brightness-75"
+          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white]"
         >
           Bridge to U2U
         </Button>
@@ -213,7 +214,7 @@ export default function SectionOne() {
             }
             setOpenAidropModal(!isOpenAirdropModal);
           }}
-          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white] hover:brightness-75"
+          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white]"
         >
           Claim Free Gas
         </Button>
@@ -236,7 +237,7 @@ export default function SectionOne() {
               behavior: 'smooth',
             });
           }}
-          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white] hover:brightness-75"
+          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white]"
         >
           Stake pUSDT
         </Button>

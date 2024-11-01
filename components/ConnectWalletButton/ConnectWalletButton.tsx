@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import ArrowRightIcon from '@/components/Icon/ArrowRight';
 import { useAuth } from '@/hooks/useAuth';
 import useWalletStore from '@/store/connect-wallet';
 import Button from '@/components/Button';

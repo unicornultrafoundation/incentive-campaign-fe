@@ -1,9 +1,9 @@
 'use client';
 
-import Button from '@/components/Button';
+import React from 'react';
+
 import Icon from '@/components/Icon';
 import Modal from '@/components/Modal';
-import { useState } from 'react';
 
 export default function LoadingModal({
   title,

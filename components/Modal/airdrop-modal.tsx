@@ -1,13 +1,16 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
+
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import Modal from '@/components/Modal';
-import { useEffect, useState } from 'react';
-import LoadingModal from './loading-modal';
 import { shortenAddress } from '@/utils/string';
 import { nextAPI } from '@/services/api';
-import useSWR from 'swr';
+import useUserStore from '@/store/auth';
+
+import LoadingModal from './loading-modal';
 
 enum ClaimStatus {
   NONE = 0, // 0 - not claim requested yet
@@ -32,7 +35,7 @@ const ClaimGasFeeModal = ({
       onClose={onClose}
       title="Free U2U Gas Fee"
       description="Make a $10 USDT transaction to the U2U Network and get 5 $U2U instantly!"
-      className="relative border border-[#7EFFC5] !max-w-[500px] max-[500px]:w-[350px] w-[500px] tablet:max-w-[450px] p-6 flex flex-col gap-5"
+      className="relative border border-[#7EFFC5] !max-w-[550px] max-[550px]:w-[360px] w-[550px] tablet:max-w-[450px] p-6 flex flex-col gap-5"
     >
       <div className="w-full flex flex-col gap-5">
         <div
@@ -42,8 +45,11 @@ const ClaimGasFeeModal = ({
           className="w-full h-[1px] bg-[#9299FF] mb-2"
         />
       </div>
-      <div className="w-full">
+      <div className="w-full relative">
         <Icon.AirdropBanner className="w-full" />
+        <div className="absolute bottom-0 left-8 w-full h-[32%] max-[550px]:h-[34%] max-[550px]:left-5 font-jockey text-3xl max-[550px]:text-xl">
+          5 $U2U Await you
+        </div>
       </div>
       <div className="w-full flex flex-col gap-5">
         <div className="w-full flex items-center gap-5">
@@ -91,41 +97,41 @@ const ClaimGasFeeModal = ({
   );
 };
 
-const AlreadyClaimedModal = ({
-  isOpen,
-  onClose,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-}) => {
-  return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title="Gas Fee Already Claimed"
-      className="relative border border-[#7EFFC5] !max-w-[600px] max-[600px]:w-[400px] w-[600px] tablet:max-w-[450px] p-6 flex flex-col gap-5"
-    >
-      <div className="w-full">
-        <Icon.AirdropClaimed className="w-[100%]" />
-      </div>
-      <div className="w-full text-center text-balance -mt-16">
-        Gas fees have already been claimed by your wallet.
-      </div>
-      <div className="w-full flex items-center justify-between max-[768px]:gap-2">
-        <Button
-          scale="md"
-          style={{
-            background: 'linear-gradient(90deg, #9299FF 0%, #4651F6 100%)',
-          }}
-          className="!text-[18px] w-full p-4 mt-4 rounded-lg text-[#fff] hover:!bg-transparent flex items-center justify-center gap-1 !border-none"
-          onClick={() => {}}
-        >
-          Got it!
-        </Button>
-      </div>
-    </Modal>
-  );
-};
+// const AlreadyClaimedModal = ({
+//   isOpen,
+//   onClose,
+// }: {
+//   isOpen: boolean;
+//   onClose: () => void;
+// }) => {
+//   return (
+//     <Modal
+//       isOpen={isOpen}
+//       onClose={onClose}
+//       title="Gas Fee Already Claimed"
+//       className="relative border border-[#7EFFC5] !max-w-[600px] max-[600px]:w-[400px] w-[600px] tablet:max-w-[450px] p-6 flex flex-col gap-5"
+//     >
+//       <div className="w-full">
+//         <Icon.AirdropClaimed className="w-[100%]" />
+//       </div>
+//       <div className="w-full text-center text-balance -mt-16">
+//         Gas fees have already been claimed by your wallet.
+//       </div>
+//       <div className="w-full flex items-center justify-between max-[768px]:gap-2">
+//         <Button
+//           scale="md"
+//           style={{
+//             background: 'linear-gradient(90deg, #9299FF 0%, #4651F6 100%)',
+//           }}
+//           className="!text-[18px] w-full p-4 mt-4 rounded-lg text-[#fff] hover:!bg-transparent flex items-center justify-center gap-1 !border-none"
+//           onClick={() => {}}
+//         >
+//           Got it!
+//         </Button>
+//       </div>
+//     </Modal>
+//   );
+// };
 
 const NotEligbleModal = ({
   isOpen,
@@ -246,18 +252,16 @@ export default function AirdropModal({
   onClose: () => void;
 }) {
   const [initialLoading, setInitialLoading] = useState(true);
-  const [status, setStatus] = useState<ClaimStatus | null>(null);
-  const [isEligible, setIsEligible] = useState(false);
-  const { data } = useSWR(isOpen ? 'get-claim-status' : null, getClaimStatus, {
+  const { userClaimStatus, setUserClaimStatus } = useUserStore();
+  useSWR(isOpen ? 'get-claim-status' : null, getClaimStatus, {
     refreshInterval:
-      status !== null &&
-      status !== ClaimStatus.PENDING &&
-      status !== ClaimStatus.REQUESTED
+      userClaimStatus !== null &&
+      userClaimStatus.claimStatus !== ClaimStatus.PENDING &&
+      userClaimStatus.claimStatus !== ClaimStatus.REQUESTED
         ? 0
         : 1000,
     onSuccess: (data) => {
-      setIsEligible(data.isEligibility);
-      setStatus(data.claimStatus);
+      setUserClaimStatus(data);
       if (initialLoading) {
         setInitialLoading(false);
       }
@@ -265,10 +269,9 @@ export default function AirdropModal({
   });
 
   const onClaim = async () => {
-    const res = await nextAPI.post('/airdrop/bridge/claim');
-    const getClaimStatusRes = await getClaimStatus()
-    setStatus(getClaimStatusRes.claimStatus);
-    setIsEligible(getClaimStatusRes.isEligibility);
+    await nextAPI.post('/airdrop/bridge/claim');
+    const getClaimStatusRes = await getClaimStatus();
+    setUserClaimStatus(getClaimStatusRes);
   };
 
   useEffect(() => {
@@ -287,7 +290,11 @@ export default function AirdropModal({
     );
   }
 
-  if (!isEligible) {
+  if (!userClaimStatus) {
+    return null;
+  }
+
+  if (!userClaimStatus.isEligibility) {
     return (
       <NotEligbleModal
         isOpen={isOpen}
@@ -297,17 +304,17 @@ export default function AirdropModal({
     );
   }
 
-  if (status === ClaimStatus.NONE) {
+  if (userClaimStatus.claimStatus === ClaimStatus.NONE) {
     return (
       <ClaimGasFeeModal isOpen={isOpen} onClose={onClose} onClaim={onClaim} />
     );
   }
 
-  if (status === ClaimStatus.SUCCESS) {
+  if (userClaimStatus.claimStatus === ClaimStatus.SUCCESS) {
     return <ClaimSuccessModal isOpen={isOpen} onClose={onClose} />;
   }
 
-  if (status === ClaimStatus.FAILED) {
+  if (userClaimStatus.claimStatus === ClaimStatus.FAILED) {
     return (
       <NotEligbleModal
         isOpen={isOpen}
@@ -317,7 +324,10 @@ export default function AirdropModal({
     );
   }
 
-  if (status === ClaimStatus.REQUESTED || status === ClaimStatus.PENDING) {
+  if (
+    userClaimStatus.claimStatus === ClaimStatus.REQUESTED ||
+    userClaimStatus.claimStatus === ClaimStatus.PENDING
+  ) {
     return (
       <LoadingModal
         isLoading={isOpen}

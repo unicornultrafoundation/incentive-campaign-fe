@@ -36,19 +36,21 @@ export default function Modal({
           boxShadow: '8px 8px 0px 0px #7EFFC5',
         }}
       >
-        <div className='flex flex-col gap-1'>
-        <div className="flex justify-between">
-          <h2 className="font-inter text-lg tablet:text-2xl text-[#7EFFC5] font-semibold">
-            {title ?? ''}
-          </h2>
-          <CloseIcon
-            className="cursor-pointer"
-            width={24}
-            height={24}
-            onClick={onClose}
-          />
-        </div>
-        {description && <p className="font-semibold mt-[0px]">{description}</p>}
+        <div className="flex flex-col gap-1">
+          <div className="flex justify-between">
+            <h2 className="font-inter text-lg tablet:text-2xl text-[#7EFFC5] font-semibold">
+              {title ?? ''}
+            </h2>
+            <CloseIcon
+              className="cursor-pointer"
+              width={24}
+              height={24}
+              onClick={onClose}
+            />
+          </div>
+          {description && (
+            <p className="font-semibold mt-[0px]">{description}</p>
+          )}
         </div>
         {children}
       </div>

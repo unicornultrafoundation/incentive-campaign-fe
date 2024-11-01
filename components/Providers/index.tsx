@@ -8,10 +8,11 @@ import { SWRConfig } from 'swr/_internal';
 import GlobalLoading from '@/components/Loading/GlobalLoading';
 import ToastModal from '@/components/Modal/Toast';
 import NetworkSwitcher from '@/components/SwitchNetwork';
-import { setAuthCredential } from '@/store/auth';
+import useUserStore, { setAuthCredential, useAuthStore } from '@/store/auth';
 import ConnectWallet from '@/components/Modal/ConnectWallet';
 import Web3Provider from '@/config/web3-provider';
 import '@rainbow-me/rainbowkit/styles.css';
+import { useGetUserClaimStatusApi } from '@/hooks/useMutationApi';
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -23,9 +24,25 @@ interface AppProvidersProps {
 // eslint-disable-next-line react-hooks/exhaustive-deps
 
 const AppProviders = ({ children, messages, locale }: AppProvidersProps) => {
+  const { hasCredential } = useAuthStore();
+  const { setUserClaimStatus } = useUserStore();
+  const { trigger: getUserClaimStatusApi } = useGetUserClaimStatusApi();
+
   useEffect(() => {
     setAuthCredential(hasCookie('accessToken'));
   }, []);
+
+  useEffect(() => {
+    const getUserClaimStatus = async () => {
+      const response = await getUserClaimStatusApi();
+      if (response.data) {
+        setUserClaimStatus(response.data.data);
+      }
+    };
+    if (hasCredential) {
+      getUserClaimStatus();
+    }
+  }, [hasCredential]);
 
   return (
     <Web3Provider>
