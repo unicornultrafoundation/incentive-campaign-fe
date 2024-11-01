@@ -8,7 +8,10 @@ import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import useIsMobile from '@/hooks/useIsMobile';
 import AirdropModal from '../../../Modal/airdrop-modal';
-import LoadingModal from '@/components/Modal/loading-modal';
+import { useAuth } from '@/hooks/useAuth';
+import useUserStore from '@/store/auth';
+import { ClaimStatus } from '@/types/entities';
+import useWalletStore from '@/store/connect-wallet';
 
 type Step = {
   title: React.ReactNode;
@@ -149,6 +152,9 @@ const SectionMarquee = () => {
 };
 
 export default function SectionOne() {
+  const { isValidSession } = useAuth();
+  const { setOpen } = useWalletStore();
+  const { userClaimStatus } = useUserStore();
   const t = useTranslations();
   const isMobile = useIsMobile(1000);
   const [isOpenAirdropModal, setOpenAidropModal] = useState(false);
@@ -156,7 +162,7 @@ export default function SectionOne() {
     {
       title: 'Bridge & Start - Move $USDT with Owlto',
       description: 'Begin by bridging your $USDT to the U2U Chain with Owlto.',
-      isCompleted: true,
+      isCompleted: isValidSession ? true : false,
       actionButton: (
         <Button
           style={{
@@ -179,13 +185,21 @@ export default function SectionOne() {
     {
       title: <>Claim Your Free Gas Fees</>,
       description: 'Receive free gas fees to kickstart your journey.',
-      isCompleted: true,
+      isCompleted:
+        isValidSession &&
+        userClaimStatus?.claimStatus === ClaimStatus.NONE &&
+        userClaimStatus.isEligibility
+          ? true
+          : false,
       actionButton: (
         <Button
-          style={{
-            fontFamily: 'Inter Bolder',
+          onClick={() => {
+            if (!isValidSession) {
+              setOpen(true);
+              return;
+            }
+            setOpenAidropModal(!isOpenAirdropModal);
           }}
-          onClick={() => setOpenAidropModal(!isOpenAirdropModal)}
           className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white] hover:brightness-75"
         >
           Claim Free Gas

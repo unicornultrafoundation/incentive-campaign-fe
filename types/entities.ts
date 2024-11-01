@@ -143,3 +143,17 @@ export interface WalletConnect {
   isOpen: boolean;
   onClose?: () => void;
 }
+
+export enum ClaimStatus {
+  NONE = 0, // 0 - not claim requested yet
+  REQUESTED = 1, // 1 - submit request
+  PENDING = 2, // 2 - Transaction send airdrop submiting and pending mint
+  SUCCESS = 3, // 3 -  Transaction send airdrop minted
+  FAILED = 4, // 4 - Transaction send airdrop failed
+}
+
+export interface UserClaimStatus {
+  isEligibility: boolean;
+  claimStatus: ClaimStatus;
+  txHash?: string;
+}

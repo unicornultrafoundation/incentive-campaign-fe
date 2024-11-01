@@ -5,15 +5,17 @@ import { useMemo } from 'react';
 import { useAccount, useDisconnect, useSwitchChain } from 'wagmi';
 
 import { config } from '@/config/wagmi';
-import { useConnectWalletApi } from '@/hooks/useMutationApi';
-import { setAuthCredential, useAuthStore } from '@/store/auth';
+import { useConnectWalletApi, useGetUserClaimStatusApi } from '@/hooks/useMutationApi';
+import useUserStore, { setAuthCredential, useAuthStore } from '@/store/auth';
 import { clearAuthCookiesAction } from '@/actions';
 import { CHAINS } from '@/config/env';
 
 export const useAuth = () => {
   const { isConnected } = useAccount();
   const { hasCredential } = useAuthStore();
+  const { setUserClaimStatus } = useUserStore();
   const { trigger: connectWallet } = useConnectWalletApi();
+  const { trigger: getUserClaimStatus } = useGetUserClaimStatusApi();
 
   const isValidSession = useMemo(() => {
     return isConnected && hasCredential;
@@ -35,12 +37,17 @@ export const useAuth = () => {
     if (result) {
       setAuthCredential(true);
     }
+    const userClaimStatus = await getUserClaimStatus()
+
+    const b = userClaimStatus.data
+    setUserClaimStatus(userClaimStatus.data.data)
   };
 
   const onLogout = async () => {
     await disconnectAsync();
     disconnect();
     // setAuthCredential(false);
+    setUserClaimStatus(null);
     await clearAuthCookiesAction();
   };
 

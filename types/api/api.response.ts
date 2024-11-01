@@ -7,6 +7,7 @@ import {
   RootAddress,
   Round,
   User,
+  UserClaimStatus,
 } from '@/types/entities';
 
 export interface APIErrorResponse {
@@ -246,4 +247,5 @@ export namespace APIResponse {
   export type SearchNode = APISuccessfulResponse<{
     data: SearchNodeData[];
   }>;
+  export type UserClaimStatusAPIResponse = APISuccessfulResponse<{ data: UserClaimStatus }>;
 }
