@@ -134,7 +134,7 @@ export default function SignConnectMessageModal({ isOpen, onClose }: Props) {
 
   return (
     <Modal
-      className="w-full max-w-[370px]  tablet:max-w-[468px] border border-[#7EFFC5]"
+      className="w-full max-w-[370px]  tablet:max-w-[468px]"
       isOpen={isOpen}
       onClose={onClose}
     >

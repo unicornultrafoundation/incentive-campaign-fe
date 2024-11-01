@@ -19,7 +19,7 @@ const ClaimNFTModal: FC<UpdatePercentSuccessModalProps> = (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      className="relative border border-[#7EFFC5] max-w-[390px] tablet:max-w-[450px] p-6 w-full flex flex-col gap-5"
+      className="relative max-w-[390px] tablet:max-w-[450px] p-6 w-full flex flex-col gap-5"
     >
       <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-3%] left-[-10px] rotate-45"></div>
       <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-3%] right-[-10px] rotate-45"></div>

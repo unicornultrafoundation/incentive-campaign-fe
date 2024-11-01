@@ -18,7 +18,7 @@ const ApproveModal: FC<UpdatePercentSuccessModalProps> = (
       isOpen={isOpen}
       onClose={onClose}
       title="fsdfdsfsdfsf"
-      className="relative border border-[#7EFFC5] max-w-[390px] tablet:max-w-[450px] p-6 w-full flex flex-col gap-5"
+      className="relative max-w-[390px] tablet:max-w-[450px] p-6 w-full flex flex-col gap-5"
     >
      aaaaa
     </Modal>
