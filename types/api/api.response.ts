@@ -7,6 +7,7 @@ import {
   RootAddress,
   Round,
   User,
+  UserClaimStatus,
 } from '@/types/entities';
 import { DashboardBitget, DashboardPublic } from '@/types/subgraph.response';
 
@@ -45,6 +46,7 @@ export namespace APIResponse {
   export type SearchNode = APISuccessfulResponse<{
     data: SearchNodeData[];
   }>;
+  export type UserClaimStatusAPIResponse = APISuccessfulResponse<{ data: UserClaimStatus }>;
 
   export type DashBoardPublic = APISuccessfulResponse<DashboardPublicData>;
   export type DashBoardBitget = APISuccessfulResponse<DashboardBitgetData>;

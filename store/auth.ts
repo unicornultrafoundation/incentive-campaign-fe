@@ -1,3 +1,4 @@
+import { UserClaimStatus } from './../types/entities';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
@@ -5,6 +6,7 @@ import { UserStoreAction, UserStoreState } from '@/types/store/store.auth';
 
 const DEFAULT_STATE: UserStoreState = {
   profile: null,
+  userClaimStatus: null,
 };
 
 const useUserStore = create(
@@ -15,6 +17,9 @@ const useUserStore = create(
         // setters
         setProfile: (profile) => set(() => ({ profile })),
         clearProfile: () => set(() => DEFAULT_STATE),
+        setUserClaimStatus: (userClaimStatus) => {
+          set(() => ({ userClaimStatus }));
+        },
       }),
       { name: 'user-storage' },
     ),

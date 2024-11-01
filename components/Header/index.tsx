@@ -88,7 +88,7 @@ const LandingHeader = () => {
           </button>
           {/* Action Buttons */}
           <div className="desktop:flex hidden flex-1 justify-end gap-3">
-            <button className="font-semibold !text-sm tablet:text-sm text-center text-nowrap cursor-pointer px-10 !py-2 tablet:px-4 bg-[#4651F6] !border-[#4651F6] items-center gap-1 rounded-[32px] text-[white]">
+            <button className="font-semibold !text-sm tablet:text-sm text-center text-nowrap cursor-pointer px-10 !py-2 tablet:px-4 bg-[#4651F6] !border-[#4651F6] items-center gap-1 rounded-[32px] text-[white] hover:brightness-75 transition-all">
               Claim your Gas fee
             </button>
             <div className="gap-2 mt-4 tablet:mt-0 hidden laptop:flex">

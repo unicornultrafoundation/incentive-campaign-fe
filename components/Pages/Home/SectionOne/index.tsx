@@ -1,42 +1,24 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import React from 'react';
+import React, { useState } from 'react';
 import Marquee from 'react-fast-marquee';
 
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import useIsMobile from '@/hooks/useIsMobile';
-import AirdropModal from './airdrop-modal';
+import AirdropModal from '../../../Modal/airdrop-modal';
+import { useAuth } from '@/hooks/useAuth';
+import useUserStore from '@/store/auth';
+import { ClaimStatus } from '@/types/entities';
+import useWalletStore from '@/store/connect-wallet';
 
 type Step = {
   title: React.ReactNode;
   description: React.ReactNode;
   isCompleted: boolean;
+  actionButton?: React.ReactNode;
 };
-
-const initialSteps: Step[] = [
-  {
-    title: 'Bridge & Start - Move $USDT with Owlto',
-    description: 'Begin by bridging your $USDT to the U2U Chain with Owlto.',
-    isCompleted: true,
-  },
-  {
-    title: (
-      <>
-        Claim Your Free Gas Fees at &nbsp;
-        <span className="text-[#9299FF] underline cursor-pointer">Here</span>
-      </>
-    ),
-    description: 'Receive free gas fees to kickstart your journey.',
-    isCompleted: true,
-  },
-  {
-    title: 'Stake & Earn Big - Boost Your U2U Rewards',
-    description: 'Stake your $USDT to earn U2U tokens instantly!',
-    isCompleted: false,
-  },
-];
 
 const TitleWithDes = () => {
   const t = useTranslations();
@@ -74,7 +56,7 @@ const Steps = ({ steps }: { steps: Step[] }) => {
     <div className="flex w-[100%] flex-col gap-0">
       {steps.map((step, stepIndex) => (
         <div key={stepIndex} className="w-full flex flex-row items-center">
-          <div className="w-[50px] h-[120px] max-[728px]:h-[200px] flex flex-col items-center justify-center">
+          <div className="w-[50px] h-[172px] max-[728px]:h-[270px] flex flex-col items-center justify-center">
             <div
               style={{
                 background: step.isCompleted ? '#5FCC8A' : '#4451BB',
@@ -118,24 +100,12 @@ const Steps = ({ steps }: { steps: Step[] }) => {
             <div className="font-normal text-[#AFAFAF] text-[20px]">
               {step.description}
             </div>
+            <div className="font-normal text-[#AFAFAF] text-[20px]">
+              {step.actionButton && step.actionButton}
+            </div>
           </div>
         </div>
       ))}
-      <div className="w-full mt-5">
-        <Button
-          style={{
-            fontFamily: 'Inter Bolder',
-          }}
-          onClick={() => {
-            const section2Ele = document.getElementById('section_2');
-            if (!section2Ele) return;
-            window.scrollTo({ top: section2Ele.offsetTop, behavior: 'smooth' });
-          }}
-          className="px-16 h-[56px] bg-[#7EFFC5] text-black rounded-lg text-[20px] cursor-pointer max-[1000px]:w-[100%]"
-        >
-          Stake pUSDT
-        </Button>
-      </div>
     </div>
   );
 };
@@ -181,13 +151,98 @@ const SectionMarquee = () => {
   );
 };
 
-export default function SectionOne({
-  steps = initialSteps,
-}: {
-  steps: Step[];
-}) {
+export default function SectionOne() {
+  const { isValidSession } = useAuth();
+  const { setOpen } = useWalletStore();
+  const { userClaimStatus } = useUserStore();
   const t = useTranslations();
   const isMobile = useIsMobile(1000);
+  const [isOpenAirdropModal, setOpenAidropModal] = useState(false);
+  const steps: Step[] = [
+    {
+      title: 'Bridge & Start - Move $USDT with Owlto',
+      description: 'Begin by bridging your $USDT to the U2U Chain with Owlto.',
+      isCompleted: isValidSession ? true : false,
+      actionButton: (
+        <Button
+          style={{
+            fontFamily: 'Inter Bolder',
+          }}
+          onClick={() => {
+            const section2Ele = document.getElementById('section_2');
+            if (!section2Ele) return;
+            window.scrollTo({
+              top: section2Ele.offsetTop,
+              behavior: 'smooth',
+            });
+          }}
+          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white] hover:brightness-75"
+        >
+          Bridge to U2U
+        </Button>
+      ),
+    },
+    {
+      title: <>Claim Your Free Gas Fees</>,
+      description: 'Receive free gas fees to kickstart your journey.',
+      isCompleted:
+        isValidSession &&
+        userClaimStatus?.isEligibility &&
+        (userClaimStatus?.claimStatus === ClaimStatus.NONE ||
+          userClaimStatus?.claimStatus === ClaimStatus.SUCCESS)
+          ? true
+          : false,
+      actionButton: (
+        <Button
+          style={{
+            pointerEvents:
+              isValidSession &&
+              userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
+                ? 'none'
+                : 'auto',
+            filter:
+              isValidSession &&
+              userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
+                ? 'grayscale(100%) brightness(60%)'
+                : 'none',
+          }}
+          onClick={() => {
+            if (!isValidSession) {
+              setOpen(true);
+              return;
+            }
+            setOpenAidropModal(!isOpenAirdropModal);
+          }}
+          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white] hover:brightness-75"
+        >
+          Claim Free Gas
+        </Button>
+      ),
+    },
+    {
+      title: 'Stake & Earn Big - Boost Your U2U Rewards',
+      description: 'Stake your $USDT to earn U2U tokens instantly!',
+      isCompleted: false,
+      actionButton: (
+        <Button
+          style={{
+            fontFamily: 'Inter Bolder',
+          }}
+          onClick={() => {
+            const section2Ele = document.getElementById('section_2');
+            if (!section2Ele) return;
+            window.scrollTo({
+              top: section2Ele.offsetTop,
+              behavior: 'smooth',
+            });
+          }}
+          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white] hover:brightness-75"
+        >
+          Stake pUSDT
+        </Button>
+      ),
+    },
+  ];
 
   const renderMobile = () => {
     return (
@@ -252,7 +307,15 @@ export default function SectionOne({
       <div className="w-full h-[80px] flex items-center bg-[#7EFFC5]">
         <SectionMarquee />
       </div>
-      {/* <AirdropModal /> */}
+      <AirdropModal
+        isOpen={isOpenAirdropModal}
+        onClose={() => setOpenAidropModal(false)}
+      />
+      {/* <LoadingModal
+        title="Processing your claim... Please wait."
+        isLoading={true}
+        onClose={() => {}}
+      /> */}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import Modal from '@/components/Modal/index';
 import { useAuth } from '@/hooks/useAuth';
 import { useGetProfileApi } from '@/hooks/useMutationApi';
 import useUserStore from '@/store/auth';
+import LoadingModal from './loading-modal';
 
 interface Props {
   isOpen: boolean;
@@ -57,14 +58,21 @@ export default function SignConnectMessageModal({ isOpen, onClose }: Props) {
     switch (true) {
       case isAuthenticating:
         return (
-          <>
-            <div className="font-inter text-primary text-center text-heading-sm">
-              {t('modal_connect_wallet.authenticating')}
-            </div>
-            <div className="font-inter text-secondary text-center">
-              {t('modal_connect_wallet.description_2')}
-            </div>
-          </>
+          <LoadingModal
+            className=''
+            title={
+              <>
+                <div className="font-inter text-primary text-center text-heading-sm">
+                  {t('modal_connect_wallet.authenticating')}
+                </div>
+                <div className="font-inter text-secondary text-center">
+                  {t('modal_connect_wallet.description_2')}
+                </div>
+              </>
+            }
+            isLoading={isAuthenticating}
+            onClose={onClose}
+          />
         );
       case isError || !!authError:
         return (

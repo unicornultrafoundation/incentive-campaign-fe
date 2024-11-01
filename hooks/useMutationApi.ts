@@ -183,3 +183,12 @@ export const useClaimNFTApi = (
     ((url: string, { arg }: any) => nextAPI.get(url, arg)) as any,
     config,
   );
+
+export const useGetUserClaimStatusApi = (
+  config?: ExtendSWRMutationConfiguration<APIResponse.UserClaimStatusAPIResponse, any>,
+) =>
+  useExtendedSWRMutation<APIResponse.UserClaimStatusAPIResponse, any>(
+    API_ENDPOINTS.GET_USER_CLAIM_STATUS,
+    ((url: string, { arg }: any) => nextAPI.get(url, arg)) as any,
+    config,
+  );
