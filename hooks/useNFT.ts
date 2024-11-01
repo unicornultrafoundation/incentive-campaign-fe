@@ -14,7 +14,6 @@ export const useNFT = () => {
   // const { address } = useAccount();
   // const { chainId: currentChainId } = useChainStore((state) => state.chain);
 
-
   return {
     isPending,
     isLoading,

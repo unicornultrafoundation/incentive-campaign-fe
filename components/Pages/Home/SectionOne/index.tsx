@@ -1,10 +1,12 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import Marquee from 'react-fast-marquee';
+
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import useIsMobile from '@/hooks/useIsMobile';
-import { useTranslations } from 'next-intl';
-import Marquee from 'react-fast-marquee';
 
 type Step = {
   title: React.ReactNode;
@@ -31,7 +33,7 @@ const initialSteps: Step[] = [
   {
     title: 'Stake & Earn Big - Boost Your U2U Rewards',
     description: 'Stake your $USDT to earn U2U tokens instantly!',
-    isCompleted: true,
+    isCompleted: false,
   },
 ];
 
@@ -79,11 +81,17 @@ const Steps = ({ steps }: { steps: Step[] }) => {
                 borderRadius: stepIndex === 0 ? '8px 8px 0px 0px' : 0,
               }}
               className="w-[6px] h-[35px]"
-            ></div>
+            />
             <div
               style={{
-                background: '#5FCC8A',
-                color: '#4651F6',
+                background: step.isCompleted
+                  ? '#5FCC8A'
+                  : 'linear-gradient(180deg, #4A4C54 0%, #202020 100%)',
+                color: step.isCompleted ? '#4651F6' : 'white',
+                border: step.isCompleted ? 'none' : '1px solid #242424',
+                boxShadow: step.isCompleted
+                  ? 'none'
+                  : '0px 2px 2px 0px rgba(255, 255, 255, 0.25) inset',
               }}
               className="w-[50px] h-[50px] bg-[black] flex items-center justify-center rounded-full font-jockey font-medium text-[20px]"
             >
@@ -100,7 +108,7 @@ const Steps = ({ steps }: { steps: Step[] }) => {
                     : 0,
               }}
               className="w-[6px] flex-1"
-            ></div>
+            />
           </div>
           <div className="flex-1 flex justify-center flex-col px-5 gap-1">
             <div className="font-jockey font-normal text-white text-[24px]">

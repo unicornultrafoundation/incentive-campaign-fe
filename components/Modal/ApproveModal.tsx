@@ -20,7 +20,7 @@ const ApproveModal: FC<UpdatePercentSuccessModalProps> = (
       title="fsdfdsfsdfsf"
       className="relative border border-[#7EFFC5] max-w-[390px] tablet:max-w-[450px] p-6 w-full flex flex-col gap-5"
     >
-     aaaaa
+      aaaaa
     </Modal>
   );
 };

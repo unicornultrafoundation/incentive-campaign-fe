@@ -32,7 +32,6 @@ export const u2uNetWork = defineChain({
   },
 });
 
-
 export const projectId = '815145290a10a9393358a85a318d47ad';
 
 if (!projectId) {
