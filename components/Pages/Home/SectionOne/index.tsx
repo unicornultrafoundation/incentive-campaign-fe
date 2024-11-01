@@ -7,6 +7,7 @@ import Marquee from 'react-fast-marquee';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import useIsMobile from '@/hooks/useIsMobile';
+import AirdropModal from './airdrop-modal';
 
 type Step = {
   title: React.ReactNode;
@@ -73,14 +74,14 @@ const Steps = ({ steps }: { steps: Step[] }) => {
     <div className="flex w-[100%] flex-col gap-0">
       {steps.map((step, stepIndex) => (
         <div key={stepIndex} className="w-full flex flex-row items-center">
-          <div className="w-[50px] h-[120px] max-[728px]:h-[180px] flex flex-col items-center justify-center">
+          <div className="w-[50px] h-[120px] max-[728px]:h-[200px] flex flex-col items-center justify-center">
             <div
               style={{
                 background: step.isCompleted ? '#5FCC8A' : '#4451BB',
                 opacity: step.isCompleted ? 1 : 0.25,
                 borderRadius: stepIndex === 0 ? '8px 8px 0px 0px' : 0,
               }}
-              className="w-[6px] h-[35px]"
+              className="w-[6px] flex-1"
             />
             <div
               style={{
@@ -190,7 +191,7 @@ export default function SectionOne({
 
   const renderMobile = () => {
     return (
-      <div className="w-full z-10 flex flex-col py-10 px-5">
+      <div className="w-full z-10 flex flex-col py-10 px-10 max-w-screen-mobile">
         <div className="w-[100%] flex flex-col text-center text-balance">
           <TitleWithDes />
         </div>
@@ -251,6 +252,7 @@ export default function SectionOne({
       <div className="w-full h-[80px] flex items-center bg-[#7EFFC5]">
         <SectionMarquee />
       </div>
+      {/* <AirdropModal /> */}
     </div>
   );
 }

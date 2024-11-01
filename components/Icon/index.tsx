@@ -52,6 +52,10 @@ import LogoCoinList from '@/components/Icon/logo-coinlist.png';
 import EllipseSection1 from '@/components/Icon/EllipseSection1.png';
 import Crystal from '@/components/Icon/Crystal.png';
 import Star from '@/components/Icon/Star.png';
+import StarPurple from '@/components/Icon/StarPurple.png';
+import AirdropBanner from '@/components/Icon/AirdropBanner.png';
+import AirdropClaimed from '@/components/Icon/AirdropClaimed.png';
+import NotEligible from '@/components/Icon/NotEligible.png';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -171,4 +175,16 @@ Icon.Crystal = (props: Omit<ImageProps, 'src' | 'alt'>) => (
 );
 Icon.Star = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="attention" src={Star} {...props} />
+);
+Icon.AirdropBanner = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={AirdropBanner} {...props} />
+);
+Icon.StarPurple = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={StarPurple} {...props} />
+);
+Icon.AirdropClaimed = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={AirdropClaimed} {...props} />
+);
+Icon.NotEligible = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={NotEligible} {...props} />
 );
