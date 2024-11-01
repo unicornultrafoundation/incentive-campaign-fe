@@ -54,7 +54,7 @@ export default function ConnectWalletButton({
 
           <Button
             scale="md"
-            className="p-4 mt-4 w-full !rounded-xl laptop:!rounded-[20px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
+            className={`${className} p-4 w-full bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]`}
             onClick={handleConnectWallet}
           >
             {t('common.connect_wallet')}
