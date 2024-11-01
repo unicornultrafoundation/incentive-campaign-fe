@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Icon from '@/components/Icon';
 import Button from '@/components/Button';
 import ApproveModal from '@/components/Modal/ApproveModal';
+import ConnectWalletButton from '@/components/ConnectWalletButton/ConnectWalletButton';
 
 export default function HomeSectionTwo() {
   const [isOpen, setIsOpen] = useState(true);
@@ -50,7 +51,7 @@ export default function HomeSectionTwo() {
           </p>
         </div>
         <div className="mt-5 laptop:mt-[64px] flex flex-col-reverse gap-10 laptop:flex-row justify-between items-center">
-          <div className="p-8 flex flex-col w-full laptop:w-[704px] gap-8 rounded-2xl bg-[#1f1f1feb] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
+          <div className="p-8 flex flex-col w-full gap-8 rounded-2xl bg-[#1f1f1feb] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
             <div>
               <div className="p-5 rounded-2xl bg-[#141414]">
                 <div className="flex justify-between items-center">
@@ -86,7 +87,7 @@ export default function HomeSectionTwo() {
                     50 000 U2U
                   </p>
                 </div>
-                <div className="overflow-scroll mt-3 laptop:mt-5 flex items-center gap-2 laptop:gap-4 w-full">
+                <div className="scrollbar-hide overflow-x-scroll mt-3 laptop:mt-5 flex items-center gap-2 laptop:gap-4 w-full">
                   {options.map((option) => (
                     <div
                       key={option.value}
@@ -140,13 +141,18 @@ export default function HomeSectionTwo() {
                 </p>
               </div>
             </div>
-            <Button
-              scale="md"
-              className="p-4 mt-4 w-full !rounded-xl laptop:!rounded-[20px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
-              onClick={() => {}}
+            <ConnectWalletButton
+              showConnectButton
+              className="flex justify-center mt-4"
             >
-              Connect Wallet
-            </Button>
+              <Button
+                scale="md"
+                className="p-4 mt-4 w-full !rounded-xl laptop:!rounded-[20px] bg-[#4651F6] text-white hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
+                onClick={() => {}}
+              >
+                Staking now
+              </Button>
+            </ConnectWalletButton>
           </div>
           <div className="flex justify-center w-full flex-col p-0 laptop:p-5 min-w-full laptop:min-w-[437px] gap-1 laptop:gap-[48px]">
             <div className="flex justify-center w-full laptop:flex-col min-w-full laptop:min-w-[437px] gap-2 laptop:gap-[48px]">
@@ -173,7 +179,7 @@ export default function HomeSectionTwo() {
         </div>
       </div>
 
-      {/*<ApproveModal isOpen={isOpen} onClose={() => setIsOpen(false)} />*/}
+      <ApproveModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }

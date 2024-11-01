@@ -27,8 +27,16 @@ export default function Modal({
   return (
     <div className={classNames('base-modal', isOpen ? 'block' : 'hidden')}>
       <div className="overlay" aria-hidden onClick={onClose} />
-      <div className={classNames('modal-content', className)}>
-        <div className="flex justify-between mb-4">
+      <div
+        className={classNames(
+          'modal-content border border-[#7EFFC5]',
+          className,
+        )}
+        style={{
+          boxShadow: '8px 8px 0px 0px #7EFFC5',
+        }}
+      >
+        <div className="flex justify-between">
           <h2 className="font-inter text-lg tablet:text-2xl text-[#7EFFC5] font-semibold">
             {title ?? ''}
           </h2>
