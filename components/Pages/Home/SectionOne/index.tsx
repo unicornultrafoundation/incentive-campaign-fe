@@ -60,7 +60,15 @@ const Steps = ({ steps }: { steps: Step[] }) => {
           <div className="w-[50px] h-[172px] max-[728px]:h-[270px] flex flex-col items-center justify-center">
             <div
               style={{
-                background: step.isCompleted ? '#7EFFC5' : '#4451BB',
+                background: step.isCompleted
+                  ? stepIndex === 0
+                    ? '#7EFFC5'
+                    : stepIndex > 0 && steps[stepIndex - 1].isCompleted
+                      ? 'linear-gradient(#164f1e, #0a260e)'
+                      : '#7EFFC5'
+                  : stepIndex > 0 && steps[stepIndex - 1].isCompleted
+                    ? 'linear-gradient(#3ac84d, #164f1e)'
+                    : '#4451BB',
                 opacity: step.isCompleted ? 1 : 0.25,
                 borderRadius: stepIndex === 0 ? '8px 8px 0px 0px' : 0,
               }}
@@ -83,7 +91,9 @@ const Steps = ({ steps }: { steps: Step[] }) => {
             </div>
             <div
               style={{
-                background: step.isCompleted ? '#7EFFC5' : '#4451BB',
+                background: step.isCompleted
+                  ? 'linear-gradient(#6cdaa9, #164f1e)'
+                  : '#4451BB',
                 opacity:
                   stepIndex !== steps.length - 1
                     ? step.isCompleted
@@ -189,8 +199,7 @@ export default function SectionOne() {
       isCompleted:
         isValidSession &&
         userClaimStatus?.isEligibility &&
-        (userClaimStatus?.claimStatus === ClaimStatus.NONE ||
-          userClaimStatus?.claimStatus === ClaimStatus.SUCCESS)
+        userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
           ? true
           : false,
       actionButton: (
