@@ -6,7 +6,7 @@ import ApproveModal from '@/components/Modal/ApproveModal';
 import ConnectWalletButton from '@/components/ConnectWalletButton/ConnectWalletButton';
 
 export default function HomeSectionTwo() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const options: { value: string; label: string }[] = [
     {
       value: '10',
