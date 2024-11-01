@@ -27,7 +27,8 @@ const ClaimFreeU2UModal: FC<UpdatePercentSuccessModalProps> = (
       <hr className="border-[#1F1F1F]" />
       <Icon.NotEligible className="w-1/2 mx-auto" />
       <p className="font-semibold text-center">
-        Claim free U2U gas fees first or deposit $U2U to your wallet before proceeding
+        Claim free U2U gas fees first or deposit $U2U to your wallet before
+        proceeding
       </p>
       <div className="flex gap-6 justify-between items-center">
         <Button

@@ -36,10 +36,10 @@ const CheckNode: FC<Props> = (props) => {
       onClose={() => handleOnClose}
       className="relative border border-[#7EFFC5] max-w-[390px] tablet:max-w-[450px] w-full flex flex-col gap-5"
     >
-      <div className="absolute w-5 h-5 bg-[#7EFFC5]  top-[-1%] left-[-9px] rotate-45 "></div>
-      <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-1%] right-[-9px] rotate-45 "></div>
-      <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-1%] left-[-9px] rotate-45 "></div>
-      <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-1%] right-[-9px] rotate-45 "></div>
+      <div className="absolute w-5 h-5 bg-[#7EFFC5]  top-[-1%] left-[-9px] rotate-45 " />
+      <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-1%] right-[-9px] rotate-45 " />
+      <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-1%] left-[-9px] rotate-45 " />
+      <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-1%] right-[-9px] rotate-45 " />
 
       <div className="flex justify-between mb-2">
         <h2 className="font-inter text-lg tablet:text-2xl text-[#7EFFC5] font-semibold">

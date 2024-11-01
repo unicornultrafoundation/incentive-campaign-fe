@@ -7,6 +7,7 @@ import Modal from '@/components/Modal/index';
 import { useAuth } from '@/hooks/useAuth';
 import { useGetProfileApi } from '@/hooks/useMutationApi';
 import useUserStore from '@/store/auth';
+
 import LoadingModal from './loading-modal';
 
 interface Props {
@@ -59,7 +60,7 @@ export default function SignConnectMessageModal({ isOpen, onClose }: Props) {
       case isAuthenticating:
         return (
           <LoadingModal
-            className=''
+            className=""
             title={
               <>
                 <div className="font-inter text-primary text-center text-heading-sm">

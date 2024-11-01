@@ -1,10 +1,7 @@
 import { useEffect } from 'react';
 
 import { useGetSubgraphDashboardPublic } from '@/hooks/useQueryApi';
-import {
-  formatDisplayedTokenAmount,
-  toNumberNoRound,
-} from '@/utils';
+import { formatDisplayedTokenAmount, toNumberNoRound } from '@/utils';
 
 export default function Statistics() {
   const { data, mutate } = useGetSubgraphDashboardPublic({});

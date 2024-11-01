@@ -12,7 +12,10 @@ import {
 import { useQueryClient } from '@tanstack/react-query';
 
 import { config } from '@/config/wagmi';
-import { useConnectWalletApi, useGetUserClaimStatusApi } from '@/hooks/useMutationApi';
+import {
+  useConnectWalletApi,
+  useGetUserClaimStatusApi,
+} from '@/hooks/useMutationApi';
 import useUserStore, { setAuthCredential, useAuthStore } from '@/store/auth';
 import { clearAuthCookiesAction } from '@/actions';
 import { CHAINS } from '@/config/env';
@@ -47,10 +50,10 @@ export const useAuth = () => {
     if (result) {
       setAuthCredential(true);
     }
-    const userClaimStatus = await getUserClaimStatus()
+    const userClaimStatus = await getUserClaimStatus();
 
-    const b = userClaimStatus.data
-    setUserClaimStatus(userClaimStatus.data.data)
+    const b = userClaimStatus.data;
+    setUserClaimStatus(userClaimStatus.data.data);
   };
 
   const onLogout = async () => {

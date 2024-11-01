@@ -1,13 +1,15 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
+
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import Modal from '@/components/Modal';
-import { useEffect, useState } from 'react';
-import LoadingModal from './loading-modal';
 import { shortenAddress } from '@/utils/string';
 import { nextAPI } from '@/services/api';
-import useSWR from 'swr';
+
+import LoadingModal from './loading-modal';
 
 enum ClaimStatus {
   NONE = 0, // 0 - not claim requested yet
@@ -266,7 +268,7 @@ export default function AirdropModal({
 
   const onClaim = async () => {
     const res = await nextAPI.post('/airdrop/bridge/claim');
-    const getClaimStatusRes = await getClaimStatus()
+    const getClaimStatusRes = await getClaimStatus();
     setStatus(getClaimStatusRes.claimStatus);
     setIsEligible(getClaimStatusRes.isEligibility);
   };

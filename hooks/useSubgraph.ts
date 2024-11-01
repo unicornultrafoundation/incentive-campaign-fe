@@ -1,3 +1,1 @@
-export const useQueryDashboardPublic = () => {
-
-}
+export const useQueryDashboardPublic = () => {};

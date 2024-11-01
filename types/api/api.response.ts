@@ -1,15 +1,6 @@
-import {
-  AgencyInfo,
-  Credentials,
-  Node,
-  PromotionCode,
-  Ref,
-  RootAddress,
-  Round,
-  User,
-  UserClaimStatus,
-} from '@/types/entities';
+import { Credentials, UserClaimStatus } from '@/types/entities';
 import { DashboardBitget, DashboardPublic } from '@/types/subgraph.response';
+import { Address } from 'viem';
 
 export interface APIErrorResponse {
   data?: any;
@@ -30,6 +21,21 @@ export namespace APIResponse {
     limit: number;
     page: number;
   }
+  export interface User {
+    data: {
+      address: Address;
+      code: string;
+      refAddress: Address;
+      refCode: string;
+      brand: string;
+      role: string;
+      active: boolean;
+      createdAt: string;
+      createdBy: string;
+      percent: boolean;
+      userProfile: boolean;
+    };
+  }
   export interface SearchNodeData {
     address: string;
     type: string;
@@ -46,10 +52,13 @@ export namespace APIResponse {
   export type SearchNode = APISuccessfulResponse<{
     data: SearchNodeData[];
   }>;
-  export type UserClaimStatusAPIResponse = APISuccessfulResponse<{ data: UserClaimStatus }>;
+  export type UserClaimStatusAPIResponse = APISuccessfulResponse<{
+    data: UserClaimStatus;
+  }>;
 
   export type DashBoardPublic = APISuccessfulResponse<DashboardPublicData>;
   export type DashBoardBitget = APISuccessfulResponse<DashboardBitgetData>;
 
   export type Connect = APISuccessfulResponse<Credentials>;
+  export type GetInfoProfile = APISuccessfulResponse<User>;
 }
