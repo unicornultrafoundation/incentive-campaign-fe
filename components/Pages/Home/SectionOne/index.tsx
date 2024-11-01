@@ -187,12 +187,25 @@ export default function SectionOne() {
       description: 'Receive free gas fees to kickstart your journey.',
       isCompleted:
         isValidSession &&
-        userClaimStatus?.claimStatus === ClaimStatus.NONE &&
-        userClaimStatus.isEligibility
+        userClaimStatus?.isEligibility &&
+        (userClaimStatus?.claimStatus === ClaimStatus.NONE ||
+          userClaimStatus?.claimStatus === ClaimStatus.SUCCESS)
           ? true
           : false,
       actionButton: (
         <Button
+          style={{
+            pointerEvents:
+              isValidSession &&
+              userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
+                ? 'none'
+                : 'auto',
+            filter:
+              isValidSession &&
+              userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
+                ? 'grayscale(100%) brightness(60%)'
+                : 'none',
+          }}
           onClick={() => {
             if (!isValidSession) {
               setOpen(true);
