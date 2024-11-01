@@ -22,7 +22,7 @@ export default function MenuModal({ className, isOpen }: BaseModalProps) {
         className,
       )}
     >
-      <div className="h-[66px]"></div>
+      <div className="h-[66px]" />
       {/* <Header /> */}
       <div className="px-4 py-6 bg-base flex flex-col w-full h-full justify-between">
         <div className="flex flex-col">

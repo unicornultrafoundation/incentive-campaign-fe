@@ -34,10 +34,10 @@ const PurchaseSuccessModal: FC<PurchaseSuccessModalProps> = (
       onClose={onClose}
       className="relative max-w-[300px] tablet:max-w-[450px] p-6 w-full flex flex-col gap-5"
     >
-      <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-3%] left-[-10px] rotate-45"></div>
-      <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-3%] right-[-10px] rotate-45"></div>
-      <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-3%] left-[-10px] rotate-45"></div>
-      <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-3%] right-[-10px] rotate-45"></div>
+      <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-3%] left-[-10px] rotate-45" />
+      <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-3%] right-[-10px] rotate-45" />
+      <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-3%] left-[-10px] rotate-45" />
+      <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-3%] right-[-10px] rotate-45" />
       <div className="flex flex-col items-center gap-4">
         <h2 className="font-roboto text-2xl font-semibold text-[#7EFFC5]">
           {t('modal_success.title')}

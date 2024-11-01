@@ -7,11 +7,12 @@ import Marquee from 'react-fast-marquee';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import useIsMobile from '@/hooks/useIsMobile';
-import AirdropModal from '../../../Modal/airdrop-modal';
 import { useAuth } from '@/hooks/useAuth';
 import useUserStore from '@/store/auth';
 import { ClaimStatus } from '@/types/entities';
 import useWalletStore from '@/store/connect-wallet';
+
+import AirdropModal from '../../../Modal/airdrop-modal';
 
 type Step = {
   title: React.ReactNode;

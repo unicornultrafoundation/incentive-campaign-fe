@@ -101,9 +101,7 @@ const LanguageDropdownMobile = () => {
 
             return (
               <Fragment key={id}>
-                {index > 0 && (
-                  <div className="h-[1px] w-full bg-[#4A4A4A]"></div>
-                )}
+                {index > 0 && <div className="h-[1px] w-full bg-[#4A4A4A]" />}
 
                 <div
                   className={classNames(

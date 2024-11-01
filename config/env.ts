@@ -1,28 +1,25 @@
 import { Address } from 'viem';
 
+import { pUsdtAbi } from '@/config/abi/pUsdtAbi';
+import { stakePublicAbi } from '@/config/abi/stakePublicAbi';
+import { stakeBitgetAbi } from '@/config/abi/stakeBitgetAbi';
+
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
 export const U2U_SCAN_URL = process.env.NEXT_PUBLIC_U2U_SCAN_URL || '';
 export const NETWORK_NAME = process.env.NEXT_PUBLIC_NETWORK_NAME || '';
 
+export const SUBGRAPH_URL =
+  process.env.NEXT_PUBLIC_SUBGRAPH_URL || ('' as string);
+
+export const CONTRACT_PUBLIC_ADDRESS =
+  process.env.NEXT_PUBLIC_PUBLIC_ADDRESS || ('' as string);
+export const CONTRACT_BITGET_ADDRESS =
+  process.env.NEXT_PUBLIC_BITGET_ADDRESS || ('' as string);
+export const CONTRACT_PUSDT_ADDRESS =
+  process.env.NEXT_PUBLIC_PUSDT_ADDRESS || ('' as string);
 export enum ChainName {
   U2U = 'U2U',
 }
-
-//   u2u: {
-//     rpc: 'https://rpc-mainnet.u2u.xyz',
-//     name: ChainName.U2U,
-//     network: 'U2U Solaris Mainnet',
-//     explorer: 'https://u2uscan.xyz/',
-//     chainId: 39,
-//   },
-//   bsc: {
-//     rpc: 'https://bsc-dataseed.binance.org',
-//     name: ChainName.BSC,
-//     network: 'BNB Smart Chain',
-//     explorer: 'https://bscscan.com/',
-//     chainId: 56,
-//   },
-// };
 
 //TODO: add ENV chain config
 export const CHAINS = {
@@ -40,4 +37,17 @@ export const contracts: {
     address: Address;
     abi: any;
   };
-} = {};
+} = {
+  pUSDT: {
+    address: CONTRACT_PUSDT_ADDRESS as Address,
+    abi: pUsdtAbi,
+  },
+  stakePublic: {
+    address: CONTRACT_PUBLIC_ADDRESS as Address,
+    abi: stakePublicAbi,
+  },
+  stakeBiget: {
+    address: CONTRACT_BITGET_ADDRESS as Address,
+    abi: stakeBitgetAbi,
+  },
+};

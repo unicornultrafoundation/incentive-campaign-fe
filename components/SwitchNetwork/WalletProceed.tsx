@@ -33,10 +33,10 @@ export default function WalletProceed() {
             'w-[330px]',
           )}
         >
-          <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-5%] left-[-10px] rotate-45 "></div>
-          <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-5%] right-[-10px] rotate-45 "></div>
-          <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-5%] left-[-10px] rotate-45 "></div>
-          <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-5%] right-[-10px] rotate-45 "></div>
+          <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-5%] left-[-10px] rotate-45 " />
+          <div className="absolute w-5 h-5 bg-[#7EFFC5] top-[-5%] right-[-10px] rotate-45 " />
+          <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-5%] left-[-10px] rotate-45 " />
+          <div className="absolute w-5 h-5 bg-[#7EFFC5] bottom-[-5%] right-[-10px] rotate-45 " />
           <div className="flex flex-col gap-4 justify-center items-center  ">
             <p className="text-[20px] tablet:text-[24px] text-[#7EFFC5] font-roboto text-center">
               Connect Wallet to Proceed
