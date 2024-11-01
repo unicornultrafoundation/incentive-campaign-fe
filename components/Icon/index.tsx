@@ -56,6 +56,8 @@ import StarPurple from '@/components/Icon/StarPurple.png';
 import AirdropBanner from '@/components/Icon/AirdropBanner.png';
 import AirdropClaimed from '@/components/Icon/AirdropClaimed.png';
 import NotEligible from '@/components/Icon/NotEligible.png';
+import StarWhite from '@/components/Icon/StarWhite.png';
+import ClaimSuccess from '@/components/Icon/ClaimSuccess.png';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -187,4 +189,10 @@ Icon.AirdropClaimed = (props: Omit<ImageProps, 'src' | 'alt'>) => (
 );
 Icon.NotEligible = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="attention" src={NotEligible} {...props} />
+);
+Icon.StarWhite = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={StarWhite} {...props} />
+);
+Icon.ClaimSuccess = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={ClaimSuccess} {...props} />
 );
