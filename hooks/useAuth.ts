@@ -1,8 +1,15 @@
 'use client';
 
 import { signMessage } from '@wagmi/core';
-import { useMemo } from 'react';
-import { useAccount, useDisconnect, useSwitchChain } from 'wagmi';
+import { useEffect, useMemo } from 'react';
+import {
+  useAccount,
+  useBalance,
+  useBlockNumber,
+  useDisconnect,
+  useSwitchChain,
+} from 'wagmi';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { config } from '@/config/wagmi';
 import { useConnectWalletApi } from '@/hooks/useMutationApi';
@@ -11,15 +18,18 @@ import { clearAuthCookiesAction } from '@/actions';
 import { CHAINS } from '@/config/env';
 
 export const useAuth = () => {
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const { hasCredential } = useAuthStore();
   const { trigger: connectWallet } = useConnectWalletApi();
+  const queryClient = useQueryClient();
+  const { data: blockNumber } = useBlockNumber({ watch: true });
+
+  const { data: balanceU2U, queryKey } = useBalance({ address });
 
   const isValidSession = useMemo(() => {
     return isConnected && hasCredential;
   }, [isConnected, hasCredential]);
 
-  const { address } = useAccount();
   const { disconnectAsync, disconnect } = useDisconnect();
 
   const onSignMessage = async () => {
@@ -44,11 +54,20 @@ export const useAuth = () => {
     await clearAuthCookiesAction();
   };
 
+  const balanceWallet = useMemo(() => {
+    return balanceU2U?.formatted;
+  }, [balanceU2U]);
+
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey });
+  }, [blockNumber, queryClient]);
+
   return {
     // onConnectWallet,
     isValidSession,
     onSignMessage,
     onLogout,
+    balanceWallet,
   };
 };
 
