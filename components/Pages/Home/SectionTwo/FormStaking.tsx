@@ -277,8 +277,8 @@ export default function FormStaking() {
                 {toNumberNoRound(estimateRewards, 8)} $U2U
               </p>
             </div>
-            <div className="flex justify-between items-start laptop:items-center">
-              <div className="flex flex-1 flex-col gap-1 laptop:flex-row items-start laptop:items-center">
+            <div className="flex justify-between items-start">
+              <div className="flex flex-1 flex-col gap-1 items-start">
                 <p className="text-base laptop:text-xl font-semibold">
                   Current rate
                 </p>
