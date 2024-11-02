@@ -7,7 +7,7 @@ import { contracts } from '@/config/env';
 
 export const useStake = () => {
   const method = useWriteContract();
-  const waitForTransaction = useWaitForTransaction();
+  const { waitForTransaction } = useWaitForTransaction();
   const { address } = useAccount();
 
   const { data: endTime } = useReadContract({
