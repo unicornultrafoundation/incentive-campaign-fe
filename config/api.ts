@@ -34,4 +34,6 @@ export const API_ENDPOINTS = {
   GET_CLAIM_NFT: 'api/user/claim-nft/',
   SEARCH_NODE: 'api/public/search/',
   GET_USER_CLAIM_STATUS: '/airdrop/bridge/get',
+  SIGNATURE_PUBLIC: 'signature/public',
+  SIGNATURE_BITGET: 'signature/bitget',
 };

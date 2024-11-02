@@ -32,7 +32,7 @@ export const formatDisplayedTokenAmount = (
   decimal?: number,
 ) => {
   const _valueBN = typeof value === 'bigint' ? value : BigInt(value || 0);
-  const _value = formatUnits(_valueBN, decimal || 18).toString();
+  const _value = formatUnits(_valueBN, decimal || 6).toString();
 
   return formatDisplayedNumber(_value, 1e4);
 };

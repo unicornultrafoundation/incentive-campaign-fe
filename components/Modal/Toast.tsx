@@ -13,7 +13,11 @@ export default function ToastModal() {
   } = useUIStore();
 
   return (
-    <Modal className="toast" isOpen={visible} onClose={clearToast}>
+    <Modal
+      className="toast w-[350px] tablet:w-[499px]"
+      isOpen={visible}
+      onClose={clearToast}
+    >
       <div className="content">
         {type === 'error' && (
           <Icon.Close className={classNames('icon', type)} />
@@ -27,7 +31,7 @@ export default function ToastModal() {
             : type === 'error'
               ? 'Error report'
               : type === 'success'
-                ? 'Congratulation'
+                ? 'Successfully !!'
                 : ''}
         </p>
         <div className="message">{message}</div>

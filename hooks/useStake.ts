@@ -48,7 +48,7 @@ export const useStake = () => {
     signature,
   }: {
     amount: number;
-    expiresAt: string;
+    expiresAt: number;
     signature: string;
   }) => {
     const parseAmount = amount * 1000000;

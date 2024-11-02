@@ -31,13 +31,13 @@ export default function Input({
   ...rest
 }: BaseInputProps) {
   const baseClass =
-    ' outline-none bg-black placeholder:text-tertiary focus-visible:ring-[0.5px] w-full transition-all';
+    ' outline-none bg-black placeholder:text-tertiary w-full transition-all';
 
   const scaleClass = useMemo(() => {
     switch (scale) {
       case 'lg':
         return classNames(
-          'text-body-16 rounded-2xl min-w-72 h-14 p-4',
+          'text-body-16 rounded-2xl h-14 p-4',
           !!prependIcon && 'ps-10',
           !!appendIcon && 'pe-10',
         );
@@ -50,7 +50,7 @@ export default function Input({
       case 'md':
       default:
         return classNames(
-          'text-body-16 rounded-xl min-w-72 h-12 p-3',
+          'text-body-16 rounded-xl h-12 p-3',
           !!prependIcon && 'ps-10',
           !!appendIcon && 'pe-10',
         );

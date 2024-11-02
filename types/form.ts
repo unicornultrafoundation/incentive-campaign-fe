@@ -2,6 +2,9 @@ import { DropdownBaseProps } from '@/components/Dropdown/DropdownBase';
 import { Round } from '@/types/entities';
 
 export namespace FormState {
+  export interface Staking {
+    amount: number;
+  }
   export interface Purchase {
     referralCode?: string;
     promotionCode?: string;
