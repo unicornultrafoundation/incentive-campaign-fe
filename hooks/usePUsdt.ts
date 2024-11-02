@@ -46,7 +46,7 @@ import { contracts } from '@/config/env';
 export const usePUSDT = () => {
   const { address } = useAccount();
   const method = useWriteContract();
-  const waitForTransaction = useWaitForTransaction();
+  const { waitForTransaction } = useWaitForTransaction();
 
   const { data: balanceOfUsdt } = useReadContract({
     // abi: abiUsdtToken,
