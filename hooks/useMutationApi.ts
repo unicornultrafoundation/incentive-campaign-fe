@@ -88,3 +88,21 @@ export const useGetUserClaimStatusApi = (
     ((url: string, { arg }: any) => nextAPI.get(url, arg)) as any,
     config,
   );
+
+export const useSignaturePublicApi = (
+  config?: ExtendSWRMutationConfiguration<APIResponse.SignatureResponse, any>,
+) =>
+  useExtendedSWRMutation<APIResponse.SignatureResponse, any>(
+    API_ENDPOINTS.SIGNATURE_PUBLIC,
+    ((url: string, { arg }: any) => nextAPI.post(url, arg)) as any,
+    config,
+  );
+
+export const useSignatureBitgetApi = (
+  config?: ExtendSWRMutationConfiguration<APIResponse.SignatureResponse, any>,
+) =>
+  useExtendedSWRMutation<APIResponse.SignatureResponse, any>(
+    API_ENDPOINTS.SIGNATURE_BITGET,
+    ((url: string, { arg }: any) => nextAPI.post(url, arg)) as any,
+    config,
+  );

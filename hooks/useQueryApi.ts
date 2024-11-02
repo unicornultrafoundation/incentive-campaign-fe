@@ -57,6 +57,15 @@ export const useGetSubgraphDashboardPublic = (
     config,
   );
 
+export const useGetSubgraphDashboardBitget = (
+  config?: ExtendSWRConfiguration<APIResponse.DashBoardBitget, any>,
+) =>
+  useExtendedSWR<APIResponse.DashBoardBitget, any>(
+    'getDashboardBitgetData',
+    () => subgraphService.getDashboardBitgetData() as any,
+    config,
+  );
+
 export const useSearchNodeApi = (
   config?: ExtendSWRConfiguration<APIResponse.SearchNode, APIParams.SearchNode>,
 ) =>

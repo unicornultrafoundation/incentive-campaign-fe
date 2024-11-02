@@ -49,6 +49,13 @@ export namespace APIResponse {
     dashboards: DashboardBitget[];
   }
 
+  export interface SignatureData {
+    data: {
+      sig: string;
+      expiresAt: number;
+    };
+  }
+
   export type SearchNode = APISuccessfulResponse<{
     data: SearchNodeData[];
   }>;
@@ -58,6 +65,8 @@ export namespace APIResponse {
 
   export type DashBoardPublic = APISuccessfulResponse<DashboardPublicData>;
   export type DashBoardBitget = APISuccessfulResponse<DashboardBitgetData>;
+
+  export type SignatureResponse = APISuccessfulResponse<SignatureData>;
 
   export type Connect = APISuccessfulResponse<Credentials>;
   export type GetInfoProfile = APISuccessfulResponse<User>;

@@ -36,11 +36,11 @@
         }
 
         .title {
-          @apply mb-1 text-3xl uppercase;
+          @apply mb-1 text-3xl font-bold uppercase;
         }
 
         .message {
-          @apply text-gray-500;
+          @apply text-2xl;
         }
       }
     }
