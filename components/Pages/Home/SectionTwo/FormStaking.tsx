@@ -13,10 +13,7 @@ import { useStake } from '@/hooks/useStake';
 import ApproveModal from '@/components/Modal/ApproveModal';
 import { FormState } from '@/types/form';
 import FormMessageValidate from '@/components/Form/FormMessageValidate';
-import {
-  // useSignatureBitgetApi,
-  useSignaturePublicApi,
-} from '@/hooks/useMutationApi';
+import { useSignaturePublicApi } from '@/hooks/useMutationApi';
 import { toast } from '@/store/ui';
 
 interface Option {
@@ -27,11 +24,11 @@ interface Option {
 
 export default function FormStaking() {
   const { allowancePUSDT, balanceOfUsdt } = usePUSDT();
-  const { rewardsRatePerSecond } = useStake(); //endTime
+  const { rewardsRatePerSecond, endTime } = useStake(); //endTime
   const onStaking = useStake();
   const { onStake, isPending, isSuccess, isError, totalStaked } = onStaking;
   const [isOpenApprove, setIsOpenApprove] = useState<boolean>(false);
-  const [, setCurrentDate] = useState<number>(Date.now());
+  const [currentDate, setCurrentDate] = useState<number>(Date.now());
   const [selectedType, setSelectedType] = useState<number>(10);
   const [maxAmount] = useState<number>(10000);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -47,7 +44,6 @@ export default function FormStaking() {
       .required('Amount is required')
       .min(10, 'Amount must be at least 10')
       .test('balance-check', `Balance not enough`, function (value) {
-        console.log(value);
         return value <= Number(balanceOfUsdt || 0) / 1000000;
       })
       .test(
@@ -179,15 +175,17 @@ export default function FormStaking() {
     }
   }, [isError]);
 
-  // const estimateRewards = useMemo(() => {
-  //   const currentTime = currentDate/1000;
-  //   const rewardPerSecond = Number(
-  //     formatUnits(BigInt(Number(rewardsRatePerSecond)), 18),
-  //   );
-  //   const reward = rewardPerSecond.toFixed(8);
-  //   console.log((Number(endTime) - currentTime) * Number(reward));
-  //   return (Number(endTime) - currentTime) * rewardPerSecond;
-  // }, [rewardsRatePerSecond, currentDate, endTime]);
+  const estimateRewards = useMemo(() => {
+    const currentTime = currentDate / 1000;
+    // const rewardPerDay =
+    //   Number(formatUnits(BigInt(Number(rewardsRatePerSecond)), 18)) * 86400;
+    const timeDifferenceInSeconds = Number(endTime) - currentTime;
+    const daysRemaining = timeDifferenceInSeconds / 86400;
+    const totalUserStaked = Number(
+      formatUnits(BigInt((totalStaked as any) || 0), 6),
+    );
+    return Number(daysRemaining) * Number(currentRate) * totalUserStaked;
+  }, [rewardsRatePerSecond, currentDate, endTime]);
 
   return (
     <FormProvider {...mainForm}>
@@ -276,7 +274,7 @@ export default function FormStaking() {
                 Estimate rewards
               </p>
               <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
-                10000 $U2U
+                {toNumberNoRound(estimateRewards, 8)} $U2U
               </p>
             </div>
             <div className="flex justify-between items-start laptop:items-center">
