@@ -68,14 +68,10 @@ export default function FormStaking() {
   const { amount } = watch();
 
   const isApprove = useMemo<boolean>(() => {
-    if (balanceOfUsdt) {
-      return (
-        Number(formatUnits(BigInt((allowancePUSDT as any) || 0), 6)) >
-        Number(balanceOfUsdt) / 1000000
-      );
-    }
-
-    return true;
+    return (
+      Number(formatUnits(BigInt((allowancePUSDT as any) || 0), 6)) >
+      Number(balanceOfUsdt) / 1000000
+    );
   }, [allowancePUSDT, balanceOfUsdt]);
   const options: Option[] = [
     {
