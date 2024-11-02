@@ -313,7 +313,7 @@ export default function SectionOne() {
         style={{
           minHeight: 'calc(100vh - 160px)',
         }}
-        className="w-full z-10 flex flex-row pt-32 max-w-screen-desktop"
+        className="w-full z-10 flex flex-row pt-32 max-w-screen-desktop max-[1600px]:px-20 max-[768px]:px-0"
       >
         <div className="w-[55%] flex flex-col">
           <TitleWithDes />
