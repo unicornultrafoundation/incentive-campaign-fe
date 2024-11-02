@@ -3,6 +3,7 @@
 // import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import Marquee from 'react-fast-marquee';
+import { Tooltip } from 'react-tooltip';
 
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
@@ -13,9 +14,11 @@ import { ClaimStatus } from '@/types/entities';
 import useWalletStore from '@/store/connect-wallet';
 
 import AirdropModal from '../../../Modal/airdrop-modal';
+import 'react-tooltip/dist/react-tooltip.css';
 
 type Step = {
   title: React.ReactNode;
+  type: 'Bridge' | 'Claim' | 'Stake';
   description: React.ReactNode;
   isCompleted: boolean;
   actionButton?: React.ReactNode;
@@ -105,9 +108,31 @@ const Steps = ({ steps }: { steps: Step[] }) => {
             />
           </div>
           <div className="flex-1 flex justify-center flex-col px-5 gap-1">
-            <div className="font-jockey font-normal text-white text-[24px]">
-              {step.title}
-            </div>
+            {step.isCompleted ? (
+              <div className="font-jockey font-normal text-[#7EFFC5] text-[24px]">
+                <a
+                  data-tooltip-id={`step_${stepIndex}`}
+                  className="cursor-pointer"
+                  data-tooltip-content={`${step.type} completed. Ready for the next step!`}
+                >
+                  {step.isCompleted && `✅`}&nbsp;&nbsp;&nbsp;
+                  {step.type} Completed
+                </a>
+                <Tooltip
+                  id={`step_${stepIndex}`}
+                  style={{
+                    backgroundColor: '#4651F6',
+                    color: 'white',
+                    fontFamily: 'Inter Bold',
+                    fontSize: '14px',
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="font-jockey font-normal text-white text-[24px]">
+                {step.title}
+              </div>
+            )}
             <div className="font-normal text-[#AFAFAF] text-[20px]">
               {step.description}
             </div>
@@ -171,13 +196,23 @@ export default function SectionOne() {
   const [isOpenAirdropModal, setOpenAidropModal] = useState(false);
   const steps: Step[] = [
     {
-      title: 'Bridge & Start - Move $USDT with Owlto',
+      title: <>Bridge & Start - Move $USDT with Owlto</>,
       description: 'Begin by bridging your $USDT to the U2U Chain with Owlto.',
-      isCompleted: isValidSession ? true : false,
+      type: 'Bridge',
+      isCompleted:
+        isValidSession && userClaimStatus?.isEligibility ? true : false,
       actionButton: (
         <Button
           style={{
             fontFamily: 'Inter Bolder',
+            pointerEvents:
+              isValidSession && userClaimStatus?.isEligibility
+                ? 'none'
+                : 'auto',
+            filter:
+              isValidSession && userClaimStatus?.isEligibility
+                ? 'grayscale(100%) brightness(60%)'
+                : 'none',
           }}
           onClick={() => {
             const section2Ele = document.getElementById('section_2');
@@ -195,6 +230,7 @@ export default function SectionOne() {
     },
     {
       title: <>Claim Your Free Gas Fees</>,
+      type: 'Claim',
       description: 'Receive free gas fees to kickstart your journey.',
       isCompleted:
         isValidSession &&
@@ -233,6 +269,7 @@ export default function SectionOne() {
       title: 'Stake & Earn Big - Boost Your U2U Rewards',
       description: 'Stake your $USDT to earn U2U tokens instantly!',
       isCompleted: false,
+      type: 'Stake',
       actionButton: (
         <Button
           style={{
@@ -321,11 +358,6 @@ export default function SectionOne() {
         isOpen={isOpenAirdropModal}
         onClose={() => setOpenAidropModal(false)}
       />
-      {/* <LoadingModal
-        title="Processing your claim... Please wait."
-        isLoading={true}
-        onClose={() => {}}
-      /> */}
     </div>
   );
 }

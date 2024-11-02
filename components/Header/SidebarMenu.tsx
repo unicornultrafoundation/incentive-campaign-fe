@@ -1,19 +1,14 @@
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useAccount } from 'wagmi';
 import { useState } from 'react';
 
 import LanguageDropdownMobile from '@/components/Dropdown/LanguageDropdownMobile';
 import Icon from '@/components/Icon';
-import { WHITELIST_LINK } from '@/config/constants';
 import { useAuth } from '@/hooks/useAuth';
 import useWalletStore from '@/store/connect-wallet';
 import Button from '@/components/Button';
 
-import HeaderSearchIcon from '../Icon/HeaderSearch';
-
-import CheckNode from './CheckNode';
+import AirdropModal from '../Modal/airdrop-modal';
 
 interface SlideMenuProps {
   isOpen?: boolean;
@@ -21,21 +16,21 @@ interface SlideMenuProps {
 }
 
 const SlideMenu = ({ isOpen, onClose }: SlideMenuProps) => {
-  const router = useRouter();
+  // const router = useRouter();
   const t = useTranslations();
   const { isValidSession } = useAuth();
   const { setOpen } = useWalletStore();
-  const [isOpenCheckNode, setIsOpenCheckNode] = useState(false);
+  const [isOpenAirdropModal, setOpenAidropModal] = useState(false);
 
-  const handleNavigation = (path: string) => {
-    if (!isValidSession) {
-      setOpen(true);
-      if (onClose) onClose();
-      return;
-    }
-    router.push(path);
-    if (onClose) onClose();
-  };
+  // const handleNavigation = (path: string) => {
+  //   if (!isValidSession) {
+  //     setOpen(true);
+  //     if (onClose) onClose();
+  //     return;
+  //   }
+  //   router.push(path);
+  //   if (onClose) onClose();
+  // };
 
   const { onLogout } = useAuth();
 
@@ -58,9 +53,18 @@ const SlideMenu = ({ isOpen, onClose }: SlideMenuProps) => {
   return (
     <div>
       {/*{isOpen && <>*/}
-
       <button className="menu-icon" onClick={onClose}>
-        {isOpen ? <Icon.Close width={29} height={29} /> : ''}
+        {isOpen ? (
+          <div className="w-full flex items-center justify-between pl-5">
+            <Icon.Logo
+              width={'70%'}
+              className="tablet:w-10 tablet:h-10 w-[32px] h-[32px]"
+            />
+            <Icon.Close width={29} height={29} />
+          </div>
+        ) : (
+          ''
+        )}
       </button>
 
       {/* Tab Menu */}
@@ -69,50 +73,24 @@ const SlideMenu = ({ isOpen, onClose }: SlideMenuProps) => {
       >
         <ul className="">
           <li>
-            <button
-              className="w-full px-4 py-2 flex justify-between items-center gap-4  border border-solid border-[#4A4A4A] rounded-[100px]"
-              onClick={() => {
-                if (onClose) {
-                  onClose();
-                  setIsOpenCheckNode(true);
-                }
-              }}
-            >
-              <p className="font-inter text-xs text-[#4A4A4A]">
-                Check nodes by wallet
-              </p>
-              <HeaderSearchIcon width={32} height={32} />
-            </button>
-          </li>
-          <li>
-            <button
-              className="uppercase text-2xl"
-              onClick={() => handleNavigation('/')}
-            >
-              {t('header.node_sale')}
-            </button>
-          </li>
-          <li>
-            <button
-              className="uppercase text-2xl"
-              onClick={() => handleNavigation('/mynode')}
-            >
-              {t('header.my_node')}
-            </button>
-          </li>
-          <li>
             <LanguageDropdownMobile />
           </li>
         </ul>
         <div className="w-full">
-          <Link
-            href={WHITELIST_LINK}
-            className="p-4 hover:bg-gray-500 bg-[#141414] flex items-center justify-center gap-1 border border-solid border-[#8C8C99] rounded-lg text-[#000]"
+          <Button
+            onClick={() => {
+              if (!isValidSession) {
+                setOpen(true);
+                return;
+              }
+              setOpenAidropModal(true);
+            }}
+            className="w-full p-4 hover:bg-gray-500 bg-[#141414] flex items-center justify-center gap-1 border border-solid border-[#8C8C99] rounded-lg text-[#000]"
           >
             <span className="text-xl text-[#7EFFC5] font-semibold">
-              {t('header.become_promoter')}
+              Claim your Gas fee
             </span>
-          </Link>
+          </Button>
           {isConnected ? (
             <Button
               scale="md"
@@ -134,9 +112,9 @@ const SlideMenu = ({ isOpen, onClose }: SlideMenuProps) => {
           )}
         </div>
       </div>
-      <CheckNode
-        isOpen={isOpenCheckNode}
-        onClose={() => setIsOpenCheckNode(false)}
+      <AirdropModal
+        isOpen={isOpenAirdropModal}
+        onClose={() => setOpenAidropModal(false)}
       />
     </div>
   );
