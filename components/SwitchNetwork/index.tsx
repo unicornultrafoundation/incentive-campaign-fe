@@ -8,7 +8,7 @@ import { useWrongNetwork } from '@/hooks/useAuth';
 export default function NetworkSwitcher() {
   const toast = useToast();
 
-  const [isShowChooseChain, setIsShowChooseChain] = useState<boolean>(false);
+  const [, setIsShowChooseChain] = useState<boolean>(false);
   const { handleSwitchChain, isWrongNetwork } = useWrongNetwork();
 
   const handleSwitch = () => {

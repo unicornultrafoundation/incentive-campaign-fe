@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 
 import TwitterIcon from '@/components/Icon/Twitter';
 import TelegramIcon from '@/components/Icon/Telegram';
@@ -12,7 +12,7 @@ import LinkedinIcon from '@/components/Icon/Linkedin';
 import useIsMobile from '@/hooks/useIsMobile';
 
 const Footer = () => {
-  const t = useTranslations();
+  // const t = useTranslations();
   const isMobile = useIsMobile();
 
   return (

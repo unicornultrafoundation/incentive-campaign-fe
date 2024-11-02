@@ -1,8 +1,9 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import Marquee from 'react-fast-marquee';
+import { Tooltip } from 'react-tooltip';
 
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
@@ -13,16 +14,18 @@ import { ClaimStatus } from '@/types/entities';
 import useWalletStore from '@/store/connect-wallet';
 
 import AirdropModal from '../../../Modal/airdrop-modal';
+import 'react-tooltip/dist/react-tooltip.css';
 
 type Step = {
   title: React.ReactNode;
+  type: 'Bridge' | 'Claim' | 'Stake';
   description: React.ReactNode;
   isCompleted: boolean;
   actionButton?: React.ReactNode;
 };
 
 const TitleWithDes = () => {
-  const t = useTranslations();
+  // const t = useTranslations();
   return (
     <div className="flex flex-col gap-6 max-[1000px]:gap-1 w-[100%]">
       <h1 className=" text-white font-jockey text-2xl tablet:text-3xl desktop:text-[64px] max-[1000px]:text-[30px] font-normal mb-4">
@@ -43,7 +46,7 @@ const TitleWithDes = () => {
 };
 
 const Crystal = () => {
-  const t = useTranslations();
+  // const t = useTranslations();
   return (
     <div className="flex items-center justify-center w-[100%] flex-1 !pointer-events-none">
       <Icon.Crystal />
@@ -52,7 +55,7 @@ const Crystal = () => {
 };
 
 const Steps = ({ steps }: { steps: Step[] }) => {
-  const t = useTranslations();
+  // const t = useTranslations();
   return (
     <div className="flex w-[100%] flex-col gap-0">
       {steps.map((step, stepIndex) => (
@@ -60,7 +63,15 @@ const Steps = ({ steps }: { steps: Step[] }) => {
           <div className="w-[50px] h-[172px] max-[728px]:h-[270px] flex flex-col items-center justify-center">
             <div
               style={{
-                background: step.isCompleted ? '#5FCC8A' : '#4451BB',
+                background: step.isCompleted
+                  ? stepIndex === 0
+                    ? '#7EFFC5'
+                    : stepIndex > 0 && steps[stepIndex - 1].isCompleted
+                      ? 'linear-gradient(#164f1e, #0a260e)'
+                      : '#7EFFC5'
+                  : stepIndex > 0 && steps[stepIndex - 1].isCompleted
+                    ? 'linear-gradient(#3ac84d, #164f1e)'
+                    : '#4451BB',
                 opacity: step.isCompleted ? 1 : 0.25,
                 borderRadius: stepIndex === 0 ? '8px 8px 0px 0px' : 0,
               }}
@@ -69,7 +80,7 @@ const Steps = ({ steps }: { steps: Step[] }) => {
             <div
               style={{
                 background: step.isCompleted
-                  ? '#5FCC8A'
+                  ? '#7EFFC5'
                   : 'linear-gradient(180deg, #4A4C54 0%, #202020 100%)',
                 color: step.isCompleted ? '#4651F6' : 'white',
                 border: step.isCompleted ? 'none' : '1px solid #242424',
@@ -83,7 +94,9 @@ const Steps = ({ steps }: { steps: Step[] }) => {
             </div>
             <div
               style={{
-                background: step.isCompleted ? '#5FCC8A' : '#4451BB',
+                background: step.isCompleted
+                  ? 'linear-gradient(#6cdaa9, #164f1e)'
+                  : '#4451BB',
                 opacity:
                   stepIndex !== steps.length - 1
                     ? step.isCompleted
@@ -95,9 +108,31 @@ const Steps = ({ steps }: { steps: Step[] }) => {
             />
           </div>
           <div className="flex-1 flex justify-center flex-col px-5 gap-1">
-            <div className="font-jockey font-normal text-white text-[24px]">
-              {step.title}
-            </div>
+            {step.isCompleted ? (
+              <div className="font-jockey font-normal text-[#7EFFC5] text-[24px]">
+                <a
+                  data-tooltip-id={`step_${stepIndex}`}
+                  className="cursor-pointer"
+                  data-tooltip-content={`${step.type} completed. Ready for the next step!`}
+                >
+                  {step.isCompleted && `✅`}&nbsp;&nbsp;&nbsp;
+                  {step.type} Completed
+                </a>
+                <Tooltip
+                  id={`step_${stepIndex}`}
+                  style={{
+                    backgroundColor: '#4651F6',
+                    color: 'white',
+                    fontFamily: 'Inter Bold',
+                    fontSize: '14px',
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="font-jockey font-normal text-white text-[24px]">
+                {step.title}
+              </div>
+            )}
             <div className="font-normal text-[#AFAFAF] text-[20px]">
               {step.description}
             </div>
@@ -156,18 +191,28 @@ export default function SectionOne() {
   const { isValidSession } = useAuth();
   const { setOpen } = useWalletStore();
   const { userClaimStatus } = useUserStore();
-  const t = useTranslations();
+  // const t = useTranslations();
   const isMobile = useIsMobile(1000);
   const [isOpenAirdropModal, setOpenAidropModal] = useState(false);
   const steps: Step[] = [
     {
-      title: 'Bridge & Start - Move $USDT with Owlto',
+      title: <>Bridge & Start - Move $USDT with Owlto</>,
       description: 'Begin by bridging your $USDT to the U2U Chain with Owlto.',
-      isCompleted: isValidSession ? true : false,
+      type: 'Bridge',
+      isCompleted:
+        isValidSession && userClaimStatus?.isEligibility ? true : false,
       actionButton: (
         <Button
           style={{
             fontFamily: 'Inter Bolder',
+            pointerEvents:
+              isValidSession && userClaimStatus?.isEligibility
+                ? 'none'
+                : 'auto',
+            filter:
+              isValidSession && userClaimStatus?.isEligibility
+                ? 'grayscale(100%) brightness(60%)'
+                : 'none',
           }}
           onClick={() => {
             const section2Ele = document.getElementById('section_2');
@@ -177,7 +222,7 @@ export default function SectionOne() {
               behavior: 'smooth',
             });
           }}
-          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white] hover:brightness-75"
+          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white]"
         >
           Bridge to U2U
         </Button>
@@ -185,12 +230,12 @@ export default function SectionOne() {
     },
     {
       title: <>Claim Your Free Gas Fees</>,
+      type: 'Claim',
       description: 'Receive free gas fees to kickstart your journey.',
       isCompleted:
         isValidSession &&
         userClaimStatus?.isEligibility &&
-        (userClaimStatus?.claimStatus === ClaimStatus.NONE ||
-          userClaimStatus?.claimStatus === ClaimStatus.SUCCESS)
+        userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
           ? true
           : false,
       actionButton: (
@@ -214,7 +259,7 @@ export default function SectionOne() {
             }
             setOpenAidropModal(!isOpenAirdropModal);
           }}
-          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white] hover:brightness-75"
+          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white]"
         >
           Claim Free Gas
         </Button>
@@ -224,6 +269,7 @@ export default function SectionOne() {
       title: 'Stake & Earn Big - Boost Your U2U Rewards',
       description: 'Stake your $USDT to earn U2U tokens instantly!',
       isCompleted: false,
+      type: 'Stake',
       actionButton: (
         <Button
           style={{
@@ -237,7 +283,7 @@ export default function SectionOne() {
               behavior: 'smooth',
             });
           }}
-          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white] hover:brightness-75"
+          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white]"
         >
           Stake pUSDT
         </Button>
@@ -312,11 +358,6 @@ export default function SectionOne() {
         isOpen={isOpenAirdropModal}
         onClose={() => setOpenAidropModal(false)}
       />
-      {/* <LoadingModal
-        title="Processing your claim... Please wait."
-        isLoading={true}
-        onClose={() => {}}
-      /> */}
     </div>
   );
 }

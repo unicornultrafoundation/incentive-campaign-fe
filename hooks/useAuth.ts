@@ -47,13 +47,13 @@ export const useAuth = () => {
       signature: message,
       signer: address.toLowerCase(),
     });
+    const response = await getUserClaimStatus();
+    if (response.data) {
+      setUserClaimStatus(response.data.data);
+    }
     if (result) {
       setAuthCredential(true);
     }
-    const userClaimStatus = await getUserClaimStatus();
-
-    const b = userClaimStatus.data;
-    setUserClaimStatus(userClaimStatus.data.data);
   };
 
   const onLogout = async () => {

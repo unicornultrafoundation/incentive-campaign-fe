@@ -5,8 +5,8 @@ import { useAccount, useSignMessage } from 'wagmi';
 import Button from '@/components/Button';
 import Modal from '@/components/Modal/index';
 import { useAuth } from '@/hooks/useAuth';
-import { useGetProfileApi } from '@/hooks/useMutationApi';
-import useUserStore from '@/store/auth';
+// import { useGetProfileApi } from '@/hooks/useMutationApi';
+// import useUserStore from '@/store/auth';
 
 import LoadingModal from './loading-modal';
 
@@ -21,12 +21,12 @@ export default function SignConnectMessageModal({ isOpen, onClose }: Props) {
   const { onSignMessage } = useAuth();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [authError, setAuthError] = useState('');
-  const { setProfile } = useUserStore();
+  // const { setProfile } = useUserStore();
   const t = useTranslations();
 
   const [isCheckingChain, setIsCheckingChain] = useState<boolean>(false);
 
-  const { trigger: getProfile } = useGetProfileApi();
+  // const { trigger: getProfile } = useGetProfileApi();
 
   const handleSignMessage = useCallback(async () => {
     setAuthError('');
