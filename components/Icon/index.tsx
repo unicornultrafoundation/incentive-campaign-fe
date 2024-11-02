@@ -59,6 +59,7 @@ import NotEligible from '@/components/Icon/NotEligible.png';
 import ApproveLogo from '@/components/Icon/LogoApporve.png';
 import StarWhite from '@/components/Icon/StarWhite.png';
 import ClaimSuccess from '@/components/Icon/ClaimSuccess.png';
+import AirdropClaimError from '@/components/Icon/AirdropClaimError.png';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -199,4 +200,7 @@ Icon.StarWhite = (props: Omit<ImageProps, 'src' | 'alt'>) => (
 );
 Icon.ClaimSuccess = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="attention" src={ClaimSuccess} {...props} />
+);
+Icon.AirdropClaimError = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={AirdropClaimError} {...props} />
 );

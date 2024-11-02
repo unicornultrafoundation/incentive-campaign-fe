@@ -232,6 +232,57 @@ const ClaimSuccessModal = ({
   );
 };
 
+const AirdropClaimErrModal = ({
+  isOpen,
+  onClose,
+  onRetryClaim,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onRetryClaim: () => void;
+}) => {
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Airdrop Claim Failed"
+      className="relative border border-[#7EFFC5] !max-w-[550px] max-[550px]:w-[360px] w-[550px] tablet:max-w-[450px] p-6 flex flex-col gap-5"
+    >
+      <div className="w-full flex flex-col gap-5">
+        <div
+          style={{
+            background: 'linear-gradient(90deg, #9299FF 0%, #4651F6 100%)',
+          }}
+          className="w-full h-[1px] bg-[#9299FF] mb-2"
+        />
+      </div>
+      <div className="w-full relative flex justify-center">
+        <Icon.AirdropClaimError className="w-[60%]" />
+      </div>
+      <div className="w-full text-center text-balance">
+        Claim failed due to network or eligibility issues. Please try again or
+        contact support.
+      </div>
+      <div className="w-full flex items-center justify-between max-[768px]:gap-2">
+        <Button
+          scale="md"
+          className="!text-[17px] w-[48%] max-[768px]:w-[35%] p-4 mt-4 !rounded-xl laptop:!rounded-[8px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
+          onClick={() => {}}
+        >
+          Contact Support
+        </Button>
+        <Button
+          scale="md"
+          className="!text-[17px] w-[48%] max-[768px]:flex-1 p-4 mt-4 !rounded-xl laptop:!rounded-[8px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
+          onClick={() => onRetryClaim()}
+        >
+          Retry Claim
+        </Button>
+      </div>
+    </Modal>
+  );
+};
+
 const getClaimStatus = async () => {
   const res = await nextAPI.get('/airdrop/bridge/get');
   const data = res.data as {
@@ -274,13 +325,24 @@ export default function AirdropModal({
     setUserClaimStatus(getClaimStatusRes);
   };
 
+  const handleRetryClaim = async () => {
+    if (!userClaimStatus) return;
+    setUserClaimStatus({
+      claimStatus: ClaimStatus.REQUESTED,
+      isEligibility: userClaimStatus.isEligibility,
+    });
+    await nextAPI.post('/airdrop/bridge/claim');
+    const getClaimStatusRes = await getClaimStatus();
+    setUserClaimStatus(getClaimStatusRes);
+  };
+
   useEffect(() => {
     if (isOpen) {
       getClaimStatus();
     }
   }, [isOpen]);
 
-  if (initialLoading) {
+  if (!initialLoading) {
     return (
       <LoadingModal
         isLoading={isOpen}
@@ -316,10 +378,10 @@ export default function AirdropModal({
 
   if (userClaimStatus.claimStatus === ClaimStatus.FAILED) {
     return (
-      <NotEligbleModal
+      <AirdropClaimErrModal
         isOpen={isOpen}
         onClose={onClose}
-        onAirdropNow={() => {}}
+        onRetryClaim={handleRetryClaim}
       />
     );
   }
