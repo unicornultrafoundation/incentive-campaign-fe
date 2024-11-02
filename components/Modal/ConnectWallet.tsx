@@ -62,6 +62,12 @@ export default function ConnectWallet() {
     if (connectorName === 'Browser Wallet') {
       return <Icon.U2UWallet width={32} height={32} />;
     }
+    if (connectorName === 'bitget') {
+      return <Icon.Bitget width={32} height={32} />;
+    }
+    if (connectorName === 'okx') {
+      return <Icon.Okx width={32} height={32} />;
+    }
     return null;
   };
 
@@ -122,7 +128,7 @@ export default function ConnectWallet() {
                     className="flex justify-between items-center w-full"
                   >
                     <p>{connector.name}</p>
-                    {renderIcon(connector.name)}
+                    {renderIcon('okx')}
                   </button>
                 </div>
               );
@@ -141,7 +147,7 @@ export default function ConnectWallet() {
                     className="flex justify-between items-center w-full"
                   >
                     <p>Bitget</p>
-                    {renderIcon(connector.name)}
+                    {renderIcon('bitget')}
                   </button>
                 </div>
               );
@@ -179,7 +185,7 @@ export default function ConnectWallet() {
                     className="flex justify-between items-center w-full"
                   >
                     <p>{connector.name}</p>
-                    {renderIcon(connector.name)}
+                    {renderIcon('walletConnect')}
                   </button>
                 </div>
               );
