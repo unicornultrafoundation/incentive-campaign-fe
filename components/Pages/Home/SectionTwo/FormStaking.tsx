@@ -27,11 +27,11 @@ interface Option {
 
 export default function FormStaking() {
   const { allowancePUSDT, balanceOfUsdt } = usePUSDT();
-  const { rewardsRatePerSecond, endTime } = useStake();
+  const { rewardsRatePerSecond } = useStake(); //endTime
   const onStaking = useStake();
   const { onStake, isPending, isSuccess, isError, totalStaked } = onStaking;
   const [isOpenApprove, setIsOpenApprove] = useState<boolean>(false);
-  const [currentDate, setCurrentDate] = useState<number>(Date.now());
+  const [, setCurrentDate] = useState<number>(Date.now());
   const [selectedType, setSelectedType] = useState<number>(10);
   const [maxAmount] = useState<number>(10000);
   const [isLoading, setIsLoading] = useState<boolean>(false);
