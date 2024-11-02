@@ -1,4 +1,6 @@
 import { formatUnits } from 'viem';
+import numeral from 'numeral';
+import { trimEnd } from 'lodash';
 
 export const sleep = (delay: number) =>
   new Promise((resolve) => setTimeout(resolve, delay));
@@ -54,4 +56,27 @@ export const generateRandomNumber = (length: number): string => {
     result += chars[randomIndex];
   }
   return result;
+};
+
+export const toNumberNoRound = (
+  value: any,
+  maximumFractionDigitsDisplay = 4,
+): string => {
+  const truncateFractionAndFormat = (value: any, maxDigits: any) => {
+    let returnValue = numeral(value).format(
+      '0,0[.]' + '0'.repeat(maxDigits),
+      Math.floor,
+    );
+    // Kiểm tra có phải là số thập phân
+    if (returnValue.indexOf('.') != -1) {
+      // Bỏ những số 0 cuối
+      returnValue = trimEnd(returnValue, '0');
+    }
+    // Kiểm tra nếu dấu . ở cuối sau khi bỏ số 0
+    if (returnValue.substr(-1) === '.') {
+      returnValue = returnValue.replace('.', '');
+    }
+    return returnValue;
+  };
+  return truncateFractionAndFormat(value, maximumFractionDigitsDisplay);
 };

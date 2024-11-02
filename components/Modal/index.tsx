@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { classNames } from '@/utils/string';
 import CloseIcon from '@/components/Icon/Close';
@@ -24,6 +24,17 @@ export default function Modal({
   description,
   onClose,
 }: ModalProps) {
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     document.body.classList.add('no-scroll');
+  //   } else {
+  //     document.body.classList.remove('no-scroll');
+  //   }
+  //
+  //   return () => {
+  //     document.body.classList.remove('no-scroll');
+  //   };
+  // }, [isOpen]);
   return (
     <div className={classNames('base-modal', isOpen ? 'block' : 'hidden')}>
       <div className="overlay" aria-hidden onClick={onClose} />
