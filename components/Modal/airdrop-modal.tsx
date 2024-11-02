@@ -342,7 +342,7 @@ export default function AirdropModal({
     }
   }, [isOpen]);
 
-  if (!initialLoading) {
+  if (initialLoading) {
     return (
       <LoadingModal
         isLoading={isOpen}
