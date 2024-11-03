@@ -106,3 +106,15 @@ export const useSignatureBitgetApi = (
     ((url: string, { arg }: any) => nextAPI.post(url, arg)) as any,
     config,
   );
+
+export const useLogOutAPI = (
+  config?: ExtendSWRMutationConfiguration<
+    APIResponse.UserClaimStatusAPIResponse,
+    any
+  >,
+) =>
+  useExtendedSWRMutation<APIResponse.UserClaimStatusAPIResponse, any>(
+    API_ENDPOINTS.LOG_OUT,
+    ((url: string, { arg }: any) => nextAPI.post(url, arg)) as any,
+    config,
+  );

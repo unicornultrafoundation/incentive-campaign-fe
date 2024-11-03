@@ -5,7 +5,7 @@ const useIsMobile = (mobileMaxWidth: number = 768): boolean => {
 
   useLayoutEffect(() => {
     const updateSize = (): void => {
-      setIsMobile(window.innerWidth < mobileMaxWidth);
+      setIsMobile(window.innerWidth <= mobileMaxWidth);
     };
     window.addEventListener('resize', updateSize);
     updateSize();

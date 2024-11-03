@@ -40,7 +40,7 @@ const LandingHeader = () => {
   // const [activeNavIndex, setActiveNavIndex] = useState(0);
   // const router = useRouter();
   // const { setOpen } = useWalletStore();
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(1280);
 
   // const toggleNav = (index: any) => {
   //   if (activeNavIndex !== index) {
@@ -69,7 +69,7 @@ const LandingHeader = () => {
   return (
     <FormProvider {...method}>
       <nav className="p-4 bg-[#141414] tablet:px-[100px] tablet:py-4 w-full flex">
-        <div className="flex w-full tablet:flex-row tablet:gap-2 desktop:gap-0 tablet:items-center justify-between desktop:py-10 desktop:px-8 mobile:px-5">
+        <div className="flex w-full tablet:flex-row tablet:gap-2 desktop:gap-0 tablet:items-center justify-between desktop:py-10 laptop:py-10 desktop:px-8 mobile:px-5">
           <div className="flex gap-6">
             {/* Logo */}
             <Link
@@ -93,7 +93,7 @@ const LandingHeader = () => {
             <Icon.Menu width={24} height={24} />
           </button>
           {/* Action Buttons */}
-          <div className="desktop:flex hidden flex-1 justify-end gap-3">
+          <div className="desktop:flex laptop:flex hidden flex-1 justify-end gap-3">
             <button
               onClick={() => {
                 if (!isValidSession) {

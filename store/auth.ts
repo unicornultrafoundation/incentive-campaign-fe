@@ -1,4 +1,3 @@
-import { UserClaimStatus } from './../types/entities';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
