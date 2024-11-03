@@ -37,7 +37,7 @@ const TitleWithDes = () => {
           backgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}
-        className=" font-jockey text-base font-normal text-[32px] leading-[35px] max-[1000px]:text-[24px]"
+        className=" font-jockey font-normal text-[32px] leading-[35px] max-[1000px]:text-[24px]"
       >
         Stake, Earn $U2U Instantly, and Watch Your Rewards Grow!
       </p>
