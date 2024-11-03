@@ -200,7 +200,7 @@
     "description": "To access and manage your nodes, please connect your wallet.",
     "connect_wallet": "Connect Wallet",
     "authenticating": "Authenticating...",
-    "description_2": "Connecting your wallet to U2U DePIN Subnet Node"
+    "description_2": "Connecting your wallet"
   },
   "modal_choose_blockchain": {
     "title": "Choose Blockchain",
