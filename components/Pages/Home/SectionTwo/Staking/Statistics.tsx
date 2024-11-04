@@ -4,7 +4,9 @@ import { useGetSubgraphDashboardPublic } from '@/hooks/useQueryApi';
 import { formatDisplayedTokenAmount, toNumberNoRound } from '@/utils';
 
 export default function Statistics() {
-  const { data, mutate } = useGetSubgraphDashboardPublic({});
+  const { data, mutate } = useGetSubgraphDashboardPublic({
+    refreshInterval: 1000,
+  });
   const { amountStakePublic, amountHarvestPublic, totalUserPublic } =
     data?.data?.dashboards[0] || {};
 

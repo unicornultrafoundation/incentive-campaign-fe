@@ -188,9 +188,9 @@ export default function FormStaking() {
 
   return (
     <FormProvider {...mainForm}>
-      <div className="p-8 flex flex-col w-full gap-8 rounded-2xl bg-[#1f1f1feb] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
+      <div className="p-5 laptop:p-8 flex flex-col w-full gap-8 rounded-2xl bg-[#14141480] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
         <div>
-          <div className="p-5 rounded-2xl bg-[#141414]">
+          <div className="p-5 rounded-2xl bg-[#1F1F1F]">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-4">
                 <p className="text-sm laptop:text-lg font-semibold">
@@ -242,7 +242,7 @@ export default function FormStaking() {
                 <div
                   onClick={handleSelectType(option)}
                   key={option.value}
-                  className={`${selectedType === option.value && '!bg-gradient-to-r'} cursor-pointer w-full min-w-[98px] rounded-lg flex justify-center items-center bg-[#1F1F1F] h-[35px] py-2 hover:bg-gradient-to-r from-[#9299FF] to-[#4651F6]`}
+                  className={`${selectedType === option.value && '!bg-gradient-to-r'} cursor-pointer w-full min-w-[98px] rounded-lg flex justify-center items-center bg-[#4A4A4A] h-[35px] py-2 hover:bg-gradient-to-r from-[#9299FF] to-[#4651F6]`}
                 >
                   {option.label}
                 </div>
@@ -306,7 +306,7 @@ export default function FormStaking() {
               disabled={isPending || isLoading}
               loadingText={'Staking...'}
               scale="md"
-              className="disabled:bg-[#4651F6] disabled:opacity-50 p-4 mt-4 w-full !rounded-xl laptop:!rounded-[20px] bg-[#4651F6] text-white hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
+              className="disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 mt-4 w-full !rounded-xl laptop:!rounded-[20px] bg-[#4651F6] text-white hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
               onClick={() => {
                 handleSubmit(handleStake)();
               }}
@@ -316,7 +316,7 @@ export default function FormStaking() {
           ) : (
             <Button
               scale="md"
-              className="p-4 mt-4 w-full !rounded-xl laptop:!rounded-[20px] bg-[#4651F6] text-white hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
+              className="disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 mt-4 w-full !rounded-xl laptop:!rounded-[20px] bg-[#4651F6] text-white hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
               onClick={handleOpenApprove}
             >
               Approve

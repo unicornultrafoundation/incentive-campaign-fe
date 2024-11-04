@@ -5,13 +5,17 @@ import { ApolloQueryResult } from '@apollo/client';
 import { SubgraphResponse } from '@/types/subgraph.response';
 
 import { subgraphClient } from './apollo';
-import { DashboardPublicQuery, DashboardBitgetQuery } from './queries';
+import { DashboardPublicQuery, DashboardBitgetQuery, TransactionRewardQuery } from './queries';
+import { Address } from 'viem';
 
 type QueryResult<TResponse> = Promise<ApolloQueryResult<TResponse>>;
 
 export interface IService {
   getDashboardPublicData: () => QueryResult<SubgraphResponse.DashboardPublicData>;
-  getDashboardBitgetData: () => QueryResult<SubgraphResponse.DashboardPublicData>;
+  getDashboardBitgetData: () => QueryResult<SubgraphResponse.DashboardBitgetData>;
+  getGetTransactionReward: (
+    address: Address,
+  ) => QueryResult<SubgraphResponse.TransactionRewardData>;
 }
 
 export const subgraphService: IService = {
@@ -19,4 +23,9 @@ export const subgraphService: IService = {
     subgraphClient.query({ query: DashboardPublicQuery }),
   getDashboardBitgetData: () =>
     subgraphClient.query({ query: DashboardBitgetQuery }),
+  getGetTransactionReward: (address: Address) =>
+    subgraphClient.query({
+      query: TransactionRewardQuery,
+      variables: { address },
+    }),
 };

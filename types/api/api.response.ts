@@ -1,5 +1,5 @@
 import { Credentials, UserClaimStatus } from '@/types/entities';
-import { DashboardBitget, DashboardPublic } from '@/types/subgraph.response';
+import { DashboardBitget, DashboardPublic, TransactionReward } from '@/types/subgraph.response';
 import { Address } from 'viem';
 
 export interface APIErrorResponse {
@@ -49,6 +49,10 @@ export namespace APIResponse {
     dashboards: DashboardBitget[];
   }
 
+  export interface TransactionRewardData {
+    transactionPools: TransactionReward[];
+  }
+
   export interface SignatureData {
     data: {
       sig: string;
@@ -65,6 +69,8 @@ export namespace APIResponse {
 
   export type DashBoardPublic = APISuccessfulResponse<DashboardPublicData>;
   export type DashBoardBitget = APISuccessfulResponse<DashboardBitgetData>;
+  export type TransactionRewardResponse =
+    APISuccessfulResponse<TransactionRewardData>;
 
   export type SignatureResponse = APISuccessfulResponse<SignatureData>;
 
