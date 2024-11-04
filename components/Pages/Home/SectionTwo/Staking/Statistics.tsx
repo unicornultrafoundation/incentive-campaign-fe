@@ -24,7 +24,7 @@ export default function Statistics() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (CAMPAIGN_TYPE === 'public') {
+      if (CAMPAIGN_TYPE.toLowerCase() === 'public') {
         publicMutate();
       } else {
         bitgetMutate();
@@ -42,7 +42,7 @@ export default function Statistics() {
           <p className="font-semibold">Total Rewards (U2U)</p>
           <p className="font-semibold text-3xl laptop:text-5xl text-gradient bg-gradient-to-r from-[#9299FF_48%] to-[#4651F6_168%]">
             {formatDisplayedTokenAmount(
-              CAMPAIGN_TYPE === 'public'
+              CAMPAIGN_TYPE.toLowerCase() === 'public'
                 ? amountHarvestPublic
                 : amountHarvestBitget || 0,
               18,
@@ -53,7 +53,7 @@ export default function Statistics() {
           <p className="font-semibold">Total staked pUSDT</p>
           <p className="font-semibold text-3xl laptop:text-5xl text-gradient bg-gradient-to-r from-[#9299FF_48%] to-[#4651F6_168%]">
             {formatDisplayedTokenAmount(
-              CAMPAIGN_TYPE === 'public'
+              CAMPAIGN_TYPE.toLowerCase() === 'public'
                 ? amountStakePublic
                 : amountStakeBitget || 0,
               6,
@@ -65,7 +65,7 @@ export default function Statistics() {
         <p className="font-semibold">Number of participants</p>
         <p className="font-semibold text-3xl laptop:text-5xl text-gradient bg-gradient-to-r from-[#9299FF_48%] to-[#4651F6_168%]">
           {toNumberNoRound(
-            CAMPAIGN_TYPE === 'public' ? totalUserPublic : totalUserBitget || 0,
+            CAMPAIGN_TYPE.toLowerCase() === 'public' ? totalUserPublic : totalUserBitget || 0,
             0,
           )}{' '}
           USERS

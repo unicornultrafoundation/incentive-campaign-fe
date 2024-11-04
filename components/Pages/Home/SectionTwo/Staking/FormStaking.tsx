@@ -115,7 +115,7 @@ export default function FormStaking() {
     try {
       setIsLoading(true);
       const res =
-        CAMPAIGN_TYPE === 'public'
+        CAMPAIGN_TYPE.toLowerCase() === 'public'
           ? await signaturePublic()
           : await signatureBitget();
       const signature = res.data.data.sig;
