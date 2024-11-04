@@ -45,7 +45,7 @@ export const contracts: {
   },
   stakePublic: {
     address:
-      CAMPAIGN_TYPE === 'public'
+      CAMPAIGN_TYPE.toLowerCase() === 'public'
         ? (CONTRACT_PUBLIC_ADDRESS as Address)
         : (CONTRACT_BITGET_ADDRESS as Address),
     abi: stakePublicAbi,

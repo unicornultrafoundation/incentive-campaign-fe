@@ -95,7 +95,7 @@ export default function ConnectWallet() {
         description="To participate in the airdrop, your wallet must have one successful $10 USDT bridge transaction to the U2U Network."
         className="relative border border-[#7EFFC5] max-w-[390px] tablet:max-w-[450px] p-6 w-full flex flex-col gap-5"
       >
-        {CAMPAIGN_TYPE === 'public' ? (
+        {CAMPAIGN_TYPE.toLowerCase() === 'public' ? (
           <div className="w-full flex flex-col gap-5">
             <div
               style={{
