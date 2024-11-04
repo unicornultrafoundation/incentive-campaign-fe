@@ -13,8 +13,12 @@ import { useStake } from '@/hooks/useStake';
 import ApproveModal from '@/components/Modal/ApproveModal';
 import { FormState } from '@/types/form';
 import FormMessageValidate from '@/components/Form/FormMessageValidate';
-import { useSignaturePublicApi } from '@/hooks/useMutationApi';
+import {
+  useSignatureBitgetApi,
+  useSignaturePublicApi,
+} from '@/hooks/useMutationApi';
 import { toast } from '@/store/ui';
+import { CAMPAIGN_TYPE } from '@/config/env';
 
 interface Option {
   value: number;
@@ -34,7 +38,7 @@ export default function FormStaking() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { trigger: signaturePublic } = useSignaturePublicApi();
-  // const {trigger: signatureBitget} = useSignatureBitgetApi();
+  const { trigger: signatureBitget } = useSignatureBitgetApi();
 
   const schema = yup.object({
     maxAmount: yup.number(),
@@ -110,7 +114,10 @@ export default function FormStaking() {
   const handleStake = async () => {
     try {
       setIsLoading(true);
-      const res = await signaturePublic();
+      const res =
+        CAMPAIGN_TYPE === 'public'
+          ? await signaturePublic()
+          : await signatureBitget();
       const signature = res.data.data.sig;
       const expiresAt = res.data.data.expiresAt;
       if (signature && expiresAt) {
@@ -134,13 +141,21 @@ export default function FormStaking() {
       const balance = Number(balanceOfUsdt || 0) / 1000000;
       if (option.value === 10000) {
         if (balance < option.value) {
-          return setValue('amount', balance);
+          const total = Number(
+            formatUnits(BigInt((totalStaked as any) || 0), 6),
+          );
+          const actuallAmount = 10000 - total;
+          // if (balance < 10000 - total)
+          return setValue('amount', actuallAmount);
         }
       }
       return setValue('amount', option.value);
     } else {
+      const total = Number(formatUnits(BigInt((totalStaked as any) || 0), 6));
+      const actuallAmount = 10000 - total;
       const value =
-        (option.value * (Number(balanceOfUsdt || 0) / 1000000)) / 100;
+        // (option.value * (Number(balanceOfUsdt || 0) / 1000000)) / 100;
+        (option.value * Number(actuallAmount)) / 100;
       return setValue('amount', value);
     }
   };
@@ -276,7 +291,7 @@ export default function FormStaking() {
           </div>
           <div className="w-full flex items-center gap-2 mt-6">
             <Icon.IconWarning width={24} height={24} />
-            <p className="text-sm laptop:text-base font-semibold text-[#7EFFC5]">
+            <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">
               Deposit locked until campaign ended.
             </p>
           </div>
