@@ -12,8 +12,8 @@ import {
 import { CHAINS } from '@/config/env';
 
 export const u2uNetWork = defineChain({
-  id: CHAINS.u2u.chainId,
-  caipNetworkId: `eip155:${CHAINS.u2u.chainId}`,
+  id: Number(CHAINS.u2u.chainId),
+  caipNetworkId: `eip155:${Number(CHAINS.u2u.chainId)}`,
   chainNamespace: 'eip155',
   name: CHAINS.u2u.network,
   nativeCurrency: { name: 'U2U', symbol: 'U2U', decimals: 18 },
@@ -31,6 +31,8 @@ export const u2uNetWork = defineChain({
     // Add the contracts here
   },
 });
+
+console.log({ u2uNetWork });
 
 export const projectId = '815145290a10a9393358a85a318d47ad';
 

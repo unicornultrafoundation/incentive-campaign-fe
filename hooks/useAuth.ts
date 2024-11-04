@@ -99,7 +99,7 @@ export const useWrongNetwork = () => {
 
   const isWrongNetwork = useMemo(() => {
     if (!isConnected) return false;
-    return isConnected && chainId !== CHAINS.u2u.chainId;
+    return isConnected && chainId !== Number(CHAINS.u2u.chainId);
   }, [chainId, chainId, isConnected]);
 
   const handleSwitchChain = () => {
