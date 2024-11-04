@@ -1,5 +1,9 @@
 import { Credentials, UserClaimStatus } from '@/types/entities';
-import { DashboardBitget, DashboardPublic, TransactionReward } from '@/types/subgraph.response';
+import {
+  DashboardBitget,
+  DashboardPublic,
+  TransactionReward,
+} from '@/types/subgraph.response';
 import { Address } from 'viem';
 
 export interface APIErrorResponse {
