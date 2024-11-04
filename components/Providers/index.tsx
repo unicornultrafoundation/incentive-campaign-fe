@@ -29,13 +29,13 @@ const AppProviders = ({ children, messages, locale }: AppProvidersProps) => {
   const { trigger: getUserClaimStatusApi } = useGetUserClaimStatusApi();
 
   useEffect(() => {
-    setAuthCredential(hasCookie('accessToken'));
+    setAuthCredential(hasCookie('refreshToken'));
   }, []);
 
   useEffect(() => {
     const getUserClaimStatus = async () => {
       const response = await getUserClaimStatusApi();
-      if (response.data) {
+      if (response && response.data) {
         setUserClaimStatus(response.data.data);
       }
     };
