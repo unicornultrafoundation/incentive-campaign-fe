@@ -15,6 +15,7 @@ import { config } from '@/config/wagmi';
 import {
   useConnectWalletApi,
   useGetUserClaimStatusApi,
+  useLogOutAPI,
 } from '@/hooks/useMutationApi';
 import useUserStore, { setAuthCredential, useAuthStore } from '@/store/auth';
 import { clearAuthCookiesAction } from '@/actions';
@@ -30,6 +31,7 @@ export const useAuth = () => {
   const { data: blockNumber } = useBlockNumber({ watch: true });
 
   const { data: balanceU2U, queryKey } = useBalance({ address });
+  const { trigger: logOutApi } = useLogOutAPI();
 
   const isValidSession = useMemo(() => {
     return isConnected && hasCredential;
@@ -56,7 +58,17 @@ export const useAuth = () => {
     }
   };
 
+  const handleLogoutApi = async () => {
+    try {
+      await logOutApi();
+      return 1;
+    } catch (err) {
+      return 0;
+    }
+  };
+
   const onLogout = async () => {
+    handleLogoutApi();
     await disconnectAsync();
     disconnect();
     // setAuthCredential(false);
@@ -87,7 +99,7 @@ export const useWrongNetwork = () => {
 
   const isWrongNetwork = useMemo(() => {
     if (!isConnected) return false;
-    return isConnected && chainId !== CHAINS.u2u.chainId;
+    return isConnected && chainId !== Number(CHAINS.u2u.chainId);
   }, [chainId, chainId, isConnected]);
 
   const handleSwitchChain = () => {

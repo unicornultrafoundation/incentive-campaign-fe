@@ -8,6 +8,7 @@ export const BASE_REQUEST_OPTIONS = {
 /** API endpoints for proxy api requests **/
 export const SERVER_ENDPOINTS = {
   CONNECT: '/auth/connect',
+  REFRESH_TOKEN: '/auth/refresh',
 };
 
 /** API endpoints for client-side api requests **/
@@ -36,4 +37,5 @@ export const API_ENDPOINTS = {
   GET_USER_CLAIM_STATUS: '/airdrop/bridge/get',
   SIGNATURE_PUBLIC: 'signature/public',
   SIGNATURE_BITGET: 'signature/bitget',
+  LOG_OUT: '/auth/logout',
 };

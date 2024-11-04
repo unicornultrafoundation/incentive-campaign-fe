@@ -3,6 +3,7 @@ import { Address } from 'viem';
 export interface UserCredentials {
   accessToken: string;
   refreshToken: string;
+  userId: string;
 }
 
 export interface Credentials {

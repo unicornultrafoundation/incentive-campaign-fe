@@ -12,8 +12,8 @@ import {
 import { CHAINS } from '@/config/env';
 
 export const u2uNetWork = defineChain({
-  id: CHAINS.u2u.chainId,
-  caipNetworkId: `eip155:${CHAINS.u2u.chainId}`,
+  id: Number(CHAINS.u2u.chainId),
+  caipNetworkId: `eip155:${Number(CHAINS.u2u.chainId)}`,
   chainNamespace: 'eip155',
   name: CHAINS.u2u.network,
   nativeCurrency: { name: 'U2U', symbol: 'U2U', decimals: 18 },

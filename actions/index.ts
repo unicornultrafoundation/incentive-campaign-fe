@@ -6,7 +6,11 @@ import { jwtDecode } from 'jwt-decode';
 import moment from 'moment';
 
 import { API_ENDPOINTS, SERVER_ENDPOINTS } from '@/config/api';
-import { clearAuthCookies, getAuthCookies } from '@/services/cookies';
+import {
+  clearAuthCookies,
+  getAuthCookies,
+  setAuthCookies,
+} from '@/services/cookies';
 
 export const parseRequestParams = async (request: Request) => {
   const url = new URL(request.url);
@@ -59,11 +63,37 @@ export const handleRouteAuthentication = async (
     return;
   }
   const dataAuthCookie = getAuthCookies();
-  const { accessToken } = dataAuthCookie;
+  const { accessToken, refreshToken, userId } = dataAuthCookie;
 
   // Handle Access token expires
   if (!accessToken) {
-    clearAuthCookies();
+    if (!refreshToken) {
+      clearAuthCookies();
+    } else {
+      try {
+        const credentials: any = await client.post(
+          SERVER_ENDPOINTS.REFRESH_TOKEN,
+          {
+            refreshToken: refreshToken,
+            userAddress: userId,
+          },
+        );
+        console.log('--------');
+        console.log('TOKEN REFRESHED');
+        console.log('NEW TOKEN---', credentials);
+        console.log('--------');
+
+        setAuthCookies(credentials.data);
+
+        client.defaults.headers.common.Authorization = `Bearer ${credentials.data.accessToken}`;
+      } catch (e: any) {
+        console.log('--------');
+        console.log('ERROR REFRESHING', e.message);
+        console.log('--------');
+
+        clearAuthCookies();
+      }
+    }
   } else {
     // const tokenTest =
     //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjkwODAxODksImlzcyI6Im5vZGUtc2FsZSIsImV4cCI6MTcyOTA4NjE4OSwiYWRkcmVzcyI6IjB4OTVmZmI1ZjUyMWNkMzc3MTUyOTA0ZmNiZWM1YjY0Nzg4N2RlYTZlOCIsInJvbGUiOiJVU0VSIn0.tMGMNly25jqp9LkneQWUOU62kxnBmLKI2upjST7h8i5aBeSPWbzJq2G6fQuXDQ5Msx5QYgsHoEsuHvMwdCFdcQ';
@@ -85,34 +115,6 @@ export const handleRouteAuthentication = async (
       clearAuthCookies();
     }
   }
-
-  // TODO: API Refresh Token
-  // if (!refreshToken) {
-  //   clearAuthCookies();
-  // } else {
-  //   try {
-  //     const credentials: Credentials = await client.post(
-  //       SERVER_ENDPOINTS.CONNECT,
-  //       {
-  //         refreshToken: refreshToken,
-  //       },
-  //     );
-  //     console.log('--------');
-  //     console.log('TOKEN REFRESHED');
-  //     console.log('NEW TOKEN---', credentials);
-  //     console.log('--------');
-
-  //     setAuthCookies(credentials.data);
-
-  //     client.defaults.headers.common.Authorization = `Bearer ${credentials.data.accessToken}`;
-  //   } catch (e: any) {
-  //     console.log('--------');
-  //     console.log('ERROR REFRESHING', e.message);
-  //     console.log('--------');
-
-  //     clearAuthCookies();
-  //   }
-  // }
 };
 export const clearAuthCookiesAction = async () => {
   clearAuthCookies();

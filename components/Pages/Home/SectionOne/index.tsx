@@ -28,7 +28,7 @@ const TitleWithDes = () => {
   // const t = useTranslations();
   return (
     <div className="flex flex-col gap-6 max-[1000px]:gap-1 w-[100%]">
-      <h1 className=" text-white font-jockey text-2xl tablet:text-3xl desktop:text-[64px] max-[1000px]:text-[30px] font-normal mb-4">
+      <h1 className=" text-white font-jockey text-2xl leading-[64px] text-[64px] max-[1000px]:text-[30px] font-normal mb-4">
         U2U Incentivized Mainnet Saga
       </h1>
       <p
@@ -37,7 +37,7 @@ const TitleWithDes = () => {
           backgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}
-        className=" font-jockey text-base font-normal tablet:text-lg desktop:text-[32px] max-[1000px]:text-[24px]"
+        className=" font-jockey font-normal text-[32px] leading-[35px] max-[1000px]:text-[24px]"
       >
         Stake, Earn $U2U Instantly, and Watch Your Rewards Grow!
       </p>
@@ -321,7 +321,7 @@ export default function SectionOne() {
             <Steps steps={steps} />
           </div>
         </div>
-        <div className="w-[45%]">
+        <div className="w-[45%] px-8 flex items-center">
           <Crystal />
         </div>
       </div>
@@ -351,7 +351,7 @@ export default function SectionOne() {
         </div>
       </div>
       {isMobile ? renderMobile() : renderDesktop()}
-      <div className="w-full h-[80px] flex items-center bg-[#7EFFC5]">
+      <div className="w-full h-[80px] flex items-center bg-[#7EFFC5] mt-10">
         <SectionMarquee />
       </div>
       <AirdropModal

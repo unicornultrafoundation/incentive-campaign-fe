@@ -24,13 +24,15 @@ export enum ChainName {
 //TODO: add ENV chain config
 export const CHAINS = {
   u2u: {
-    rpc: 'https://rpc-nebulas-testnet.uniultra.xyz',
-    name: ChainName.U2U,
-    network: 'Nebulas Testnet',
-    explorer: 'https://testnet.u2uscan.xyz',
-    chainId: 2484,
+    rpc: process.env.NEXT_PUBLIC_RPC_URL ?? '',
+    name: process.env.NEXT_PUBLIC_NETWORK_NAME ?? '',
+    network: process.env.NEXT_PUBLIC_NETWORK_NAME ?? '',
+    explorer: process.env.NEXT_PUBLIC_BLOCK_EXPLORER_URL ?? '',
+    chainId: process.env.NEXT_PUBLIC_CHAIN_ID as any,
   },
 };
+
+console.log({ CHAINS });
 
 export const contracts: {
   [key: string]: {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useSWR from 'swr';
 
 import Button from '@/components/Button';
@@ -186,6 +186,8 @@ const ClaimSuccessModal = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
+  const { userClaimStatus } = useUserStore();
+
   return (
     <Modal
       isOpen={isOpen}
@@ -217,8 +219,16 @@ const ClaimSuccessModal = ({
       </div>
       <div className="w-full flex items-center justify-between">
         <div className="text-[#929292] text-[15px]">Tx Hash</div>
-        <div className="text-[white] text-[16px] font-bold">
-          {shortenAddress('0x35287h284jk24adasdasasddsdasd2x')}
+        <div
+          className="text-[white] text-[16px] font-bold cursor-pointer hover:underline"
+          onClick={() =>
+            window.open(
+              `${process.env.NEXT_PUBLIC_U2U_SCAN_URL}/${userClaimStatus?.txHash}`,
+              '_blank',
+            )
+          }
+        >
+          {shortenAddress(userClaimStatus?.txHash)}
         </div>
       </div>
       <Button
@@ -289,6 +299,7 @@ const getClaimStatus = async () => {
     data: {
       isEligibility: boolean;
       claimStatus: ClaimStatus;
+      txHash: string;
     };
     message: string;
   };
@@ -335,12 +346,6 @@ export default function AirdropModal({
     const getClaimStatusRes = await getClaimStatus();
     setUserClaimStatus(getClaimStatusRes);
   };
-
-  useEffect(() => {
-    if (isOpen) {
-      getClaimStatus();
-    }
-  }, [isOpen]);
 
   if (initialLoading) {
     return (
