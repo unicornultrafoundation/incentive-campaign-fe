@@ -5,6 +5,7 @@ import Button from '@/components/Button';
 import { formatDisplayedTokenAmount, toNumberNoRound } from '@/utils';
 import { useStake } from '@/hooks/useStake';
 import { toast } from '@/store/ui';
+import ConnectWalletButton from '@/components/ConnectWalletButton/ConnectWalletButton';
 
 export default function ClaimReward() {
   const { rewardsRatePerSecond, endTime, pendingReward } = useStake(); //endTime
@@ -119,16 +120,22 @@ export default function ClaimReward() {
           </div>
           <hr className="border-[#4A4A4A]" />
           <div className="flex items-center gap-6 mt-4">
-            <Button
-              loading={isPending || isLoading}
-              disabled={false}
-              loadingText={'Claiming...'}
-              scale="md"
-              className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
-              onClick={handleClaim}
+            <ConnectWalletButton
+              showConnectButton
+              className="flex justify-center h-12 laptop:h-[64px] !rounded-xl laptop:!rounded-2xl"
             >
-              Claim
-            </Button>
+              <Button
+                loading={isPending || isLoading}
+                disabled={false}
+                loadingText={'Claiming...'}
+                scale="md"
+                className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
+                onClick={handleClaim}
+              >
+                Claim
+              </Button>
+            </ConnectWalletButton>
+
             <Button
               loading={isPending || isLoadingUnStake}
               disabled={!isWithdraw}
