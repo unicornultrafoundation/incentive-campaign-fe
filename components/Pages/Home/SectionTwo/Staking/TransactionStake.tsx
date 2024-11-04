@@ -3,19 +3,19 @@ import { useAccount } from 'wagmi';
 import { formatUnits } from 'viem';
 import { format } from 'date-fns';
 
-import { useGetTransactionReward } from '@/hooks/useQueryApi';
+import { useGetTransactionStake } from '@/hooks/useQueryApi';
 import { shortenAddress } from '@/utils/string';
 import { U2U_SCAN_URL } from '@/config/env';
 import { toNumberNoRound } from '@/utils';
 
-export default function TransactionReward() {
+export default function TransactionStake() {
   // const [queryParams, setQueryParams] = useState<APIParams.Pagination>({
   //   page: 1,
   //   size: 5,
   // });
   const { address } = useAccount();
 
-  const { data, mutate } = useGetTransactionReward({
+  const { data, mutate, isLoading } = useGetTransactionStake({
     params: { address: address?.toLowerCase() },
     refreshInterval: 10000,
   });
@@ -46,7 +46,7 @@ export default function TransactionReward() {
                 </tr>
               </thead>
               <tbody>
-                {transactions?.length
+                {!isLoading && transactions?.length
                   ? transactions?.map((transaction, index) => (
                       <tr key={index}>
                         <td className="py-4 pr-4 laptop:pr-0 text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
@@ -60,7 +60,7 @@ export default function TransactionReward() {
                             Number(
                               formatUnits(
                                 BigInt(Number(transaction.amount) || 0),
-                                18,
+                                6,
                               ),
                             ),
                             3,
@@ -80,10 +80,21 @@ export default function TransactionReward() {
                   : ''}
               </tbody>
             </table>
-            {!transactions?.length && (
-              <div className="flex justify-center items-center h-full w-full">
-                <p className="text-[#929292]">No transaction found</p>
+            {isLoading ? (
+              <div className="w-full justify-center">
+                <svg
+                  className="animate-spin h-5 w-5 mr-3 ..."
+                  viewBox="0 0 24 24"
+                />
               </div>
+            ) : (
+              <>
+                {!transactions?.length && (
+                  <div className="flex justify-center items-center h-full w-full">
+                    <p className="text-[#929292]">No transaction found</p>
+                  </div>
+                )}
+              </>
             )}
           </div>
           {/*<div className="h-full w-full flex items-end justify-center mt-6">*/}

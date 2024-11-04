@@ -5,6 +5,7 @@ import { stakePublicAbi } from '@/config/abi/stakePublicAbi';
 import { stakeBitgetAbi } from '@/config/abi/stakeBitgetAbi';
 
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+export const CAMPAIGN_TYPE = process.env.NEXT_PUBLIC_CAMPAIGN_TYPE || '';
 export const U2U_SCAN_URL = process.env.NEXT_PUBLIC_U2U_SCAN_URL || '';
 export const NETWORK_NAME = process.env.NEXT_PUBLIC_NETWORK_NAME || '';
 
@@ -32,8 +33,6 @@ export const CHAINS = {
   },
 };
 
-console.log({ CHAINS });
-
 export const contracts: {
   [key: string]: {
     address: Address;
@@ -45,7 +44,10 @@ export const contracts: {
     abi: pUsdtAbi,
   },
   stakePublic: {
-    address: CONTRACT_PUBLIC_ADDRESS as Address,
+    address:
+      CAMPAIGN_TYPE === 'public'
+        ? (CONTRACT_PUBLIC_ADDRESS as Address)
+        : (CONTRACT_BITGET_ADDRESS as Address),
     abi: stakePublicAbi,
   },
   stakeBiget: {

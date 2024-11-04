@@ -76,6 +76,16 @@ export const useGetTransactionReward = (
     config,
   );
 
+export const useGetTransactionStake = (
+  config?: ExtendSWRConfiguration<APIResponse.TransactionRewardResponse, any>,
+) =>
+  useExtendedSWR<APIResponse.TransactionRewardResponse, any>(
+    'getTransactionStake',
+    () =>
+      subgraphService.getGetTransactionStake(config?.params?.address) as any,
+    config,
+  );
+
 export const useSearchNodeApi = (
   config?: ExtendSWRConfiguration<APIResponse.SearchNode, APIParams.SearchNode>,
 ) =>
