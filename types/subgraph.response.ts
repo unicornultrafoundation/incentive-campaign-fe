@@ -12,6 +12,17 @@ export interface DashboardBitget {
   totalUserBitget: string;
 }
 
+export interface TransactionReward {
+  txHash: string;
+  to: string;
+  timestamp: string;
+  id: string;
+  from: string;
+  event: string;
+  contract: string;
+  amount: string;
+}
+
 export namespace SubgraphResponse {
   export interface DashboardPublicData {
     data: {
@@ -20,5 +31,9 @@ export namespace SubgraphResponse {
   }
   export interface DashboardBitgetData {
     dashboards: DashboardBitget[];
+  }
+
+  export interface TransactionRewardData {
+    transactionPools: TransactionReward[];
   }
 }

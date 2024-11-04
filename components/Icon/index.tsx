@@ -62,6 +62,8 @@ import ClaimSuccess from '@/components/Icon/ClaimSuccess.png';
 import AirdropClaimError from '@/components/Icon/AirdropClaimError.png';
 import Bitget from '@/components/Icon/Bitget.png';
 import Okx from '@/components/Icon/Okx.png';
+import StakingTabActive from '@/components/Icon/StakingTabActive';
+import StakingTabNotActive from '@/components/Icon/StakingTabNotActive';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -94,6 +96,10 @@ Icon.Warning = (props: IconProps) => <WarningIcon {...props} />;
 Icon.Loading = (props: IconProps) => <LoadingIcon {...props} />;
 Icon.Search = (props: IconProps) => <SearchIcon {...props} />;
 Icon.U2UWallet = (props: IconProps) => <U2UWalletIcon {...props} />;
+Icon.StakingTabActive = (props: IconProps) => <StakingTabActive {...props} />;
+Icon.StakingTabNotActive = (props: IconProps) => (
+  <StakingTabNotActive {...props} />
+);
 
 Icon.Cards = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="attention" src={Cards} {...props} />

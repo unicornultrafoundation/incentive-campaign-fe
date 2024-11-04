@@ -27,6 +27,15 @@ export const useStake = () => {
     },
   });
 
+  const { data: pendingReward } = useReadContract({
+    ...contracts.stakePublic,
+    functionName: 'pendingRewards',
+    args: [address as Address],
+    query: {
+      refetchInterval: 3000,
+    },
+  });
+
   type UserInfo = [bigint, bigint, bigint];
 
   const [totalStaked, latestHarvest, totalClaimed] = useMemo(
@@ -61,6 +70,23 @@ export const useStake = () => {
     });
     return waitForTransaction(txhash);
   };
+
+  const onClaim = async () => {
+    const txhash = await method.writeContractAsync({
+      ...contracts.stakePublic,
+      functionName: 'harvest',
+      args: [],
+    });
+    return waitForTransaction(txhash);
+  };
+  const onUnStake = async () => {
+    const txhash = await method.writeContractAsync({
+      ...contracts.stakePublic,
+      functionName: 'unstake',
+      args: [],
+    });
+    return waitForTransaction(txhash);
+  };
   return {
     ...method,
     onStake,
@@ -70,5 +96,8 @@ export const useStake = () => {
     totalStaked,
     latestHarvest,
     totalClaimed,
+    pendingReward,
+    onClaim,
+    onUnStake,
   };
 };
