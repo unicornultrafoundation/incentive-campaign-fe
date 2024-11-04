@@ -63,9 +63,8 @@ export default function ClaimReward() {
 
   const currentRate = useMemo(() => {
     if (rewardsRatePerSecond) {
-      const rewards =
-        Number(formatUnits(BigInt(Number(rewardsRatePerSecond)), 18)) * 86400;
-      return rewards.toFixed(8);
+      const rewards = Number(rewardsRatePerSecond || 0) * 86400;
+      return Number(formatUnits(BigInt(rewards * 1000000), 18));
     }
     return;
   }, [rewardsRatePerSecond]);
@@ -73,7 +72,7 @@ export default function ClaimReward() {
   const stakeDuration = useMemo(() => {
     const currentTime = currentDate / 1000;
     const timeDifferenceInSeconds = Number(endTime) - currentTime;
-    return Math.ceil(timeDifferenceInSeconds / 86400);
+    return Math.floor(timeDifferenceInSeconds / 86400);
   }, [currentDate, endTime]);
 
   const isWithdraw = useMemo(() => {
@@ -99,14 +98,11 @@ export default function ClaimReward() {
                   <p className="text-base laptop:text-xl font-semibold">
                     Claimable
                   </p>
-                  <p className="text-sm laptop:text-base text-[#AFAFAF]">
-                    (at 5$/day)
-                  </p>
                 </div>
                 <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
                   {toNumberNoRound(
                     Number(formatUnits(BigInt(Number(pendingReward) || 0), 18)),
-                    8,
+                    3,
                   )}{' '}
                   $U2U
                 </p>
@@ -116,7 +112,7 @@ export default function ClaimReward() {
                   Current rate
                 </p>
                 <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
-                  {currentRate} U2U/day
+                  {toNumberNoRound(currentRate, 3)} U2U/day
                 </p>
               </div>
             </div>

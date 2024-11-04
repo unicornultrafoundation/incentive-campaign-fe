@@ -153,9 +153,8 @@ export default function FormStaking() {
 
   const currentRate = useMemo(() => {
     if (rewardsRatePerSecond) {
-      const rewards =
-        Number(formatUnits(BigInt(Number(rewardsRatePerSecond)), 18)) * 86400;
-      return rewards.toFixed(8);
+      const rewards = Number(rewardsRatePerSecond || 0) * 86400;
+      return Number(formatUnits(BigInt(rewards * 1000000), 18));
     }
     return;
   }, [rewardsRatePerSecond]);
@@ -176,15 +175,12 @@ export default function FormStaking() {
 
   const estimateRewards = useMemo(() => {
     const currentTime = currentDate / 1000;
-    // const rewardPerDay =
-    //   Number(formatUnits(BigInt(Number(rewardsRatePerSecond)), 18)) * 86400;
     const timeDifferenceInSeconds = Number(endTime) - currentTime;
     const daysRemaining = timeDifferenceInSeconds / 86400;
-    const totalUserStaked = Number(
-      formatUnits(BigInt((totalStaked as any) || 0), 6),
+    return (
+      Number(amount) * Number(currentRate) * Number(Math.floor(daysRemaining))
     );
-    return Number(daysRemaining) * Number(currentRate) * totalUserStaked;
-  }, [rewardsRatePerSecond, currentDate, endTime]);
+  }, [currentDate, endTime, amount]);
 
   return (
     <FormProvider {...mainForm}>
@@ -261,18 +257,10 @@ export default function FormStaking() {
           <div className="flex flex-col gap-5">
             <div className="flex justify-between items-center">
               <p className="text-base laptop:text-xl font-semibold">
-                Default Term
-              </p>
-              <p className="text-lg laptop:text-2xl font-bold text-[#929292]">
-                90 Days
-              </p>
-            </div>
-            <div className="flex justify-between items-center">
-              <p className="text-base laptop:text-xl font-semibold">
                 Estimate rewards
               </p>
               <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
-                {toNumberNoRound(estimateRewards, 8)} $U2U
+                {toNumberNoRound(estimateRewards, 3)} $U2U
               </p>
             </div>
             <div className="flex justify-between items-start">
@@ -280,12 +268,9 @@ export default function FormStaking() {
                 <p className="text-base laptop:text-xl font-semibold">
                   Current rate
                 </p>
-                <p className="text-sm laptop:text-base text-[#AFAFAF]">
-                  (Interest in U2U can be withdrawn instantly)
-                </p>
               </div>
               <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
-                {currentRate} U2U/day
+                {toNumberNoRound(currentRate, 3)} U2U/day
               </p>
             </div>
           </div>

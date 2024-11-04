@@ -97,7 +97,9 @@ Icon.Loading = (props: IconProps) => <LoadingIcon {...props} />;
 Icon.Search = (props: IconProps) => <SearchIcon {...props} />;
 Icon.U2UWallet = (props: IconProps) => <U2UWalletIcon {...props} />;
 Icon.StakingTabActive = (props: IconProps) => <StakingTabActive {...props} />;
-Icon.StakingTabNotActive = (props: IconProps) => <StakingTabNotActive {...props} />;
+Icon.StakingTabNotActive = (props: IconProps) => (
+  <StakingTabNotActive {...props} />
+);
 
 Icon.Cards = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="attention" src={Cards} {...props} />

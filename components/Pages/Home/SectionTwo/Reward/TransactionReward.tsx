@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
-// import ReactPaginate from 'react-paginate';
-// import classNames from 'classnames';
 import { useAccount } from 'wagmi';
-
-// import ArrowLeftIcon from '@/components/Icon/ArrowLeft';
-import Link from 'next/link';
+import { formatUnits } from 'viem';
 
 import { useGetTransactionReward } from '@/hooks/useQueryApi';
 import { shortenAddress } from '@/utils/string';
+import { U2U_SCAN_URL } from '@/config/env';
+import { toNumberNoRound } from '@/utils';
 
 export default function TransactionReward() {
   // const [queryParams, setQueryParams] = useState<APIParams.Pagination>({
@@ -21,7 +19,6 @@ export default function TransactionReward() {
     refreshInterval: 10000,
   });
   const transactions = data?.data?.transactionPools;
-  console.log(transactions);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -45,23 +42,35 @@ export default function TransactionReward() {
               <thead>
                 <tr className="text-[#929292]">
                   <th className="text-left w-1/3">No</th>
-                  <th className="text-left w-1/3">Amount</th>
-                  <th className="text-left w-1/3">TxHash</th>
+                  <th className="text-left laptop:text-center w-1/3">Amount</th>
+                  <th className="text-left laptop:text-right w-1/3">TxHash</th>
                 </tr>
               </thead>
               <tbody>
                 {transactions?.map((transaction, index) => (
                   <tr key={index}>
-                    <td className="py-4 text-lg border-b border-[#4a4a4a80] ...">
+                    <td className="py-4 pr-4 laptop:pr-0 text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
                       {index + 1}
                     </td>
-                    <td className="py-4 text-lg border-b border-[#4a4a4a80] ...">
-                      {transaction.amount} U2U
+                    <td className="py-4 pr-4 laptop:pr-0 text-left laptop:text-center text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
+                      {toNumberNoRound(
+                        Number(
+                          formatUnits(
+                            BigInt(Number(transaction.amount) || 0),
+                            18,
+                          ),
+                        ),
+                        8,
+                      )}{' '}
+                      U2U
                     </td>
-                    <td className="cursor-pointer py-4 text-lg border-b border-[#4a4a4a80] ...">
-                      <Link target="_blank" href={`/tx/${transaction.txHash}`}>
+                    <td className="cursor-pointer text-left laptop:text-right py-4 pr-4 laptop:pr-0 text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
+                      <a
+                        target="_blank"
+                        href={`${U2U_SCAN_URL}/${transaction.txHash}`}
+                      >
                         {shortenAddress(transaction.txHash)}
-                      </Link>
+                      </a>
                     </td>
                   </tr>
                 ))}
