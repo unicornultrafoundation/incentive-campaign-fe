@@ -1,11 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import { formatUnits } from 'viem';
+import { useAccount } from 'wagmi';
 
 import Button from '@/components/Button';
 import { formatDisplayedTokenAmount, toNumberNoRound } from '@/utils';
 import { useStake } from '@/hooks/useStake';
 import { toast } from '@/store/ui';
 import ConnectWalletButton from '@/components/ConnectWalletButton/ConnectWalletButton';
+import Icon from '@/components/Icon';
+import { shortenAddress } from '@/utils/string';
 
 export default function ClaimReward() {
   const { rewardsRatePerSecond, endTime, pendingReward } = useStake(); //endTime
@@ -22,6 +25,7 @@ export default function ClaimReward() {
   const [currentDate, setCurrentDate] = useState<number>(Date.now());
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoadingUnStake, setIsLoadingUnStake] = useState<boolean>(false);
+  const { address } = useAccount();
 
   const handleClaim = async () => {
     try {
@@ -88,6 +92,14 @@ export default function ClaimReward() {
           <div className="">
             <div className="flex flex-col gap-5">
               <div className="flex justify-between items-center">
+                <p className="text-base laptop:text-xl font-semibold">
+                  Wallet Address
+                </p>
+                <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
+                  {shortenAddress(address)}
+                </p>
+              </div>
+              <div className="flex justify-between items-center">
                 <p className="text-base laptop:text-xl font-semibold">Staked</p>
                 <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
                   {formatDisplayedTokenAmount(Number(totalStaked || 0), 6)}{' '}
@@ -116,6 +128,13 @@ export default function ClaimReward() {
                   {toNumberNoRound(currentRate, 3)} U2U/day
                 </p>
               </div>
+            </div>
+            <div className="w-full flex items-center gap-2 mt-6">
+              <Icon.IconWarning width={24} height={24} />
+              <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">
+                Note: Rewards can be claimed 7 days after U2U&#39;s listing.
+                Please check back later.
+              </p>
             </div>
           </div>
           <hr className="border-[#4A4A4A]" />

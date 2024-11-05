@@ -23,7 +23,7 @@ nextAPI.interceptors.response.use(
     if (error.response?.status === 401) {
       setAuthCredential(false);
     }
-    return Promise.reject(error.response.data);
+    return Promise.reject(error.response?.data);
   },
 );
 

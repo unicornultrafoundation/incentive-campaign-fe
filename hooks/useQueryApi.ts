@@ -66,25 +66,25 @@ export const useGetSubgraphDashboardBitget = (
     config,
   );
 
-export const useGetTransactionReward = (
-  config?: ExtendSWRConfiguration<APIResponse.TransactionRewardResponse, any>,
-) =>
-  useExtendedSWR<APIResponse.TransactionRewardResponse, any>(
-    'getTransactionReward',
-    () =>
-      subgraphService.getGetTransactionReward(config?.params?.address) as any,
-    config,
-  );
-
-export const useGetTransactionStake = (
-  config?: ExtendSWRConfiguration<APIResponse.TransactionRewardResponse, any>,
-) =>
-  useExtendedSWR<APIResponse.TransactionRewardResponse, any>(
-    'getTransactionStake',
-    () =>
-      subgraphService.getGetTransactionStake(config?.params?.address) as any,
-    config,
-  );
+// export const useGetTransactionReward = (
+//   config?: ExtendSWRConfiguration<APIResponse.TransactionRewardResponse, any>,
+// ) =>
+//   useExtendedSWR<APIResponse.TransactionRewardResponse, any>(
+//     'getTransactionReward',
+//     () =>
+//       subgraphService.getGetTransactionReward(config?.params?.address) as any,
+//     config,
+//   );
+//
+// export const useGetTransactionStake = (
+//   config?: ExtendSWRConfiguration<APIResponse.TransactionRewardResponse, any>,
+// ) =>
+//   useExtendedSWR<APIResponse.TransactionRewardResponse, any>(
+//     'getTransactionStake',
+//     () =>
+//       subgraphService.getGetTransactionStake(config?.params?.address) as any,
+//     config,
+//   );
 
 export const useSearchNodeApi = (
   config?: ExtendSWRConfiguration<APIResponse.SearchNode, APIParams.SearchNode>,

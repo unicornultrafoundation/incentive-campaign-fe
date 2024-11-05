@@ -1,40 +1,57 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
-import { formatUnits } from 'viem';
+import { Address, formatUnits } from 'viem';
 import { format } from 'date-fns';
 
-import { useGetTransactionStake } from '@/hooks/useQueryApi';
+// import { useGetTransactionStake } from '@/hooks/useQueryApi';
 import { shortenAddress } from '@/utils/string';
-import { U2U_SCAN_URL } from '@/config/env';
+import {
+  CAMPAIGN_TYPE,
+  CONTRACT_BITGET_ADDRESS,
+  CONTRACT_PUBLIC_ADDRESS,
+  U2U_SCAN_URL,
+} from '@/config/env';
 import { toNumberNoRound } from '@/utils';
+import { subgraphService } from '@/services/subgraph';
+import { TransactionReward } from '@/types/subgraph.response';
 
 export default function TransactionStake() {
   // const [queryParams, setQueryParams] = useState<APIParams.Pagination>({
   //   page: 1,
   //   size: 5,
   // });
+  const [transactions, setTransactions] = useState<TransactionReward[]>([]);
   const { address } = useAccount();
 
-  const { data, mutate, isLoading } = useGetTransactionStake({
-    params: { address: address?.toLowerCase() },
-    refreshInterval: 10000,
-  });
-  const transactions = data?.data?.transactionPools;
-
+  const fetchData = async () => {
+    if (!address) return;
+    const { data } = await subgraphService.getGetTransactionStake(
+      address?.toLowerCase() as Address,
+      CAMPAIGN_TYPE.toLowerCase() === 'public'
+        ? (CONTRACT_PUBLIC_ADDRESS.toLowerCase() as Address)
+        : (CONTRACT_BITGET_ADDRESS.toLowerCase() as Address),
+    );
+    setTransactions(data?.transactionPools || []);
+  };
   useEffect(() => {
     const interval = setInterval(() => {
-      mutate();
-    }, 10000);
+      // mutate();
+      fetchData().then();
+    }, 3000);
 
     return () => {
       clearInterval(interval);
     };
-  }, [mutate]);
+  }, [address]);
+
+  useEffect(() => {
+    fetchData().then();
+  }, [address]);
 
   return (
     <>
       <div className="flex justify-center gap-6 laptop:gap-4 flex-col w-full">
-        <h3 className="font-jockey text-2xl">Reward Transactions</h3>
+        <h3 className="font-jockey text-2xl">Transactions</h3>
         <div className="p-5 laptop:p-8 flex justify-center flex-col w-full gap-6 rounded-2xl bg-[#14141480] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
           <div className="h-[300px] w-full overflow-y-scroll">
             <table className="w-full border-collapse">
@@ -46,7 +63,7 @@ export default function TransactionStake() {
                 </tr>
               </thead>
               <tbody>
-                {!isLoading && transactions?.length
+                {transactions?.length
                   ? transactions?.map((transaction, index) => (
                       <tr key={index}>
                         <td className="py-4 pr-4 laptop:pr-0 text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
@@ -80,21 +97,26 @@ export default function TransactionStake() {
                   : ''}
               </tbody>
             </table>
-            {isLoading ? (
-              <div className="w-full justify-center">
-                <svg
-                  className="animate-spin h-5 w-5 mr-3 ..."
-                  viewBox="0 0 24 24"
-                />
+            {/*{isLoading ? (*/}
+            {/*  <div className="w-full justify-center">*/}
+            {/*    <svg*/}
+            {/*      className="animate-spin h-5 w-5 mr-3 ..."*/}
+            {/*      viewBox="0 0 24 24"*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*) : (*/}
+            {/*  <>*/}
+            {/*    {!transactions?.length && (*/}
+            {/*      <div className="flex justify-center items-center h-full w-full">*/}
+            {/*        <p className="text-[#929292]">No transaction found</p>*/}
+            {/*      </div>*/}
+            {/*    )}*/}
+            {/*  </>*/}
+            {/*)}*/}
+            {!transactions?.length && (
+              <div className="flex justify-center items-center h-full w-full">
+                <p className="text-[#929292]">No transaction found</p>
               </div>
-            ) : (
-              <>
-                {!transactions?.length && (
-                  <div className="flex justify-center items-center h-full w-full">
-                    <p className="text-[#929292]">No transaction found</p>
-                  </div>
-                )}
-              </>
             )}
           </div>
           {/*<div className="h-full w-full flex items-end justify-center mt-6">*/}

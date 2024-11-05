@@ -6,51 +6,12 @@ import { useWaitForTransaction } from '@/hooks/wagmi/useWaitForTransaction';
 import { contracts } from '@/config/env';
 // import { REFRESH_INTERVAL } from '@/config/constants';
 
-// export const useBalancePUSDT = () => {
-//   const { address } = useAccount();
-//   return useReadContract({
-//     ...contracts.pUSDT,
-//     functionName: 'balanceOf',
-//     args: [address as Address],
-//     query: {
-//       enabled: !!address,
-//       refetchInterval: REFRESH_INTERVAL.FAST,
-//       retry: false,
-//     },
-//   });
-// };
-//
-// export const useAllowancePUSDT = () => {
-//   const { address } = useAccount();
-//   return useReadContract({
-//     ...contracts.pUSDT,
-//     functionName: 'allowance',
-//     args: [address as Address, contracts.pUSDT.address as Address],
-//     query: {
-//       enabled: !!address,
-//       refetchInterval: REFRESH_INTERVAL.FAST,
-//       retry: false,
-//     },
-//   });
-// };
-//
-// export const useApprovePUsdt = () => {
-//   const loading = useLoading();
-//   const [isLoading, setIsLoading] = useState(false);
-//   const { writeContractAsync } = useWriteContract();
-//   const { waitForTransaction, isPending } = useWaitForTransaction();
-//   // const { address } = useAccount();
-//   return {};
-// };
-
 export const usePUSDT = () => {
   const { address } = useAccount();
   const method = useWriteContract();
   const { waitForTransaction } = useWaitForTransaction();
 
   const { data: balanceOfUsdt } = useReadContract({
-    // abi: abiUsdtToken,
-    // address: env.CONTRACT_USDT_TOKEN_ADDRESS,
     ...contracts.pUSDT,
     functionName: 'balanceOf',
     args: [address as Address],
