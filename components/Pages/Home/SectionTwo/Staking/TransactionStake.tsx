@@ -82,7 +82,7 @@ export default function TransactionStake() {
                             ),
                             3,
                           )}{' '}
-                          U2U
+                          pUSDT
                         </td>
                         <td className="cursor-pointer text-left laptop:text-right py-4 pr-4 laptop:pr-0 text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
                           <a

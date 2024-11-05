@@ -9,6 +9,7 @@ import Modal from '@/components/Modal';
 import { shortenAddress } from '@/utils/string';
 import { nextAPI } from '@/services/api';
 import useUserStore from '@/store/auth';
+import { CAMPAIGN_TYPE, U2U_AIRDROP_LINK } from '@/config/env';
 
 import LoadingModal from './loading-modal';
 
@@ -46,10 +47,16 @@ const ClaimGasFeeModal = ({
         />
       </div>
       <div className="w-full relative">
-        <Icon.AirdropBanner className="w-full" />
-        <div className="absolute bottom-0 left-8 w-full h-[32%] max-[550px]:h-[34%] max-[550px]:left-5 font-jockey text-3xl max-[550px]:text-xl">
-          5 $U2U Await you
-        </div>
+        {CAMPAIGN_TYPE.toLowerCase() === 'public' ? (
+          <>
+            <Icon.AirdropBanner className="w-full" />
+            <div className="absolute bottom-0 left-8 w-full h-[32%] max-[550px]:h-[34%] max-[550px]:left-5 font-jockey text-3xl max-[550px]:text-xl">
+              5 $U2U Await you
+            </div>
+          </>
+        ) : (
+          <Icon.AirdropClaimBitget className="w-full" />
+        )}
       </div>
       <div className="w-full flex flex-col gap-5">
         <div className="w-full flex items-center gap-5">
@@ -366,7 +373,7 @@ export default function AirdropModal({
       <NotEligbleModal
         isOpen={isOpen}
         onClose={onClose}
-        onAirdropNow={() => {}}
+        onAirdropNow={() => window.open(U2U_AIRDROP_LINK, '_blank')}
       />
     );
   }

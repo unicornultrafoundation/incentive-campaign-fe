@@ -64,6 +64,7 @@ import Bitget from '@/components/Icon/Bitget.png';
 import Okx from '@/components/Icon/Okx.png';
 import StakingTabActive from '@/components/Icon/StakingTabActive';
 import StakingTabNotActive from '@/components/Icon/StakingTabNotActive';
+import AirdropClaimBitget from '@/components/Icon/airdrop-claim-bitget.png';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -217,4 +218,7 @@ Icon.Bitget = (props: Omit<ImageProps, 'src' | 'alt'>) => (
 );
 Icon.Okx = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="attention" src={Okx} {...props} />
+);
+Icon.AirdropClaimBitget = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={AirdropClaimBitget} {...props} />
 );

@@ -12,6 +12,7 @@ import { useAuth } from '@/hooks/useAuth';
 import useUserStore from '@/store/auth';
 import { ClaimStatus } from '@/types/entities';
 import useWalletStore from '@/store/connect-wallet';
+import { CAMPAIGN_TYPE } from '@/config/env';
 
 import AirdropModal from '../../../Modal/airdrop-modal';
 import 'react-tooltip/dist/react-tooltip.css';
@@ -29,7 +30,9 @@ const TitleWithDes = () => {
   return (
     <div className="flex flex-col gap-6 max-[1000px]:gap-1 w-[100%]">
       <h1 className=" text-white font-jockey text-2xl leading-[64px] text-[64px] max-[1000px]:text-[30px] font-normal mb-4">
-        U2U Incentivized Mainnet Saga
+        {CAMPAIGN_TYPE.toLowerCase() === 'public'
+          ? `U2U Incentivized Mainnet Saga`
+          : `Unlock Rewards  with Bitget Staking!`}
       </h1>
       <p
         style={{
@@ -39,7 +42,9 @@ const TitleWithDes = () => {
         }}
         className=" font-jockey font-normal text-[32px] leading-[35px] max-[1000px]:text-[24px]"
       >
-        Stake, Earn $U2U Instantly, and Watch Your Rewards Grow!
+        {CAMPAIGN_TYPE.toLowerCase() === 'public'
+          ? `Stake, Earn $U2U Instantly, and Watch Your Rewards Grow!`
+          : `Stake $pUSDT & Claim $U2U Instantly`}
       </p>
     </div>
   );
@@ -215,12 +220,11 @@ export default function SectionOne() {
                 : 'none',
           }}
           onClick={() => {
-            const section2Ele = document.getElementById('section_2');
-            if (!section2Ele) return;
-            window.scrollTo({
-              top: section2Ele.offsetTop,
-              behavior: 'smooth',
-            });
+            if (!isValidSession) {
+              setOpen(true);
+              return;
+            }
+            setOpenAidropModal(!isOpenAirdropModal);
           }}
           className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white]"
         >
@@ -238,32 +242,50 @@ export default function SectionOne() {
         userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
           ? true
           : false,
-      actionButton: (
-        <Button
-          style={{
-            pointerEvents:
-              isValidSession &&
-              userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
-                ? 'none'
-                : 'auto',
-            filter:
-              isValidSession &&
-              userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
-                ? 'grayscale(100%) brightness(60%)'
-                : 'none',
-          }}
-          onClick={() => {
-            if (!isValidSession) {
-              setOpen(true);
-              return;
-            }
-            setOpenAidropModal(!isOpenAirdropModal);
-          }}
-          className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white]"
-        >
-          Claim Free Gas
-        </Button>
-      ),
+      actionButton:
+        isValidSession && userClaimStatus?.isEligibility === false ? (
+          <Button
+            style={{
+              pointerEvents: 'none',
+              filter: 'grayscale(100%) brightness(60%)',
+            }}
+            onClick={() => {
+              if (!isValidSession) {
+                setOpen(true);
+                return;
+              }
+              setOpenAidropModal(!isOpenAirdropModal);
+            }}
+            className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white]"
+          >
+            Claim Free Gas
+          </Button>
+        ) : (
+          <Button
+            style={{
+              pointerEvents:
+                isValidSession &&
+                userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
+                  ? 'none'
+                  : 'auto',
+              filter:
+                isValidSession &&
+                userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
+                  ? 'grayscale(100%) brightness(60%)'
+                  : 'none',
+            }}
+            onClick={() => {
+              if (!isValidSession) {
+                setOpen(true);
+                return;
+              }
+              setOpenAidropModal(!isOpenAirdropModal);
+            }}
+            className="px-10 py-3 bg-[#4651F6] border-none text-white rounded-lg text-[16px] cursor-pointer max-[1000px]:w-[100%] mt-2 mb-10 hover:bg-[#4651F6] hover:text-[white]"
+          >
+            Claim Free Gas
+          </Button>
+        ),
     },
     {
       title: 'Stake & Earn Big - Boost Your U2U Rewards',
