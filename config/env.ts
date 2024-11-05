@@ -11,6 +11,8 @@ export const NETWORK_NAME = process.env.NEXT_PUBLIC_NETWORK_NAME || '';
 
 export const U2U_AIRDROP_LINK =
   process.env.NEXT_PUBLIC_U2U_AIRDROP_LINK || ('' as string);
+export const U2U_LEARN_MORE_LINK =
+  process.env.NEXT_PUBLIC_U2U_LEAR_MORE_LINK || ('' as string);
 
 export const SUBGRAPH_URL =
   process.env.NEXT_PUBLIC_SUBGRAPH_URL || ('' as string);
