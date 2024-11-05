@@ -11,8 +11,9 @@ import useWalletStore from '@/store/connect-wallet';
 import Modal from '@/components/Modal';
 import { CAMPAIGN_TYPE } from '@/config/env';
 import useDetectWallets from '@/hooks/useDetectWallets';
+import useDevice from '@/hooks/useDevice';
+
 import WalletErrorModal from './WalletErrorModal';
-import { set } from 'lodash';
 // import { useAuthStore } from '@/store/auth';
 
 export default function ConnectWallet() {
@@ -22,6 +23,7 @@ export default function ConnectWallet() {
   const { disconnectAsync } = useDisconnect();
   // const t = useTranslations();
   const [isMobile, setIsMobile] = useState(false);
+  const { isAndroid, isIphone } = useDevice();
   const [showSignMessage, setShowSignMessage] = useState(false);
   const { isOpen, onClosed } = useWalletStore((state) => state);
   const [isClient, setIsClient] = useState(false);
@@ -140,7 +142,7 @@ export default function ConnectWallet() {
                           setErrorWalletLink(
                             'https://chromewebstore.google.com/detail/okx-wallet/mcohilncbfahbmgdjkbpemcciiolgcge',
                           );
-                          setErrorWalletName('Okx');
+                          setErrorWalletName('OKX');
                           return;
                         }
                         isMobile
@@ -156,7 +158,7 @@ export default function ConnectWallet() {
                 );
               }}
             </WalletButton.Custom>
-            {isClient && window.ReactNativeWebView && (
+            {isClient && (isIphone || isAndroid) && (
               <WalletButton.Custom wallet="injected">
                 {({ ready, connect, connector }) => {
                   return (
@@ -170,7 +172,7 @@ export default function ConnectWallet() {
                         }
                         className="flex justify-between items-center w-full"
                       >
-                        <p>Injected</p>
+                        <p>U2U Wallet</p>
                         {renderIcon(connector.name)}
                       </button>
                     </div>

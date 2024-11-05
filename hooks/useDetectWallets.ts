@@ -19,7 +19,6 @@ const useDetectWallets = () => {
   useEffect(() => {
     if (isClient) {
       if (!window.ethereum) {
-        alert(true);
         setIsMetamask(false);
         setIsBitget(false);
         setIsOkxWallet(false);

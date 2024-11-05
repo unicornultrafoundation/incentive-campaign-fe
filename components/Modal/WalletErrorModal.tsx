@@ -15,10 +15,6 @@ const WalletErrorModal: FC<WalletErrorModalProps> = (
   props: WalletErrorModalProps,
 ) => {
   const { isOpen, onClose, link, walletName } = props;
-  const handleApprove = () => {
-    console.log('Approve');
-  };
-
   return (
     <Modal
       isOpen={isOpen}

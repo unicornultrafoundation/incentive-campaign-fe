@@ -1,5 +1,4 @@
 import { useTranslations } from 'next-intl';
-import { useAccount } from 'wagmi';
 import { useState } from 'react';
 
 import LanguageDropdownMobile from '@/components/Dropdown/LanguageDropdownMobile';
@@ -33,8 +32,6 @@ const SlideMenu = ({ isOpen, onClose }: SlideMenuProps) => {
   // };
 
   const { onLogout } = useAuth();
-
-  const { isConnected } = useAccount();
 
   const handleLogout = () => {
     onLogout();
@@ -91,7 +88,7 @@ const SlideMenu = ({ isOpen, onClose }: SlideMenuProps) => {
               Claim your Gas fee
             </span>
           </Button>
-          {isConnected ? (
+          {isValidSession ? (
             <Button
               scale="md"
               className="p-4 mt-4 w-full bg-[#141414] flex items-center justify-center gap-1 border border-solid border-[#8C8C99] rounded-lg text-[#000]"
