@@ -71,7 +71,7 @@ export const useAuth = () => {
     handleLogoutApi();
     await disconnectAsync();
     disconnect();
-    // setAuthCredential(false);
+    setAuthCredential(false);
     setUserClaimStatus(null);
     await clearAuthCookiesAction();
   };

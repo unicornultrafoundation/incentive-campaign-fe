@@ -65,7 +65,9 @@ export default function Statistics() {
         <p className="font-semibold">Number of participants</p>
         <p className="font-semibold text-3xl laptop:text-5xl text-gradient bg-gradient-to-r from-[#9299FF_48%] to-[#4651F6_168%]">
           {toNumberNoRound(
-            CAMPAIGN_TYPE.toLowerCase() === 'public' ? totalUserPublic : totalUserBitget || 0,
+            CAMPAIGN_TYPE.toLowerCase() === 'public'
+              ? totalUserPublic
+              : totalUserBitget || 0,
             0,
           )}{' '}
           USERS

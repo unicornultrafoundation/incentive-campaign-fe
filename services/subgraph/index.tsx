@@ -5,7 +5,12 @@ import { ApolloQueryResult } from '@apollo/client';
 import { SubgraphResponse } from '@/types/subgraph.response';
 
 import { subgraphClient } from './apollo';
-import { DashboardPublicQuery, DashboardBitgetQuery, TransactionRewardQuery, TransactionStakeQuery } from './queries';
+import {
+  DashboardPublicQuery,
+  DashboardBitgetQuery,
+  TransactionRewardQuery,
+  TransactionStakeQuery,
+} from './queries';
 import { Address } from 'viem';
 
 type QueryResult<TResponse> = Promise<ApolloQueryResult<TResponse>>;
