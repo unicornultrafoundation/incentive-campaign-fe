@@ -10,6 +10,9 @@ import SignConnectMessageModal from '@/components/Modal/SignConnectMessageModal'
 import useWalletStore from '@/store/connect-wallet';
 import Modal from '@/components/Modal';
 import { CAMPAIGN_TYPE } from '@/config/env';
+import useDetectWallets from '@/hooks/useDetectWallets';
+import WalletErrorModal from './WalletErrorModal';
+import { set } from 'lodash';
 // import { useAuthStore } from '@/store/auth';
 
 export default function ConnectWallet() {
@@ -22,7 +25,10 @@ export default function ConnectWallet() {
   const [showSignMessage, setShowSignMessage] = useState(false);
   const { isOpen, onClosed } = useWalletStore((state) => state);
   const [isClient, setIsClient] = useState(false);
+  const { isBitget, isMetamask, isOkxWallet } = useDetectWallets();
   // const { hasCredential } = useAuthStore();
+  const [errorWalletLink, setErrorWalletLink] = useState<string | null>(null);
+  const [errorWalletName, setErrorWalletName] = useState<string | null>(null);
 
   // const isValidSession = useMemo(() => {
   //   return isConnected && hasCredential;
@@ -108,7 +114,16 @@ export default function ConnectWallet() {
               className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]"
             >
               <button
-                onClick={() => handleConnect(connectors[0])}
+                onClick={() => {
+                  if (!isMetamask) {
+                    setErrorWalletLink(
+                      'https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en',
+                    );
+                    setErrorWalletName('Metamask');
+                    return;
+                  }
+                  handleConnect(connectors[0]);
+                }}
                 className="flex justify-between items-center w-full"
               >
                 <p>{connectors[0].name}</p>
@@ -120,11 +135,18 @@ export default function ConnectWallet() {
                 return (
                   <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
                     <button
-                      onClick={() =>
+                      onClick={() => {
+                        if (!isOkxWallet) {
+                          setErrorWalletLink(
+                            'https://chromewebstore.google.com/detail/okx-wallet/mcohilncbfahbmgdjkbpemcciiolgcge',
+                          );
+                          setErrorWalletName('Okx');
+                          return;
+                        }
                         isMobile
                           ? handleConnect(connector, connect)
-                          : handleConnect(connector)
-                      }
+                          : handleConnect(connector);
+                      }}
                       className="flex justify-between items-center w-full"
                     >
                       <p>{connector.name}</p>
@@ -186,11 +208,18 @@ export default function ConnectWallet() {
                 return (
                   <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
                     <button
-                      onClick={() =>
+                      onClick={() => {
+                        if (!isBitget) {
+                          setErrorWalletLink(
+                            'https://chromewebstore.google.com/detail/bitget-wallet-formerly-bi/jiidiaalihmmhddjgbnbgdfflelocpak',
+                          );
+                          setErrorWalletName('Bitget');
+                          return;
+                        }
                         isMobile
                           ? handleConnect(connector, connect)
-                          : handleConnect(connector)
-                      }
+                          : handleConnect(connector);
+                      }}
                       className="flex justify-between items-center w-full"
                     >
                       <p>Bitget</p>
@@ -208,6 +237,15 @@ export default function ConnectWallet() {
       <SignConnectMessageModal
         isOpen={showSignMessage}
         onClose={() => setShowSignMessage(false)}
+      />
+      <WalletErrorModal
+        isOpen={errorWalletName !== null}
+        onClose={() => {
+          setErrorWalletLink(null);
+          setErrorWalletName(null);
+        }}
+        link={errorWalletLink}
+        walletName={errorWalletName}
       />
     </>
   );
