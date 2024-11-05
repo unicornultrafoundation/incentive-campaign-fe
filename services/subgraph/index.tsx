@@ -1,6 +1,5 @@
 import { ApolloQueryResult } from '@apollo/client';
-
-// import { SubgraphParams } from '../../types/subgraph.params';
+import { Address } from 'viem';
 
 import { SubgraphResponse } from '@/types/subgraph.response';
 
@@ -11,7 +10,6 @@ import {
   TransactionRewardQuery,
   TransactionStakeQuery,
 } from './queries';
-import { Address } from 'viem';
 
 type QueryResult<TResponse> = Promise<ApolloQueryResult<TResponse>>;
 
@@ -20,25 +18,35 @@ export interface IService {
   getDashboardBitgetData: () => QueryResult<SubgraphResponse.DashboardBitgetData>;
   getGetTransactionReward: (
     address: Address,
+    contract: Address,
   ) => QueryResult<SubgraphResponse.TransactionRewardData>;
   getGetTransactionStake: (
     address: Address,
+    contract: Address,
   ) => QueryResult<SubgraphResponse.TransactionRewardData>;
 }
 
 export const subgraphService: IService = {
   getDashboardPublicData: () =>
-    subgraphClient.query({ query: DashboardPublicQuery }),
+    subgraphClient.query({
+      query: DashboardPublicQuery,
+      fetchPolicy: 'no-cache',
+    }),
   getDashboardBitgetData: () =>
-    subgraphClient.query({ query: DashboardBitgetQuery }),
-  getGetTransactionReward: (address: Address) =>
+    subgraphClient.query({
+      query: DashboardBitgetQuery,
+      fetchPolicy: 'no-cache',
+    }),
+  getGetTransactionReward: (address: Address, contract: Address) =>
     subgraphClient.query({
       query: TransactionRewardQuery,
-      variables: { address },
+      variables: { address, contract },
+      fetchPolicy: 'no-cache',
     }),
-  getGetTransactionStake: (address: Address) =>
+  getGetTransactionStake: (address: Address, contract: Address) =>
     subgraphClient.query({
       query: TransactionStakeQuery,
-      variables: { address },
+      variables: { address, contract },
+      fetchPolicy: 'no-cache',
     }),
 };

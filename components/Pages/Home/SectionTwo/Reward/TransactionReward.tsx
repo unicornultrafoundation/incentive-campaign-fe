@@ -1,35 +1,51 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
-import { formatUnits } from 'viem';
+import { Address, formatUnits } from 'viem';
 import { format } from 'date-fns';
 
-import { useGetTransactionReward } from '@/hooks/useQueryApi';
 import { shortenAddress } from '@/utils/string';
-import { U2U_SCAN_URL } from '@/config/env';
+import {
+  CAMPAIGN_TYPE,
+  CONTRACT_BITGET_ADDRESS,
+  CONTRACT_PUBLIC_ADDRESS,
+  U2U_SCAN_URL,
+} from '@/config/env';
 import { toNumberNoRound } from '@/utils';
+import { subgraphService } from '@/services/subgraph';
+import { TransactionReward as ITransactionReward } from '@/types/subgraph.response';
 
 export default function TransactionReward() {
   // const [queryParams, setQueryParams] = useState<APIParams.Pagination>({
   //   page: 1,
   //   size: 5,
   // });
+  const [transactions, setTransactions] = useState<ITransactionReward[]>([]);
   const { address } = useAccount();
 
-  const { data, mutate } = useGetTransactionReward({
-    params: { address: address?.toLowerCase() },
-    refreshInterval: 10000,
-  });
-  const transactions = data?.data?.transactionPools;
-
+  const fetchData = async () => {
+    if (!address) return;
+    const { data } = await subgraphService.getGetTransactionReward(
+      address?.toLowerCase() as Address,
+      CAMPAIGN_TYPE.toLowerCase() === 'public'
+        ? (CONTRACT_PUBLIC_ADDRESS.toLowerCase() as Address)
+        : (CONTRACT_BITGET_ADDRESS.toLowerCase() as Address),
+    );
+    setTransactions(data?.transactionPools || []);
+  };
   useEffect(() => {
     const interval = setInterval(() => {
-      mutate();
-    }, 10000);
+      // mutate();
+      fetchData().then();
+    }, 3000);
 
     return () => {
       clearInterval(interval);
     };
-  }, [mutate]);
+  }, [address]);
+
+  useEffect(() => {
+    fetchData().then();
+  }, [address]);
 
   return (
     <>

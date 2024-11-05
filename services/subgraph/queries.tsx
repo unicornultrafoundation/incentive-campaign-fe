@@ -13,8 +13,8 @@ export const DashboardPublicQuery = gql(`
 `);
 
 export const TransactionRewardQuery: DocumentNode = gql(`
-query TransactionReward($address: String, $limit: Int = 10, $skip: Int = 0) {
-  transactionPools(where: {to: $address, event: HARVEST}, 
+query TransactionReward($contract: String, $address: String, $limit: Int = 10, $skip: Int = 0) {
+  transactionPools(where: {to: $address, event: HARVEST, contract: $contract}, 
   first: $limit,
   skip: $skip,
     orderBy: timestamp,
@@ -32,8 +32,8 @@ query TransactionReward($address: String, $limit: Int = 10, $skip: Int = 0) {
 }`);
 
 export const TransactionStakeQuery: DocumentNode = gql(`
-query TransactionReward($address: String, $limit: Int = 10, $skip: Int = 0) {
-  transactionPools(where: {to: $address, event: STAKE}, 
+query TransactionReward($contract: String, $address: String, $limit: Int = 10, $skip: Int = 0) {
+  transactionPools(where: {to: $address, event: STAKE, contract: $contract}, 
   first: $limit,
   skip: $skip,
     orderBy: timestamp,
