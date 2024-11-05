@@ -104,7 +104,7 @@ export default function FormStaking() {
     {
       value: 10000,
       type: 'number',
-      label: 'Max: 10,000$',
+      label: 'Max',
     },
   ];
 
@@ -145,17 +145,24 @@ export default function FormStaking() {
             formatUnits(BigInt((totalStaked as any) || 0), 6),
           );
           const actuallAmount = 10000 - total;
+
+          if (balance < actuallAmount) {
+            return setValue('amount', balance);
+          }
           // if (balance < 10000 - total)
           return setValue('amount', actuallAmount);
         }
       }
       return setValue('amount', option.value);
     } else {
+      const balance = Number(balanceOfUsdt || 0) / 1000000;
       const total = Number(formatUnits(BigInt((totalStaked as any) || 0), 6));
       const actuallAmount = 10000 - total;
-      const value =
-        // (option.value * (Number(balanceOfUsdt || 0) / 1000000)) / 100;
-        (option.value * Number(actuallAmount)) / 100;
+      if (balance < actuallAmount) {
+        const value = (option.value * Number(balance)) / 100;
+        return setValue('amount', value);
+      }
+      const value = (option.value * Number(actuallAmount)) / 100;
       return setValue('amount', value);
     }
   };

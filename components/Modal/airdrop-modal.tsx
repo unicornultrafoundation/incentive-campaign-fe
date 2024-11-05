@@ -9,7 +9,11 @@ import Modal from '@/components/Modal';
 import { shortenAddress } from '@/utils/string';
 import { nextAPI } from '@/services/api';
 import useUserStore from '@/store/auth';
-import { CAMPAIGN_TYPE, U2U_AIRDROP_LINK } from '@/config/env';
+import {
+  CAMPAIGN_TYPE,
+  U2U_AIRDROP_LINK,
+  U2U_LEARN_MORE_LINK,
+} from '@/config/env';
 
 import LoadingModal from './loading-modal';
 
@@ -88,7 +92,9 @@ const ClaimGasFeeModal = ({
         <Button
           scale="md"
           className="!text-[17px] w-[49%] max-[768px]:w-[35%] p-4 mt-4 !rounded-xl laptop:!rounded-[20px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
-          onClick={() => {}}
+          onClick={() => {
+            window.open(U2U_LEARN_MORE_LINK, '_blank');
+          }}
         >
           Learn More
         </Button>
@@ -170,7 +176,9 @@ const NotEligbleModal = ({
         <Button
           scale="md"
           className="!text-[18px] w-[48.5%] max-[768px]:w-[35%] p-4 mt-4 !rounded-xl laptop:!rounded-[20px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
-          onClick={() => {}}
+          onClick={() => {
+            window.open(U2U_LEARN_MORE_LINK, '_blank');
+          }}
         >
           Learn More
         </Button>
