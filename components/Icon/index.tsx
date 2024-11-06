@@ -65,6 +65,7 @@ import Okx from '@/components/Icon/Okx.png';
 import StakingTabActive from '@/components/Icon/StakingTabActive';
 import StakingTabNotActive from '@/components/Icon/StakingTabNotActive';
 import AirdropClaimBitget from '@/components/Icon/airdrop-claim-bitget.png';
+import ErrorWallet from '@/components/Icon/error.png';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -221,4 +222,7 @@ Icon.Okx = (props: Omit<ImageProps, 'src' | 'alt'>) => (
 );
 Icon.AirdropClaimBitget = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="attention" src={AirdropClaimBitget} {...props} />
+);
+Icon.ErrorWallet = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={ErrorWallet} {...props} />
 );
