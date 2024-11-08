@@ -174,11 +174,13 @@ export default function FormStaking() {
 
   const currentRate = useMemo(() => {
     if (rewardsRatePerSecond) {
-      const rewards = Number(rewardsRatePerSecond || 0) * 86400;
+      const rate = rewardsRatePerSecond
+        ? Number(rewardsRatePerSecond) * Number(amount)
+        : 0;
+      const rewards = Number(rate) * 86400;
       return Number(formatUnits(BigInt(rewards * 1000000), 18));
     }
-    return;
-  }, [rewardsRatePerSecond]);
+  }, [rewardsRatePerSecond, amount]);
 
   useEffect(() => {
     if (isSuccess) {
