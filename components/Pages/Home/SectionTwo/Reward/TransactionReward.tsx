@@ -79,7 +79,7 @@ export default function TransactionReward() {
                                 18,
                               ),
                             ),
-                            3,
+                            4,
                           )}{' '}
                           U2U
                         </td>
