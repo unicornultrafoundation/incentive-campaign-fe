@@ -182,6 +182,14 @@ export default function FormStaking() {
     }
   }, [rewardsRatePerSecond, amount]);
 
+  const currentRatePerDay = useMemo(() => {
+    if (rewardsRatePerSecond) {
+      const rate = rewardsRatePerSecond ? Number(rewardsRatePerSecond) : 0;
+      const rewards = Number(rate) * 86400;
+      return Number(formatUnits(BigInt(rewards * 1000000), 18));
+    }
+  }, [rewardsRatePerSecond, amount]);
+
   useEffect(() => {
     if (isSuccess) {
       toast.success({ message: 'Staking successfully' });
@@ -201,9 +209,11 @@ export default function FormStaking() {
     const timeDifferenceInSeconds = Number(endTime) - currentTime;
     const daysRemaining = timeDifferenceInSeconds / 86400;
     return (
-      Number(amount) * Number(currentRate) * Number(Math.floor(daysRemaining))
+      Number(amount) *
+      Number(currentRatePerDay) *
+      Number(Math.floor(daysRemaining))
     );
-  }, [currentDate, endTime, amount]);
+  }, [currentRatePerDay, endTime, amount]);
 
   const stakeable = useMemo(() => {
     const total = Number(formatUnits(BigInt(Number(totalStaked) || 0), 6));
