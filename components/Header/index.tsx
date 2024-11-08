@@ -7,7 +7,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useAccount } from 'wagmi';
 
 import ConnectWalletButton from '@/components/ConnectWalletButton/ConnectWalletButton';
-import LanguageDropdown from '@/components/Dropdown/LanguageDropdown';
+// import LanguageDropdown from '@/components/Dropdown/LanguageDropdown';
 import SidebarMenu from '@/components/Header/SidebarMenu';
 import Icon from '@/components/Icon';
 import ArrowRightIcon from '@/components/Icon/ArrowRight';
@@ -134,7 +134,7 @@ const LandingHeader = () => {
                   )}
                 </div>
               </ConnectWalletButton>
-              <LanguageDropdown />
+              {/* <LanguageDropdown /> */}
             </div>
           </div>
         </div>

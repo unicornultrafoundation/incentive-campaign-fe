@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-import LanguageDropdownMobile from '@/components/Dropdown/LanguageDropdownMobile';
 import Icon from '@/components/Icon';
 import { useAuth } from '@/hooks/useAuth';
 import useWalletStore from '@/store/connect-wallet';
@@ -69,9 +68,7 @@ const SlideMenu = ({ isOpen, onClose }: SlideMenuProps) => {
         className={`fullscreen-menu flex flex-col justify-between h-full ${isOpen ? 'open' : ''}`}
       >
         <ul className="">
-          <li>
-            <LanguageDropdownMobile />
-          </li>
+          <li />
         </ul>
         <div className="w-full">
           <Button
