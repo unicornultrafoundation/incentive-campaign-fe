@@ -4,7 +4,7 @@ import React from 'react';
 import './globals.scss';
 
 import AppProviders from '@/components/Providers';
-import { CAMPAIGN_TYPE } from '@/config/env';
+import { CAMPAIGN_TYPE, CLIENT_URL } from '@/config/env';
 
 const publicKeywords = [
   'staking',
@@ -41,28 +41,32 @@ export const metadata: Metadata = {
     images:
       CAMPAIGN_TYPE === 'public'
         ? {
-            url: 'images/thumbnail/Coinlist.png',
+            url: `${CLIENT_URL}/images/thumbnail/Coinlist.png`,
             width: 1200,
             height: 600,
+            type: 'png',
           }
         : {
-            url: 'images/thumbnail/Bitget.png',
+            url: `${CLIENT_URL}/images/thumbnail/Bitget.png`,
             width: 1200,
             height: 600,
+            type: 'png',
           },
   },
   twitter: {
     images:
       CAMPAIGN_TYPE === 'public'
         ? {
-            url: 'images/thumbnail/Coinlist.png',
+            url: `${CLIENT_URL}/images/thumbnail/Coinlist.png`,
             width: 1200,
             height: 600,
+            type: 'png',
           }
         : {
-            url: 'images/thumbnail/Bitget.png',
+            url: `${CLIENT_URL}/images/thumbnail/Bitget.png`,
             width: 1200,
             height: 600,
+            type: 'png',
           },
     card: 'summary_large_image',
     title:
@@ -86,7 +90,7 @@ const RootLayout = async ({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} prefix="og: http://ogp.me/ns#">
       <body>
         {/* <noscript>
           <iframe

@@ -4,6 +4,7 @@ import { pUsdtAbi } from '@/config/abi/pUsdtAbi';
 import { stakePublicAbi } from '@/config/abi/stakePublicAbi';
 import { stakeBitgetAbi } from '@/config/abi/stakeBitgetAbi';
 
+export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || '';
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
 export const CAMPAIGN_TYPE = process.env.NEXT_PUBLIC_CAMPAIGN_TYPE || '';
 export const U2U_SCAN_URL = process.env.NEXT_PUBLIC_U2U_SCAN_URL || '';
