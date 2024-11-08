@@ -18,6 +18,15 @@ export const useStake = () => {
       // refetchInterval: 3000,
     },
   });
+
+  const { data: claimableTime } = useReadContract({
+    ...contracts.stakePublic,
+    functionName: 'claimableTime',
+    args: [],
+    query: {
+      // refetchInterval: 3000,
+    },
+  });
   const { data: getUserInfo } = useReadContract({
     ...contracts.stakePublic,
     functionName: 'getUserInfo',
@@ -99,5 +108,6 @@ export const useStake = () => {
     pendingReward,
     onClaim,
     onUnStake,
+    claimableTime,
   };
 };

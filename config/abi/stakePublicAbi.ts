@@ -163,6 +163,19 @@ export const stakePublicAbi = [
   },
   {
     type: 'event',
+    name: 'UpdateClaimableTime',
+    inputs: [
+      {
+        type: 'uint256',
+        name: 'time',
+        internalType: 'uint256',
+        indexed: false,
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: 'event',
     name: 'UpdateIgnoreSignerState',
     inputs: [
       { type: 'bool', name: 'newState', internalType: 'bool', indexed: false },
@@ -216,6 +229,13 @@ export const stakePublicAbi = [
     stateMutability: 'view',
     outputs: [{ type: 'bytes32', name: '', internalType: 'bytes32' }],
     name: 'POOL_SIGNER',
+    inputs: [],
+  },
+  {
+    type: 'function',
+    stateMutability: 'view',
+    outputs: [{ type: 'uint256', name: '', internalType: 'uint256' }],
+    name: 'claimableTime',
     inputs: [],
   },
   {
@@ -385,6 +405,13 @@ export const stakePublicAbi = [
     type: 'function',
     stateMutability: 'nonpayable',
     outputs: [],
+    name: 'setClaimableTime',
+    inputs: [{ type: 'uint256', name: '_time', internalType: 'uint256' }],
+  },
+  {
+    type: 'function',
+    stateMutability: 'nonpayable',
+    outputs: [],
     name: 'setIgnoreSigner',
     inputs: [{ type: 'bool', name: '_state', internalType: 'bool' }],
   },
@@ -412,6 +439,13 @@ export const stakePublicAbi = [
     outputs: [{ type: 'bool', name: '', internalType: 'bool' }],
     name: 'supportsInterface',
     inputs: [{ type: 'bytes4', name: 'interfaceId', internalType: 'bytes4' }],
+  },
+  {
+    type: 'function',
+    stateMutability: 'view',
+    outputs: [{ type: 'uint256', name: '', internalType: 'uint256' }],
+    name: 'totalPoolStaked',
+    inputs: [],
   },
   {
     type: 'function',

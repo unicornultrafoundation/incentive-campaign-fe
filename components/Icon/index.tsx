@@ -66,6 +66,8 @@ import StakingTabActive from '@/components/Icon/StakingTabActive';
 import StakingTabNotActive from '@/components/Icon/StakingTabNotActive';
 import AirdropClaimBitget from '@/components/Icon/airdrop-claim-bitget.png';
 import ErrorWallet from '@/components/Icon/error.png';
+import ToastSuccess from '@/components/Icon/toast-success.png';
+import ToastFail from '@/components/Icon/toast-fail.png';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -225,4 +227,12 @@ Icon.AirdropClaimBitget = (props: Omit<ImageProps, 'src' | 'alt'>) => (
 );
 Icon.ErrorWallet = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="attention" src={ErrorWallet} {...props} />
+);
+
+Icon.ToastSuccess = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={ToastSuccess} {...props} />
+);
+
+Icon.ToastFail = (props: Omit<ImageProps, 'src' | 'alt'>) => (
+  <Image alt="attention" src={ToastFail} {...props} />
 );

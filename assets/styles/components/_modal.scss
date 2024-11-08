@@ -22,7 +22,7 @@
       }
 
       &.toast .content {
-        @apply flex flex-col gap-4 items-center text-center;
+        @apply flex flex-col gap-6 items-center text-center;
 
         .icon {
           @apply w-10 h-10;
@@ -36,11 +36,11 @@
         }
 
         .title {
-          @apply mb-1 text-3xl font-bold uppercase;
+          @apply mb-1 text-lg font-bold uppercase;
         }
 
         .message {
-          @apply text-2xl;
+          @apply text-lg;
         }
       }
     }

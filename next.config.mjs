@@ -13,9 +13,30 @@ const nextConfig = {
     ],
   },
   webpack: (config) => {
-    config.externals.push('pino-pretty', 'lokijs', 'encoding');
+    // config.externals.push('pino-pretty', 'lokijs', 'encoding');
+    // return config;
+    config.module.rules.push({
+      test: /\.(mp4|webm)$/,
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/media/[name].[hash][ext]',
+      },
+    });
+
     return config;
   },
+  // webpack(config: any) {
+  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  //   config.module.rules.push({
+  //     test: /\.(mp4|webm)$/,
+  //     type: 'asset/resource',
+  //     generator: {
+  //       filename: 'static/media/[name].[hash][ext]',
+  //     },
+  //   });
+  //
+  //   return config;
+  // },
 };
 
 export default withSentryConfig(withNextIntl(nextConfig), {

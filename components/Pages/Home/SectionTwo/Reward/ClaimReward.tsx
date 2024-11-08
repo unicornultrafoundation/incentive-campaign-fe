@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { formatUnits } from 'viem';
 import { useAccount } from 'wagmi';
+import { format } from 'date-fns';
 
 import Button from '@/components/Button';
 import { formatDisplayedTokenAmount, toNumberNoRound } from '@/utils';
@@ -21,6 +22,7 @@ export default function ClaimReward() {
     isError,
     totalStaked,
     totalClaimed,
+    claimableTime,
   } = onStaking;
   const [currentDate, setCurrentDate] = useState<number>(Date.now());
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -74,11 +76,33 @@ export default function ClaimReward() {
     return;
   }, [rewardsRatePerSecond]);
 
+  const estimateRewardsPerDay = useMemo(() => {
+    const total = Number(formatUnits(BigInt(Number(totalStaked) || 0), 6));
+    return Number(total) * Number(currentRate);
+  }, [currentDate, totalStaked]);
+
   const stakeDuration = useMemo(() => {
     const currentTime = currentDate / 1000;
     const timeDifferenceInSeconds = Number(endTime) - currentTime;
     return Math.floor(timeDifferenceInSeconds / 86400);
   }, [currentDate, endTime]);
+
+  // const claimTime = useMemo(() => {
+  //   const currentTime = currentDate / 1000;
+  //   const timeDifferenceInSeconds = Number(claimableTime) - currentTime;
+  //
+  //   const days = Math.floor(timeDifferenceInSeconds / 86400);
+  //   const hours = Math.floor((timeDifferenceInSeconds % 86400) / 3600);
+  //   const minutes = Math.floor((timeDifferenceInSeconds % 3600) / 60);
+  //   const seconds = Math.floor(timeDifferenceInSeconds % 60);
+  //
+  //   return { days, hours, minutes, seconds };
+  // }, [currentDate, claimableTime]);
+
+  const isClaimable = useMemo(() => {
+    const currentTime = currentDate / 1000;
+    return currentTime < Number(claimableTime);
+  }, [currentDate, claimableTime]);
 
   const isWithdraw = useMemo(() => {
     const currentTime = currentDate / 1000;
@@ -125,15 +149,19 @@ export default function ClaimReward() {
                   Current rate
                 </p>
                 <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
-                  {toNumberNoRound(currentRate, 3)} U2U/day
+                  {toNumberNoRound(estimateRewardsPerDay, 3)} U2U/day
                 </p>
               </div>
             </div>
             <div className="w-full flex items-center gap-2 mt-6">
               <Icon.IconWarning width={24} height={24} />
               <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">
-                Note: Rewards can be claimed 7 days after U2U&#39;s listing.
-                Please check back later.
+                Note: Rewards can be claimed at{' '}
+                {format(
+                  new Date(1000 * Number(claimableTime)),
+                  'yyyy-MM-dd HH:mm:ss',
+                )}
+                . Please check back later.
               </p>
             </div>
           </div>
@@ -145,7 +173,7 @@ export default function ClaimReward() {
             >
               <Button
                 loading={isPending || isLoading}
-                disabled={false}
+                disabled={isClaimable}
                 loadingText={'Claiming...'}
                 scale="md"
                 className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
