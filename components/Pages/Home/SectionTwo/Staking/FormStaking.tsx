@@ -139,17 +139,16 @@ export default function FormStaking() {
     setSelectedType(option.value);
     if (option.type === 'number') {
       const balance = Number(balanceOfUsdt || 0) / 1000000;
+      const total = Number(formatUnits(BigInt((totalStaked as any) || 0), 6));
+      const actuallAmount = 10000 - total;
       if (option.value === 10000) {
         if (balance < option.value) {
-          const total = Number(
-            formatUnits(BigInt((totalStaked as any) || 0), 6),
-          );
-          const actuallAmount = 10000 - total;
-
           if (balance < actuallAmount) {
             return setValue('amount', balance);
           }
           // if (balance < 10000 - total)
+          return setValue('amount', actuallAmount);
+        } else {
           return setValue('amount', actuallAmount);
         }
       }
@@ -204,6 +203,11 @@ export default function FormStaking() {
     );
   }, [currentDate, endTime, amount]);
 
+  const stakeable = useMemo(() => {
+    const total = Number(formatUnits(BigInt(Number(totalStaked) || 0), 6));
+    return 10000 - total;
+  }, [totalStaked]);
+
   return (
     <FormProvider {...mainForm}>
       <div className="p-5 laptop:p-8 flex flex-col w-full gap-8 rounded-2xl bg-[#14141480] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
@@ -212,11 +216,10 @@ export default function FormStaking() {
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-4">
                 <p className="text-sm laptop:text-lg font-semibold">
-                  Staking Amount:
+                  Stakeable:
                 </p>
                 <p className="text-sm laptop:text-lg font-bold text-[#7EFFC5]">
-                  {formatDisplayedTokenAmount(Number(totalStaked || 0), 6)}{' '}
-                  $pUSDT
+                  {toNumberNoRound(stakeable, 3)} $pUSDT
                 </p>
               </div>
               <div className="hidden laptop:flex gap-2 items-center">
