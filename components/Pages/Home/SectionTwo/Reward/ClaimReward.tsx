@@ -153,17 +153,19 @@ export default function ClaimReward() {
                 </p>
               </div>
             </div>
-            <div className="w-full flex items-center gap-2 mt-6">
-              <Icon.IconWarning width={24} height={24} />
-              <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">
-                Note: Rewards can be claimed at{' '}
-                {format(
-                  new Date(1000 * Number(claimableTime)),
-                  'yyyy-MM-dd HH:mm:ss',
-                )}
-                . Please check back later.
-              </p>
-            </div>
+            {isClaimable && (
+              <div className="w-full flex items-center gap-2 mt-6">
+                <Icon.IconWarning width={24} height={24} />
+                <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">
+                  Note: Rewards can be claimed at{' '}
+                  {format(
+                    new Date(1000 * Number(claimableTime)),
+                    'yyyy-MM-dd HH:mm:ss',
+                  )}
+                  . Please check back later.
+                </p>
+              </div>
+            )}
           </div>
           <hr className="border-[#4A4A4A]" />
           <div className="flex items-center gap-6 mt-4">
