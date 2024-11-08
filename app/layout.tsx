@@ -44,13 +44,13 @@ export const metadata: Metadata = {
             url: `${CLIENT_URL}/images/thumbnail/Coinlist.png`,
             width: 1200,
             height: 600,
-            type: 'png',
+            type: 'image/png',
           }
         : {
             url: `${CLIENT_URL}/images/thumbnail/Bitget.png`,
             width: 1200,
             height: 600,
-            type: 'png',
+            type: 'image/png',
           },
   },
   twitter: {
@@ -60,13 +60,13 @@ export const metadata: Metadata = {
             url: `${CLIENT_URL}/images/thumbnail/Coinlist.png`,
             width: 1200,
             height: 600,
-            type: 'png',
+            type: 'image/png',
           }
         : {
             url: `${CLIENT_URL}/images/thumbnail/Bitget.png`,
             width: 1200,
             height: 600,
-            type: 'png',
+            type: 'image/png',
           },
     card: 'summary_large_image',
     title:
