@@ -91,6 +91,9 @@ const RootLayout = async ({
 
   return (
     <html lang={locale} prefix="og: http://ogp.me/ns#">
+      <head>
+        <meta prefix="og: http://ogp.me/ns#" />
+      </head>
       <body>
         {/* <noscript>
           <iframe
