@@ -42,7 +42,7 @@ export const useAuth = () => {
   const onSignMessage = async () => {
     if (!address) return;
     const message = await signMessage(config, {
-      message: 'hello',
+      message: 'logmein',
     });
 
     const result = await connectWallet({
