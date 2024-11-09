@@ -50,7 +50,7 @@ export default function ToastModal() {
         </p>
 
         {!!action && (
-          <Button className="w-full p-3" onClick={action}>
+          <Button className="w-full rounded-lg p-3" onClick={action}>
             {actionName}
           </Button>
         )}
