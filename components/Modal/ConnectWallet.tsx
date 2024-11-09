@@ -9,7 +9,7 @@ import Icon from '@/components/Icon';
 import SignConnectMessageModal from '@/components/Modal/SignConnectMessageModal';
 import useWalletStore from '@/store/connect-wallet';
 import Modal from '@/components/Modal';
-import { CAMPAIGN_TYPE } from '@/config/env';
+import { CAMPAIGN_TYPE, CLIENT_URL } from '@/config/env';
 import useDetectWallets from '@/hooks/useDetectWallets';
 import useDevice from '@/hooks/useDevice';
 import useDetectDAppWallets from '@/hooks/useDetectDAppWallets';
@@ -23,11 +23,11 @@ export default function ConnectWallet() {
   // const [metaMaskConnector, coinbaseConnector] = connectors.slice(2);
   const { disconnectAsync } = useDisconnect();
   // const t = useTranslations();
-  const [isMobile, setIsMobile] = useState(false);
+  const [, setIsMobile] = useState(false);
   const { isAndroid, isIphone } = useDevice();
   const [showSignMessage, setShowSignMessage] = useState(false);
   const { isOpen, onClosed } = useWalletStore((state) => state);
-  const [isClient, setIsClient] = useState(false);
+  const [, setIsClient] = useState(false);
   const { isBitget, isMetamask, isOkxWallet } = useDetectWallets();
   const { isBitgetDapp, isU2UDapp } = useDetectDAppWallets();
   // const { hasCredential } = useAuthStore();
@@ -96,20 +96,26 @@ export default function ConnectWallet() {
   const getDappWalletInfo = () => {
     if (isBitgetDapp) {
       return {
-        // image: BitgetImage.src,
-        name: 'Bitget',
+        image: renderIcon('bitget'),
+        name: 'Bitget Wallet',
       };
     }
     if (navigator.userAgent.includes('MetaMaskMobile')) {
       return {
-        // image: MetamaskImage.src,
-        name: 'MetaMask',
+        image: renderIcon('MetaMask'),
+        name: 'Metamask',
       };
     }
     if (isU2UDapp) {
       return {
-        // image: U2UImage.src,
-        name: 'U2U',
+        image: renderIcon('Browser Wallet'),
+        name: 'U2U Wallet',
+      };
+    }
+    if (navigator.userAgent.includes('OKApp')) {
+      return {
+        image: renderIcon('okx'),
+        name: 'OKX Wallet',
       };
     }
     return {
@@ -138,135 +144,150 @@ export default function ConnectWallet() {
               }}
               className="w-full h-[1px] bg-[#9299FF] mb-2"
             />
-            <div
-              key={connectors[0].id}
-              className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]"
-            >
-              <button
-                onClick={() => {
-                  if (!isMetamask) {
-                    setErrorWalletLink(
-                      'https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en',
+            {!isBitgetDapp &&
+              !navigator.userAgent.includes('OKApp') &&
+              !navigator.userAgent.includes('MetaMaskMobile') &&
+              !isU2UDapp && (
+                <div
+                  key={connectors[0].id}
+                  className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]"
+                >
+                  <button
+                    onClick={() => {
+                      if (!isMetamask && !isAndroid && !isIphone) {
+                        setErrorWalletLink(
+                          'https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en',
+                        );
+                        setErrorWalletName('Metamask');
+                        return;
+                      }
+                      if (isAndroid || isIphone) {
+                        window.open(
+                          `https://metamask.app.link/dapp/${CLIENT_URL}`,
+                          '_blank',
+                        );
+                      }
+                      handleConnect(connectors[0]);
+                    }}
+                    className="flex justify-between items-center w-full"
+                  >
+                    <p>{connectors[0].name}</p>
+                    {renderIcon(connectors[0].name)}
+                  </button>
+                </div>
+              )}
+            {!isBitgetDapp &&
+              !navigator.userAgent.includes('OKApp') &&
+              !navigator.userAgent.includes('MetaMaskMobile') &&
+              !isU2UDapp && (
+                <WalletButton.Custom wallet="okx">
+                  {({ connector }) => {
+                    return (
+                      <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
+                        <button
+                          onClick={() => {
+                            if (!isOkxWallet && !isAndroid && !isIphone) {
+                              setErrorWalletLink(
+                                'https://chromewebstore.google.com/detail/okx-wallet/mcohilncbfahbmgdjkbpemcciiolgcge',
+                              );
+                              setErrorWalletName('OKX');
+                              return;
+                            }
+                            if (isAndroid || isIphone) {
+                              const encodedDappUrl =
+                                encodeURIComponent(CLIENT_URL);
+                              window.open(
+                                `okx://wallet/dapp/url?dappUrl=${encodedDappUrl}`,
+                              );
+                              return;
+                            }
+                            handleConnect(connector);
+                          }}
+                          className="flex justify-between items-center w-full"
+                        >
+                          <p>{connector.name}</p>
+                          {renderIcon('okx')}
+                        </button>
+                      </div>
                     );
-                    setErrorWalletName('Metamask');
-                    return;
-                  }
-                  handleConnect(connectors[0]);
+                  }}
+                </WalletButton.Custom>
+              )}
+            {!isBitgetDapp &&
+              !navigator.userAgent.includes('OKApp') &&
+              !navigator.userAgent.includes('MetaMaskMobile') &&
+              !isU2UDapp && (
+                <WalletButton.Custom wallet="walletconnect">
+                  {({ ready, connect, connector }) => {
+                    return (
+                      <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
+                        <button
+                          disabled={!ready}
+                          onClick={connect}
+                          className="flex justify-between items-center w-full"
+                        >
+                          <p>{connector.name}</p>
+                          {renderIcon('walletConnect')}
+                        </button>
+                      </div>
+                    );
+                  }}
+                </WalletButton.Custom>
+              )}
+          </div>
+        ) : (
+          !isBitgetDapp &&
+          !navigator.userAgent.includes('OKApp') &&
+          !navigator.userAgent.includes('MetaMaskMobile') &&
+          !isU2UDapp && (
+            <div className="w-full flex flex-col gap-5">
+              <div
+                style={{
+                  background: 'linear-gardient(to left,#9299FF,#4651F6)',
                 }}
-                className="flex justify-between items-center w-full"
-              >
-                <p>{connectors[0].name}</p>
-                {renderIcon(connectors[0].name)}
-              </button>
-            </div>
-            <WalletButton.Custom wallet="okx">
-              {({ connect, connector }) => {
-                return (
-                  <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
-                    <button
-                      onClick={() => {
-                        if (!isOkxWallet) {
-                          setErrorWalletLink(
-                            'https://chromewebstore.google.com/detail/okx-wallet/mcohilncbfahbmgdjkbpemcciiolgcge',
-                          );
-                          setErrorWalletName('OKX');
-                          return;
-                        }
-                        isMobile
-                          ? handleConnect(connector, connect)
-                          : handleConnect(connector);
-                      }}
-                      className="flex justify-between items-center w-full"
-                    >
-                      <p>{connector.name}</p>
-                      {renderIcon('okx')}
-                    </button>
-                  </div>
-                );
-              }}
-            </WalletButton.Custom>
-            {isClient && (isIphone || isAndroid) && (
-              <WalletButton.Custom wallet="injected">
-                {({ ready, connect, connector }) => {
+                className="w-full h-[1px] bg-[#9299FF] mb-2"
+              />
+              <WalletButton.Custom wallet="bitget">
+                {({ connector }) => {
                   return (
                     <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
                       <button
-                        disabled={!ready}
-                        onClick={() =>
-                          isMobile
-                            ? handleConnect(connector, connect)
-                            : handleConnect(connector)
-                        }
+                        onClick={() => {
+                          if (!isBitget && !isAndroid && !isIphone) {
+                            setErrorWalletLink(
+                              'https://chromewebstore.google.com/detail/bitget-wallet-formerly-bi/jiidiaalihmmhddjgbnbgdfflelocpak',
+                            );
+                            setErrorWalletName('Bitget');
+                            return;
+                          }
+                          if (isAndroid || isIphone) {
+                            window.open(
+                              `bitkeep://bkconnect?action=dapp&url=${CLIENT_URL}`,
+                            );
+                            return;
+                          }
+                          handleConnect(connector);
+                        }}
                         className="flex justify-between items-center w-full"
                       >
-                        <p>U2U Wallet</p>
-                        {renderIcon(connector.name)}
+                        <p>Bitget Wallet</p>
+                        {renderIcon('bitget')}
                       </button>
                     </div>
                   );
                 }}
               </WalletButton.Custom>
-            )}
-            <WalletButton.Custom wallet="walletconnect">
-              {({ ready, connect, connector }) => {
-                return (
-                  <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
-                    <button
-                      disabled={!ready}
-                      onClick={connect}
-                      className="flex justify-between items-center w-full"
-                    >
-                      <p>{connector.name}</p>
-                      {renderIcon('walletConnect')}
-                    </button>
-                  </div>
-                );
-              }}
-            </WalletButton.Custom>
-          </div>
-        ) : (
-          <div className="w-full flex flex-col gap-5">
-            <div
-              style={{
-                background: 'linear-gardient(to left,#9299FF,#4651F6)',
-              }}
-              className="w-full h-[1px] bg-[#9299FF] mb-2"
-            />
-            <WalletButton.Custom wallet="bitget">
-              {({ connect, connector }) => {
-                return (
-                  <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
-                    <button
-                      onClick={() => {
-                        if (!isBitget) {
-                          setErrorWalletLink(
-                            'https://chromewebstore.google.com/detail/bitget-wallet-formerly-bi/jiidiaalihmmhddjgbnbgdfflelocpak',
-                          );
-                          setErrorWalletName('Bitget');
-                          return;
-                        }
-                        isMobile
-                          ? handleConnect(connector, connect)
-                          : handleConnect(connector);
-                      }}
-                      className="flex justify-between items-center w-full"
-                    >
-                      <p>Bitget Wallet</p>
-                      {renderIcon('bitget')}
-                    </button>
-                  </div>
-                );
-              }}
-            </WalletButton.Custom>
-          </div>
+            </div>
+          )
         )}
         {(isBitgetDapp ||
+          navigator.userAgent.includes('OKApp') ||
           navigator?.userAgent.includes('MetaMaskMobile') ||
           isU2UDapp) && (
           <WalletButton.Custom wallet="injected">
             {({ connector }) => {
               return (
-                <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-gray-300 hover:border-transparent hover:text-black">
+                <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
                   <button
                     onClick={() => {
                       handleConnect(connector);
@@ -274,12 +295,7 @@ export default function ConnectWallet() {
                     className="flex justify-between items-center w-full"
                   >
                     <div className="w-full flex items-center gap-5 font-bold text-lg">
-                      {/* <Image
-                        src={getDappWalletInfo().image}
-                        alt="bitget-ico"
-                        width={35}
-                        height={35}
-                      /> */}
+                      {getDappWalletInfo().image}
                       {getDappWalletInfo().name}
                     </div>
                   </button>

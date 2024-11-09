@@ -75,8 +75,8 @@ export default function Logo({
   if (CAMPAIGN_TYPE.toLowerCase() === 'bitget') {
     return (
       <svg
-        width="405"
-        height="41"
+        width={`${width}`}
+        height={`${height}`}
         viewBox="0 0 405 41"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
