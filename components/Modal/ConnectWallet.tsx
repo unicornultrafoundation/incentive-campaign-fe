@@ -163,13 +163,13 @@ export default function ConnectWallet() {
                       }
                       if (isAndroid || isIphone) {
                         window.location.href = `https://metamask.app.link/dapp/${CLIENT_URL}`;
-                        var now = new Date().valueOf();
                         setTimeout(function () {
-                          if (new Date().valueOf() - now > 100) return;
-                          window.location.href = isAndroid
-                            ? 'https://play.google.com/store/apps/details?id=io.metamask&hl=en'
-                            : 'https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202';
-                        }, 25);
+                          if (document.hasFocus()) {
+                            window.location.href = isAndroid
+                              ? 'https://play.google.com/store/apps/details?id=io.metamask&hl=en'
+                              : 'https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202';
+                          }
+                        }, 500);
                         return;
                       }
                       handleConnect(connectors[0]);
@@ -202,13 +202,13 @@ export default function ConnectWallet() {
                               const encodedDappUrl =
                                 encodeURIComponent(CLIENT_URL);
                               window.location.href = `okx://wallet/dapp/url?dappUrl=${encodedDappUrl}`;
-                              var now = new Date().valueOf();
                               setTimeout(function () {
-                                if (new Date().valueOf() - now > 100) return;
-                                window.location.href = isAndroid
-                                  ? 'https://play.google.com/store/apps/details?id=com.okinc.okex.gp&hl=en'
-                                  : 'https://apps.apple.com/us/app/okx-buy-bitcoin-btc-crypto/id1327268470';
-                              }, 25);
+                                if (document.hasFocus()) {
+                                  window.location.href = isAndroid
+                                    ? 'https://play.google.com/store/apps/details?id=com.okinc.okex.gp&hl=en'
+                                    : 'https://apps.apple.com/us/app/okx-buy-bitcoin-btc-crypto/id1327268470';
+                                }
+                              }, 500);
                               return;
                             }
                             handleConnect(connector);
@@ -272,13 +272,13 @@ export default function ConnectWallet() {
                           }
                           if (isAndroid || isIphone) {
                             window.location.href = `bitkeep://bkconnect?action=dapp&url=${CLIENT_URL}`;
-                            var now = new Date().valueOf();
                             setTimeout(function () {
-                              if (new Date().valueOf() - now > 100) return;
-                              window.location.href = isAndroid
-                                ? 'https://play.google.com/store/apps/details?id=com.bitkeep.wallet&hl=en'
-                                : 'https://apps.apple.com/us/app/bitget-wallet-crypto-bitcoin/id1395301115';
-                            }, 25);
+                              if (document.hasFocus()) {
+                                window.location.href = isAndroid
+                                  ? 'https://play.google.com/store/apps/details?id=com.bitkeep.wallet&hl=en'
+                                  : 'https://apps.apple.com/us/app/bitget-wallet-crypto-bitcoin/id1395301115';
+                              }
+                            }, 500);
                             return;
                           }
                           handleConnect(connector);
