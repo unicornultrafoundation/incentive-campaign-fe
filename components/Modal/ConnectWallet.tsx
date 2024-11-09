@@ -12,6 +12,7 @@ import Modal from '@/components/Modal';
 import { CAMPAIGN_TYPE } from '@/config/env';
 import useDetectWallets from '@/hooks/useDetectWallets';
 import useDevice from '@/hooks/useDevice';
+import useDetectDAppWallets from '@/hooks/useDetectDAppWallets';
 
 import WalletErrorModal from './WalletErrorModal';
 // import { useAuthStore } from '@/store/auth';
@@ -28,6 +29,7 @@ export default function ConnectWallet() {
   const { isOpen, onClosed } = useWalletStore((state) => state);
   const [isClient, setIsClient] = useState(false);
   const { isBitget, isMetamask, isOkxWallet } = useDetectWallets();
+  const { isBitgetDapp, isU2UDapp } = useDetectDAppWallets();
   // const { hasCredential } = useAuthStore();
   const [errorWalletLink, setErrorWalletLink] = useState<string | null>(null);
   const [errorWalletName, setErrorWalletName] = useState<string | null>(null);
@@ -90,6 +92,31 @@ export default function ConnectWallet() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  const getDappWalletInfo = () => {
+    if (isBitgetDapp) {
+      return {
+        // image: BitgetImage.src,
+        name: 'Bitget',
+      };
+    }
+    if (navigator.userAgent.includes('MetaMaskMobile')) {
+      return {
+        // image: MetamaskImage.src,
+        name: 'MetaMask',
+      };
+    }
+    if (isU2UDapp) {
+      return {
+        // image: U2UImage.src,
+        name: 'U2U',
+      };
+    }
+    return {
+      image: '',
+      name: 'Injected Wallet',
+    };
+  };
 
   return (
     <>
@@ -224,7 +251,7 @@ export default function ConnectWallet() {
                       }}
                       className="flex justify-between items-center w-full"
                     >
-                      <p>Bitget</p>
+                      <p>Bitget Wallet</p>
                       {renderIcon('bitget')}
                     </button>
                   </div>
@@ -232,6 +259,34 @@ export default function ConnectWallet() {
               }}
             </WalletButton.Custom>
           </div>
+        )}
+        {(isBitgetDapp ||
+          navigator?.userAgent.includes('MetaMaskMobile') ||
+          isU2UDapp) && (
+          <WalletButton.Custom wallet="injected">
+            {({ connector }) => {
+              return (
+                <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-gray-300 hover:border-transparent hover:text-black">
+                  <button
+                    onClick={() => {
+                      handleConnect(connector);
+                    }}
+                    className="flex justify-between items-center w-full"
+                  >
+                    <div className="w-full flex items-center gap-5 font-bold text-lg">
+                      {/* <Image
+                        src={getDappWalletInfo().image}
+                        alt="bitget-ico"
+                        width={35}
+                        height={35}
+                      /> */}
+                      {getDappWalletInfo().name}
+                    </div>
+                  </button>
+                </div>
+              );
+            }}
+          </WalletButton.Custom>
         )}
       </Modal>
 

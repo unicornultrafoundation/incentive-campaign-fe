@@ -33,6 +33,10 @@ export default function AuthProvider({
 
   useEffect(() => {
     if (isClient) {
+      if (!hasCookie('refreshToken')) {
+        onLogout();
+        return;
+      }
       if (hasCookie('refreshToken')) {
         getUserClaimStatus();
       }

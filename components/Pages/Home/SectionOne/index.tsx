@@ -32,7 +32,7 @@ const TitleWithDes = () => {
       <h1 className=" text-white font-jockey text-2xl leading-[64px] text-[64px] max-[1000px]:text-[30px] font-normal mb-4">
         {CAMPAIGN_TYPE.toLowerCase() === 'public'
           ? `U2U Incentivized Mainnet Saga`
-          : `Unlock Rewards  with Bitget Staking!`}
+          : `Unlock Rewards  with Bitget Wallet Staking!`}
       </h1>
       <p
         style={{
