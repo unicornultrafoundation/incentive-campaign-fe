@@ -88,10 +88,10 @@ const ClaimGasFeeModal = ({
           </div>
         </div>
       </div>
-      <div className="w-full flex items-center justify-between max-[768px]:gap-2">
+      <div className="w-full flex items-center justify-between gap-2 laptop:gap-6">
         <Button
           scale="md"
-          className="!text-[17px] w-[49%] max-[768px]:w-[35%] p-4 mt-4 !rounded-xl laptop:!rounded-[20px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
+          className="!text-[17px] w-[35%] text-[#7EFFC5] laptop:w-full p-4 !rounded-lg flex items-center justify-center gap-1"
           onClick={() => {
             window.open(U2U_LEARN_MORE_LINK, '_blank');
           }}
@@ -100,7 +100,7 @@ const ClaimGasFeeModal = ({
         </Button>
         <Button
           scale="md"
-          className="!text-[17px] w-[49%] max-[768px]:flex-1 p-4 mt-4 !rounded-xl laptop:!rounded-[20px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
+          className="!text-[17px] w-[65%] laptop:w-full p-4 !rounded-lg bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
           onClick={() => onClaim()}
         >
           Claim Free Gas Fee Here
@@ -172,10 +172,10 @@ const NotEligbleModal = ({
         You need a successful bridge transaction from $USDT to U2U Network with
         at least $10. Complete the transaction and return to claim your reward!
       </div>
-      <div className="w-full flex items-center justify-between max-[768px]:gap-2">
+      <div className="w-full flex items-center justify-between gap-2 laptop:gap-6">
         <Button
           scale="md"
-          className="!text-[18px] w-[48.5%] max-[768px]:w-[35%] p-4 mt-4 !rounded-xl laptop:!rounded-[20px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
+          className="!text-[18px] w-full text-[#7EFFC5] p-4 !rounded-lg flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
           onClick={() => {
             window.open(U2U_LEARN_MORE_LINK, '_blank');
           }}
@@ -184,7 +184,7 @@ const NotEligbleModal = ({
         </Button>
         <Button
           scale="md"
-          className="!text-[18px] w-[48.5%] max-[768px]:flex-1 p-4 mt-4 !rounded-xl laptop:!rounded-[20px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
+          className="!text-[18px] w-full p-4 !rounded-lg bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
           onClick={() => onAirdropNow()}
         >
           Airdrop Now

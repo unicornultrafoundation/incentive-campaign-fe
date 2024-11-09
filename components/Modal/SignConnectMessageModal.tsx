@@ -8,6 +8,8 @@ import { useAuth } from '@/hooks/useAuth';
 // import { useGetProfileApi } from '@/hooks/useMutationApi';
 // import useUserStore from '@/store/auth';
 
+import Icon from '@/components/Icon';
+
 import LoadingModal from './loading-modal';
 
 interface Props {
@@ -78,7 +80,7 @@ export default function SignConnectMessageModal({ isOpen, onClose }: Props) {
       case isError || !!authError:
         return (
           <>
-            <div className="font-semibold text-error text-center text-heading-sm">
+            <div className="font-semibold text-error text-center text-2xl text-heading-sm">
               {t('common.error_report')}
             </div>
             <a
@@ -89,13 +91,20 @@ export default function SignConnectMessageModal({ isOpen, onClose }: Props) {
                 {error?.message || authError}
               </div>
             </a>
+            <Icon.ToastFail className="mx-auto" />
 
-            <div>
-              <Button className="w-full mb-5" onClick={handleSignMessage}>
+            <div className="w-full flex justify-between gap-6">
+              <Button
+                className="w-full h-12 p-4 !rounded-lg"
+                onClick={handleSignMessage}
+              >
                 {t('common.try_again')}
               </Button>
-              <Button className="w-full" onClick={onClose}>
-                {t('common.close_and_continue')}
+              <Button
+                className="h-12 disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 w-full !rounded-lg bg-[#7EFFC5] hover:!bg-transparent text-black hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#7EFFC5]"
+                onClick={onClose}
+              >
+                Close & continue
               </Button>
             </div>
           </>
@@ -106,12 +115,18 @@ export default function SignConnectMessageModal({ isOpen, onClose }: Props) {
             <div className="font-inter text-primary text-center text-heading-sm">
               Please sign the message to connect your wallet
             </div>
-            <div>
-              <Button className="w-full mb-5" onClick={handleSignMessage}>
+            <div className="w-full flex justify-between gap-6">
+              <Button
+                className="w-full h-12 p-4 !rounded-lg"
+                onClick={handleSignMessage}
+              >
                 Sign Message
               </Button>
-              <Button className="w-full" onClick={onClose}>
-                {t('common.close_and_continue')}
+              <Button
+                className="h-12 disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 w-full !rounded-lg bg-[#7EFFC5] hover:!bg-transparent text-black hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#7EFFC5]"
+                onClick={onClose}
+              >
+                Close & continue
               </Button>
             </div>
           </>
