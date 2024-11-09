@@ -5,9 +5,6 @@ import { useAccount, useSignMessage } from 'wagmi';
 import Button from '@/components/Button';
 import Modal from '@/components/Modal/index';
 import { useAuth } from '@/hooks/useAuth';
-// import { useGetProfileApi } from '@/hooks/useMutationApi';
-// import useUserStore from '@/store/auth';
-
 import Icon from '@/components/Icon';
 
 import LoadingModal from './loading-modal';

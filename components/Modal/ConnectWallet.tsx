@@ -162,10 +162,15 @@ export default function ConnectWallet() {
                         return;
                       }
                       if (isAndroid || isIphone) {
-                        window.open(
-                          `https://metamask.app.link/dapp/${CLIENT_URL}`,
-                          '_blank',
-                        );
+                        window.location.href = `https://metamask.app.link/dapp/${CLIENT_URL}`;
+                        setTimeout(function () {
+                          if (document.hasFocus()) {
+                            window.location.href = isAndroid
+                              ? 'https://play.google.com/store/apps/details?id=io.metamask&hl=en'
+                              : 'https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202';
+                          }
+                        }, 1000);
+                        return;
                       }
                       handleConnect(connectors[0]);
                     }}
@@ -196,9 +201,14 @@ export default function ConnectWallet() {
                             if (isAndroid || isIphone) {
                               const encodedDappUrl =
                                 encodeURIComponent(CLIENT_URL);
-                              window.open(
-                                `okx://wallet/dapp/url?dappUrl=${encodedDappUrl}`,
-                              );
+                              window.location.href = `okx://wallet/dapp/url?dappUrl=${encodedDappUrl}`;
+                              setTimeout(function () {
+                                if (document.hasFocus()) {
+                                  window.location.href = isAndroid
+                                    ? 'https://play.google.com/store/apps/details?id=com.okinc.okex.gp&hl=en'
+                                    : 'https://apps.apple.com/us/app/okx-buy-bitcoin-btc-crypto/id1327268470';
+                                }
+                              }, 1000);
                               return;
                             }
                             handleConnect(connector);
@@ -261,9 +271,14 @@ export default function ConnectWallet() {
                             return;
                           }
                           if (isAndroid || isIphone) {
-                            window.open(
-                              `bitkeep://bkconnect?action=dapp&url=${CLIENT_URL}`,
-                            );
+                            window.location.href = `bitkeep://bkconnect?action=dapp&url=${CLIENT_URL}`;
+                            setTimeout(function () {
+                              if (document.hasFocus()) {
+                                window.location.href = isAndroid
+                                  ? 'https://play.google.com/store/apps/details?id=com.bitkeep.wallet&hl=en'
+                                  : 'https://apps.apple.com/us/app/bitget-wallet-crypto-bitcoin/id1395301115';
+                              }
+                            }, 1000);
                             return;
                           }
                           handleConnect(connector);
