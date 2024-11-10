@@ -161,17 +161,17 @@ export default function ConnectWallet() {
                         setErrorWalletName('Metamask');
                         return;
                       }
-                      if (isAndroid || isIphone) {
-                        window.location.href = `https://metamask.app.link/dapp/${CLIENT_URL}`;
-                        setTimeout(function () {
-                          if (document.hasFocus()) {
-                            window.location.href = isAndroid
-                              ? 'https://play.google.com/store/apps/details?id=io.metamask&hl=en'
-                              : 'https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202';
-                          }
-                        }, 500);
-                        return;
-                      }
+                      // if (isAndroid || isIphone) {
+                      //   window.location.href = `https://metamask.app.link/dapp/${CLIENT_URL}`;
+                      //   setTimeout(function () {
+                      //     if (document.hasFocus()) {
+                      //       window.location.href = isAndroid
+                      //         ? 'https://play.google.com/store/apps/details?id=io.metamask&hl=en'
+                      //         : 'https://apps.apple.com/us/app/metamask-blockchain-wallet/id1438144202';
+                      //     }
+                      //   }, 500);
+                      //   return;
+                      // }
                       handleConnect(connectors[0]);
                     }}
                     className="flex justify-between items-center w-full"
@@ -186,7 +186,7 @@ export default function ConnectWallet() {
               !navigator.userAgent.includes('MetaMaskMobile') &&
               !isU2UDapp && (
                 <WalletButton.Custom wallet="okx">
-                  {({ connector }) => {
+                  {({ connector, connect }) => {
                     return (
                       <div className="cursor-pointer px-4 py-2 tablet:px-5 tablet:py-3 border border-gray-200 rounded-xl flex items-center  transition-all hover:bg-[#6d6d6d] hover:text-[#7EFFC5] hover:border-[#7EFFC5]">
                         <button
@@ -199,16 +199,17 @@ export default function ConnectWallet() {
                               return;
                             }
                             if (isAndroid || isIphone) {
-                              const encodedDappUrl =
-                                encodeURIComponent(CLIENT_URL);
-                              window.location.href = `okx://wallet/dapp/url?dappUrl=${encodedDappUrl}`;
-                              setTimeout(function () {
-                                if (document.hasFocus()) {
-                                  window.location.href = isAndroid
-                                    ? 'https://play.google.com/store/apps/details?id=com.okinc.okex.gp&hl=en'
-                                    : 'https://apps.apple.com/us/app/okx-buy-bitcoin-btc-crypto/id1327268470';
-                                }
-                              }, 500);
+                              // const encodedDappUrl =
+                              //   encodeURIComponent(CLIENT_URL);
+                              // window.location.href = `okx://wallet/dapp/url?dappUrl=${encodedDappUrl}`;
+                              // setTimeout(function () {
+                              //   if (document.hasFocus()) {
+                              //     window.location.href = isAndroid
+                              //       ? 'https://play.google.com/store/apps/details?id=com.okinc.okex.gp&hl=en'
+                              //       : 'https://apps.apple.com/us/app/okx-buy-bitcoin-btc-crypto/id1327268470';
+                              //   }
+                              // }, 500);
+                              handleConnect(connector, connect);
                               return;
                             }
                             handleConnect(connector);
@@ -278,7 +279,7 @@ export default function ConnectWallet() {
                                   ? 'https://play.google.com/store/apps/details?id=com.bitkeep.wallet&hl=en'
                                   : 'https://apps.apple.com/us/app/bitget-wallet-crypto-bitcoin/id1395301115';
                               }
-                            }, 500);
+                            }, 1000);
                             return;
                           }
                           handleConnect(connector);
