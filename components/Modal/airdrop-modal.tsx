@@ -91,7 +91,7 @@ const ClaimGasFeeModal = ({
       <div className="w-full flex items-center justify-between gap-2 laptop:gap-6">
         <Button
           scale="md"
-          className="!text-[17px] w-[35%] text-[#7EFFC5] laptop:w-full p-4 !rounded-lg flex items-center justify-center gap-1"
+          className="!text-[17px] w-[35%] text-[#7EFFC5] laptop:w-full p-4 !rounded-lg flex items-center justify-center"
           onClick={() => {
             window.open(U2U_LEARN_MORE_LINK, '_blank');
           }}
@@ -257,7 +257,7 @@ const ClaimSuccessModal = ({
   );
 };
 
-const AirdropClaimErrModal = ({
+export const AirdropClaimErrModal = ({
   isOpen,
   onClose,
   onRetryClaim,
@@ -288,17 +288,17 @@ const AirdropClaimErrModal = ({
         Claim failed due to network or eligibility issues. Please try again or
         contact support.
       </div>
-      <div className="w-full flex items-center justify-between max-[768px]:gap-2">
+      <div className="w-full flex items-center justify-between gap-2 laptop:gap-6">
         <Button
           scale="md"
-          className="!text-[17px] w-[48%] max-[768px]:w-[35%] p-4 mt-4 !rounded-xl laptop:!rounded-[8px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
+          className="!text-[17px] w-full p-4 !rounded-lg text-[#7EFFC5] flex items-center justify-center"
           onClick={() => {}}
         >
           Contact Support
         </Button>
         <Button
           scale="md"
-          className="!text-[17px] w-[48%] max-[768px]:flex-1 p-4 mt-4 !rounded-xl laptop:!rounded-[8px] bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
+          className="!text-[17px] w-full p-4 !rounded-lg bg-[#7EFFC5] text-[#141414] hover:!bg-transparent hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid border-[#8C8C99]"
           onClick={() => onRetryClaim()}
         >
           Retry Claim
