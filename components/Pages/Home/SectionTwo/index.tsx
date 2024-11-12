@@ -3,12 +3,24 @@ import { useState } from 'react';
 import Icon from '@/components/Icon';
 import { Staking } from '@/components/Pages/Home/SectionTwo/Staking/Staking';
 import { Reward } from '@/components/Pages/Home/SectionTwo/Reward/Reward';
+import { useAuth } from '@/hooks/useAuth';
+import useWalletStore from '@/store/connect-wallet';
 
 export default function HomeSectionTwo() {
   const [activeTab, setActiveTab] = useState<'staking' | 'reward'>('staking');
   const handleChangeTab = (tab: 'staking' | 'reward') => {
+    if (tab === 'reward') {
+      if (!isValidSession) {
+        setOpen(true);
+        setActiveTab('staking');
+        return;
+      }
+      setActiveTab(tab);
+    }
     setActiveTab(tab);
   };
+  const { isValidSession } = useAuth();
+  const { setOpen } = useWalletStore();
   return (
     <div
       id="section_2"
