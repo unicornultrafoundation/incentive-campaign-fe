@@ -10,14 +10,14 @@ import { CAMPAIGN_TYPE } from '@/config/env';
 export default function Statistics() {
   const { data: publicData, mutate: publicMutate } =
     useGetSubgraphDashboardPublic({
-      refreshInterval: 1000,
+      refreshInterval: 3000,
     });
   const { amountStakePublic, amountHarvestPublic, totalUserPublic } =
     publicData?.data?.dashboards[0] || {};
 
   const { data: bitgetData, mutate: bitgetMutate } =
     useGetSubgraphDashboardBitget({
-      refreshInterval: 1000,
+      refreshInterval: 3000,
     });
   const { amountStakeBitget, amountHarvestBitget, totalUserBitget } =
     bitgetData?.data?.dashboards[0] || {};
