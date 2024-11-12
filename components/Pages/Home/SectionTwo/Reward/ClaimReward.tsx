@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { formatUnits } from 'viem';
 import { useAccount } from 'wagmi';
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
 
 import Button from '@/components/Button';
 import { formatDisplayedTokenAmount, toNumberNoRound } from '@/utils';
@@ -22,7 +22,7 @@ export default function ClaimReward() {
     isError,
     totalStaked,
     totalClaimed,
-    claimableTime,
+    // claimableTime,
   } = onStaking;
   const [currentDate, setCurrentDate] = useState<number>(Date.now());
   const [isLoading, setIsLoading] = useState<boolean>(false);
