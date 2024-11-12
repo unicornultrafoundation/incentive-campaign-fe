@@ -185,16 +185,34 @@ export default function ClaimReward() {
               </Button>
             </ConnectWalletButton>
 
-            <Button
-              loading={isPending || isLoadingUnStake}
-              disabled={!isWithdraw}
-              loadingText={'Processing...'}
-              scale="md"
-              className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#4651F6] hover:!bg-transparent text-white hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
-              onClick={handleUnStake}
-            >
-              Withdraw
-            </Button>
+            {!isWithdraw ? (
+              <Button
+                loading={isPending || isLoadingUnStake}
+                disabled={true}
+                loadingText={'Processing...'}
+                scale="md"
+                className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#4651F6] hover:!bg-transparent text-white hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
+                onClick={handleUnStake}
+              >
+                Withdraw
+              </Button>
+            ) : (
+              <ConnectWalletButton
+                showConnectButton
+                className="flex justify-center h-12 laptop:h-[64px] !rounded-xl laptop:!rounded-2xl"
+              >
+                <Button
+                  loading={isPending || isLoadingUnStake}
+                  disabled={false}
+                  loadingText={'Processing...'}
+                  scale="md"
+                  className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#4651F6] hover:!bg-transparent text-white hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
+                  onClick={handleUnStake}
+                >
+                  Withdraw
+                </Button>
+              </ConnectWalletButton>
+            )}
           </div>
         </div>
         <div className="flex justify-center w-full flex-col p-0 laptop:p-5 min-w-full laptop:min-w-[437px] gap-1 laptop:gap-6">
