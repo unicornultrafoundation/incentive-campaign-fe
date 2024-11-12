@@ -1,4 +1,9 @@
-import { useAccount, useReadContract, useWriteContract } from 'wagmi';
+import {
+  useAccount,
+  useReadContract,
+  useReadContracts,
+  useWriteContract,
+} from 'wagmi';
 import { Address } from 'viem';
 import { useMemo } from 'react';
 
@@ -27,29 +32,48 @@ export const useStake = () => {
       // refetchInterval: 3000,
     },
   });
-  const { data: getUserInfo } = useReadContract({
-    ...contracts.stakePublic,
-    functionName: 'getUserInfo',
-    args: [address as Address],
+  const { data } = useReadContracts({
+    contracts: [
+      {
+        ...contracts.stakePublic,
+        functionName: 'getUserInfo',
+        args: [address as Address],
+      },
+      {
+        ...contracts.stakePublic,
+        functionName: 'pendingRewards',
+        args: [address as Address],
+      },
+    ],
     query: {
+      enabled: !!address,
       refetchInterval: 3000,
     },
   });
 
-  const { data: pendingReward } = useReadContract({
-    ...contracts.stakePublic,
-    functionName: 'pendingRewards',
-    args: [address as Address],
-    query: {
-      refetchInterval: 3000,
-    },
-  });
+  // const { data: getUserInfo } = useReadContract({
+  //   ...contracts.stakePublic,
+  //   functionName: 'getUserInfo',
+  //   args: [address as Address],
+  //   query: {
+  //     refetchInterval: 3000,
+  //   },
+  // });
+
+  // const { data: pendingReward } = useReadContract({
+  //   ...contracts.stakePublic,
+  //   functionName: 'pendingRewards',
+  //   args: [address as Address],
+  //   query: {
+  //     refetchInterval: 3000,
+  //   },
+  // });
 
   type UserInfo = [bigint, bigint, bigint];
 
   const [totalStaked, latestHarvest, totalClaimed] = useMemo(
-    () => (getUserInfo as UserInfo) || [],
-    [getUserInfo],
+    () => (data && data[0].result ? (data[0].result as UserInfo) : []),
+    [data],
   );
   const { data: rewardsRatePerSecond } = useReadContract({
     ...contracts.stakePublic,
@@ -96,16 +120,17 @@ export const useStake = () => {
     });
     return waitForTransaction(txhash);
   };
+
   return {
     ...method,
     onStake,
     endTime,
     rewardsRatePerSecond,
-    getUserInfo,
+    getUserInfo: data && data[0].result ? data[0].result : null,
     totalStaked,
     latestHarvest,
     totalClaimed,
-    pendingReward,
+    pendingReward: data && data[1].result ? data[1].result : null,
     onClaim,
     onUnStake,
     claimableTime,

@@ -1,24 +1,15 @@
-import {
-  useAccount,
-  useBlockNumber,
-  useReadContracts,
-  useWriteContract,
-} from 'wagmi';
+import { useAccount, useReadContracts, useWriteContract } from 'wagmi';
 import { Address, maxUint256 } from 'viem';
-import { useEffect } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 
 import { useWaitForTransaction } from '@/hooks/wagmi/useWaitForTransaction';
 import { contracts } from '@/config/env';
 
 export const usePUSDT = () => {
-  const queryClient = useQueryClient();
-  const { data: blockNumber } = useBlockNumber({ watch: true });
   const { address } = useAccount();
   const method = useWriteContract();
   const { waitForTransaction } = useWaitForTransaction();
 
-  const { data, queryKey } = useReadContracts({
+  const { data } = useReadContracts({
     contracts: [
       {
         ...contracts.pUSDT,
@@ -36,10 +27,6 @@ export const usePUSDT = () => {
       enabled: !!address,
     },
   });
-
-  useEffect(() => {
-    queryClient.invalidateQueries({ queryKey });
-  }, [blockNumber, queryClient]);
 
   // const { data: balanceOfUsdt } = useReadContract({
   //   ...contracts.pUSDT,
