@@ -83,7 +83,12 @@ export default function ClaimReward() {
 
   const stakeDuration = useMemo(() => {
     const currentTime = currentDate / 1000;
-    const timeDifferenceInSeconds = Number(endTime) - currentTime;
+    const totalStakingSeconds = 60 * 60 * 24 * 90;
+    const startTime = Number(endTime) - totalStakingSeconds;
+    const timeDifferenceInSeconds =
+      startTime > currentTime
+        ? totalStakingSeconds
+        : Number(endTime) - currentTime;
     return Math.ceil(timeDifferenceInSeconds / 86400);
   }, [currentDate, endTime]);
 
