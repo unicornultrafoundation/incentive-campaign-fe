@@ -1,6 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
+
 import type { Metadata } from 'next';
 import { getLocale, getMessages } from 'next-intl/server';
 import React from 'react';
+import Script from 'next/script';
+
 import './globals.scss';
 
 import AppProviders from '@/components/Providers';
@@ -93,16 +97,37 @@ const RootLayout = async ({
     <html lang={locale} prefix="og: http://ogp.me/ns#">
       <head>
         <meta prefix="og: http://ogp.me/ns#" />
+        <Script
+          id="facebook-pixel"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '1118700476499689');
+              fbq('track', 'PageView');
+          `,
+          }}
+        />
+        <noscript>
+          <img
+            alt="fb-pixel"
+            height="1"
+            width="1"
+            style={{
+              display: 'none',
+            }}
+            src="https://www.facebook.com/tr?id=1118700476499689&ev=PageView&noscript=1"
+          />
+        </noscript>
       </head>
       <body>
-        {/* <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-MCFFZQVB"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          ></iframe>
-        </noscript> */}
         <AppProviders messages={messages} locale={locale}>
           <main className="root-layout">{children}</main>
         </AppProviders>
