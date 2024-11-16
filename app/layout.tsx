@@ -97,11 +97,12 @@ const RootLayout = async ({
     <html lang={locale} prefix="og: http://ogp.me/ns#">
       <head>
         <meta prefix="og: http://ogp.me/ns#" />
-        <Script
-          id="facebook-pixel"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+        {CAMPAIGN_TYPE === 'public' && (
+          <Script
+            id="facebook-pixel"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
               !function(f,b,e,v,n,t,s)
               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -113,19 +114,22 @@ const RootLayout = async ({
               fbq('init', '1118700476499689');
               fbq('track', 'PageView');
           `,
-          }}
-        />
-        <noscript>
-          <img
-            alt="fb-pixel"
-            height="1"
-            width="1"
-            style={{
-              display: 'none',
             }}
-            src="https://www.facebook.com/tr?id=1118700476499689&ev=PageView&noscript=1"
           />
-        </noscript>
+        )}
+        {CAMPAIGN_TYPE === 'public' && (
+          <noscript>
+            <img
+              alt="fb-pixel"
+              height="1"
+              width="1"
+              style={{
+                display: 'none',
+              }}
+              src="https://www.facebook.com/tr?id=1118700476499689&ev=PageView&noscript=1"
+            />
+          </noscript>
+        )}
       </head>
       <body>
         <AppProviders messages={messages} locale={locale}>
