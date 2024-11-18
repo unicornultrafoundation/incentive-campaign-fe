@@ -111,7 +111,7 @@ const RootLayout = async ({
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '1118700476499689');
+              fbq('init', '2026508811116522');
               fbq('track', 'PageView');
           `,
             }}
@@ -120,13 +120,13 @@ const RootLayout = async ({
         {CAMPAIGN_TYPE === 'public' && (
           <noscript>
             <img
-              alt="fb-pixel"
               height="1"
               width="1"
               style={{
                 display: 'none',
               }}
-              src="https://www.facebook.com/tr?id=1118700476499689&ev=PageView&noscript=1"
+              alt="facebook-pixel"
+              src="https://www.facebook.com/tr?id=2026508811116522&ev=PageView&noscript=1"
             />
           </noscript>
         )}
