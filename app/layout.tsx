@@ -130,6 +130,52 @@ const RootLayout = async ({
             />
           </noscript>
         )}
+
+        {CAMPAIGN_TYPE === 'public' && (
+          <Script
+            id="google-analytics"
+            strategy="afterInteractive"
+            src="https://www.googletagmanager.com/gtag/js?id=G-4YSYW4EW7J"
+          />
+        )}
+
+        {CAMPAIGN_TYPE === 'public' && (
+          <Script
+            id="google-analytics-script"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-4YSYW4EW7J');
+        `,
+            }}
+          />
+        )}
+
+        {CAMPAIGN_TYPE === 'bitget' && (
+          <Script
+            id="google-analytics"
+            strategy="afterInteractive"
+            src="https://www.googletagmanager.com/gtag/js?id=G-Y23X3YQBXP"
+          />
+        )}
+
+        {CAMPAIGN_TYPE === 'bitget' && (
+          <Script
+            id="google-analytics-script"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-Y23X3YQBXP');
+          `,
+            }}
+          />
+        )}
       </head>
       <body>
         <AppProviders messages={messages} locale={locale}>
