@@ -111,7 +111,7 @@ const RootLayout = async ({
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '2026508811116522');
+              fbq('init', '1799239430879679');
               fbq('track', 'PageView');
           `,
             }}
@@ -126,7 +126,7 @@ const RootLayout = async ({
                 display: 'none',
               }}
               alt="facebook-pixel"
-              src="https://www.facebook.com/tr?id=2026508811116522&ev=PageView&noscript=1"
+              src="https://www.facebook.com/tr?id=1799239430879679&ev=PageView&noscript=1"
             />
           </noscript>
         )}
