@@ -43,6 +43,7 @@ export default function SignConnectMessageModal({ isOpen, onClose }: Props) {
       // }
 
       setIsCheckingChain(true);
+      localStorage.setItem('addressProfile', address);
       // setValue('isShowChooseChain', true);
     } catch (e: any) {
       setAuthError(e.message);

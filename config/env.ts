@@ -3,6 +3,7 @@ import { Address } from 'viem';
 import { pUsdtAbi } from '@/config/abi/pUsdtAbi';
 import { stakePublicAbi } from '@/config/abi/stakePublicAbi';
 import { stakeBitgetAbi } from '@/config/abi/stakeBitgetAbi';
+import { stakePublicV2Abi } from '@/config/abi/stakePublicV2Abi';
 
 export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || '';
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || '';
@@ -22,6 +23,10 @@ export const CONTRACT_PUBLIC_ADDRESS =
   process.env.NEXT_PUBLIC_PUBLIC_ADDRESS || ('' as string);
 export const CONTRACT_BITGET_ADDRESS =
   process.env.NEXT_PUBLIC_BITGET_ADDRESS || ('' as string);
+export const CONTRACT_PUBLIC_V2_ADDRESS =
+  process.env.NEXT_PUBLIC_PUBLIC_V2_ADDRESS || ('' as string);
+export const CONTRACT_BITGET_V2_ADDRESS =
+  process.env.NEXT_PUBLIC_BITGET_V2_ADDRESS || ('' as string);
 export const CONTRACT_PUSDT_ADDRESS =
   process.env.NEXT_PUBLIC_PUSDT_ADDRESS || ('' as string);
 export enum ChainName {
@@ -55,6 +60,13 @@ export const contracts: {
         ? (CONTRACT_PUBLIC_ADDRESS as Address)
         : (CONTRACT_BITGET_ADDRESS as Address),
     abi: stakePublicAbi,
+  },
+  stakePublicV2: {
+    address:
+      CAMPAIGN_TYPE.toLowerCase() === 'public'
+        ? (CONTRACT_PUBLIC_V2_ADDRESS as Address)
+        : (CONTRACT_BITGET_V2_ADDRESS as Address),
+    abi: stakePublicV2Abi,
   },
   stakeBiget: {
     address: CONTRACT_BITGET_ADDRESS as Address,

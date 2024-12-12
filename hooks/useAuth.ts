@@ -1,7 +1,7 @@
 'use client';
 
 import { signMessage } from '@wagmi/core';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useAccount, useDisconnect, useSwitchChain } from 'wagmi';
 
 import { config } from '@/config/wagmi';
@@ -58,6 +58,7 @@ export const useAuth = () => {
 
   const onLogout = async () => {
     handleLogoutApi();
+    localStorage.removeItem('addressProfile');
     await disconnectAsync();
     disconnect();
     setAuthCredential(false);
@@ -93,4 +94,17 @@ export const useWrongNetwork = () => {
   };
 
   return { isWrongNetwork, handleSwitchChain };
+};
+
+export const useAccountChange = () => {
+  const { address } = useAccount();
+  const { onSignMessage } = useAuth();
+  const profileAddress = localStorage.getItem('addressProfile');
+  useEffect(() => {
+    if (!address || !profileAddress) return;
+    if (address !== profileAddress) {
+      onSignMessage();
+    }
+  }, [address, profileAddress]);
+  return;
 };

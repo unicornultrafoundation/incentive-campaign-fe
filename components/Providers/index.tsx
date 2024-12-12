@@ -11,6 +11,7 @@ import ConnectWallet from '@/components/Modal/ConnectWallet';
 import Web3Provider from '@/config/web3-provider';
 import AuthProvider from '@/app/auth-provider';
 import '@rainbow-me/rainbowkit/styles.css';
+import AccountHandler from '@/components/AccountHandler/AccountHandler';
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -39,6 +40,7 @@ const AppProviders = ({ children, messages, locale }: AppProvidersProps) => {
             <ToastModal />
             <GlobalLoading />
             <NetworkSwitcher />
+            <AccountHandler />
             <ConnectWallet />
           </NextIntlClientProvider>
         </SWRConfig>

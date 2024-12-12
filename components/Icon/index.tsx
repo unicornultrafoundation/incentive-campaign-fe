@@ -68,6 +68,7 @@ import AirdropClaimBitget from '@/components/Icon/airdrop-claim-bitget.png';
 import ErrorWallet from '@/components/Icon/error.png';
 import ToastSuccess from '@/components/Icon/toast-success.png';
 import ToastFail from '@/components/Icon/toast-fail.png';
+import IconStart from '@/components/Icon/IconStart';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -97,6 +98,7 @@ Icon.Check = (props: IconProps) => <CheckIcon {...props} />;
 Icon.MetaMask = (props: IconProps) => <MetamaskIcon {...props} />;
 Icon.U2U = (props: IconProps) => <U2UIcon {...props} />;
 Icon.Warning = (props: IconProps) => <WarningIcon {...props} />;
+Icon.IconStart = (props: IconProps) => <IconStart {...props} />;
 Icon.Loading = (props: IconProps) => <LoadingIcon {...props} />;
 Icon.Search = (props: IconProps) => <SearchIcon {...props} />;
 Icon.U2UWallet = (props: IconProps) => <U2UWalletIcon {...props} />;

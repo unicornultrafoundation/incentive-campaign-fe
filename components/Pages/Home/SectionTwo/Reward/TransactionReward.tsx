@@ -7,7 +7,9 @@ import { shortenAddress } from '@/utils/string';
 import {
   CAMPAIGN_TYPE,
   CONTRACT_BITGET_ADDRESS,
+  CONTRACT_BITGET_V2_ADDRESS,
   CONTRACT_PUBLIC_ADDRESS,
+  CONTRACT_PUBLIC_V2_ADDRESS,
   U2U_SCAN_URL,
 } from '@/config/env';
 import { toNumberNoRound } from '@/utils';
@@ -27,8 +29,14 @@ export default function TransactionReward() {
     const { data } = await subgraphService.getGetTransactionReward(
       address?.toLowerCase() as Address,
       CAMPAIGN_TYPE.toLowerCase() === 'public'
-        ? (CONTRACT_PUBLIC_ADDRESS.toLowerCase() as Address)
-        : (CONTRACT_BITGET_ADDRESS.toLowerCase() as Address),
+        ? [
+            CONTRACT_PUBLIC_ADDRESS.toLowerCase() as Address,
+            CONTRACT_PUBLIC_V2_ADDRESS.toLowerCase() as Address,
+          ]
+        : [
+            CONTRACT_BITGET_ADDRESS.toLowerCase() as Address,
+            CONTRACT_BITGET_V2_ADDRESS.toLowerCase() as Address,
+          ],
     );
     setTransactions(data?.transactionPools || []);
   };
