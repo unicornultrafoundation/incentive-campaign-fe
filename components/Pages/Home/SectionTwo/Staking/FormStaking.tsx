@@ -19,6 +19,7 @@ import {
 import { toast } from '@/store/ui';
 import { CAMPAIGN_TYPE } from '@/config/env';
 import { useStakeV2 } from '@/hooks/useStakeV2';
+import { useStake } from '@/hooks/useStake';
 
 interface Option {
   value: number;
@@ -31,6 +32,10 @@ export default function FormStaking() {
   const { rewardsRatePerSecond, endTime } = useStakeV2(); //endTime
   const onStaking = useStakeV2();
   const { onStake, isPending, isSuccess, isError, totalStaked } = onStaking;
+
+  const onStakingV1 = useStake();
+  const { totalStaked: totalStakedV1 } = onStakingV1;
+
   const [isOpenApprove, setIsOpenApprove] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState<number>(Date.now());
   const [selectedType, setSelectedType] = useState<number>(10);
@@ -55,7 +60,9 @@ export default function FormStaking() {
         `Total amount exceeds the maximum allowed ${toNumberNoRound(maxAmount, 2)} $pUSDT`,
         function (value) {
           return (
-            value + Number(formatUnits(BigInt((totalStaked as any) || 0), 6)) <=
+            value +
+              Number(formatUnits(BigInt((totalStaked as any) || 0), 6)) +
+              Number(formatUnits(BigInt((totalStakedV1 as any) || 0), 6)) <=
             maxAmount
           );
         },
@@ -139,7 +146,14 @@ export default function FormStaking() {
     setSelectedType(option.value);
     if (option.type === 'number') {
       const balance = Number(balanceOfUsdt || 0) / 1000000;
-      const total = Number(formatUnits(BigInt((totalStaked as any) || 0), 6));
+      const total =
+        Number(formatUnits(BigInt((totalStaked as any) || 0), 6)) +
+          Number(formatUnits(BigInt((totalStakedV1 as any) || 0), 6)) >=
+        10000
+          ? 10000
+          : Number(formatUnits(BigInt((totalStaked as any) || 0), 6)) +
+            Number(formatUnits(BigInt((totalStakedV1 as any) || 0), 6));
+
       const actuallAmount = 10000 - total;
       if (option.value === 10000) {
         if (balance < option.value) {
@@ -155,7 +169,14 @@ export default function FormStaking() {
       return setValue('amount', option.value);
     } else {
       const balance = Number(balanceOfUsdt || 0) / 1000000;
-      const total = Number(formatUnits(BigInt((totalStaked as any) || 0), 6));
+      const total =
+        Number(formatUnits(BigInt((totalStaked as any) || 0), 6)) +
+          Number(formatUnits(BigInt((totalStakedV1 as any) || 0), 6)) >=
+        10000
+          ? 10000
+          : Number(formatUnits(BigInt((totalStaked as any) || 0), 6)) +
+            Number(formatUnits(BigInt((totalStakedV1 as any) || 0), 6));
+
       const actuallAmount = 10000 - total;
       if (balance < actuallAmount) {
         const value = (option.value * Number(balance)) / 100;
@@ -216,9 +237,12 @@ export default function FormStaking() {
   }, [currentRatePerDay, endTime, amount]);
 
   const stakeable = useMemo(() => {
-    const total = Number(formatUnits(BigInt(Number(totalStaked) || 0), 6));
+    const total =
+      Number(formatUnits(BigInt(Number(totalStaked) || 0), 6)) +
+      Number(formatUnits(BigInt(Number(totalStakedV1) || 0), 6));
+    if (total >= 10000) return 0;
     return 10000 - total;
-  }, [totalStaked]);
+  }, [totalStaked, totalStakedV1]);
 
   return (
     <FormProvider {...mainForm}>
