@@ -18,11 +18,11 @@ export interface IService {
   getDashboardBitgetData: () => QueryResult<SubgraphResponse.DashboardBitgetData>;
   getGetTransactionReward: (
     address: Address,
-    contract: Address,
+    contract: Address[],
   ) => QueryResult<SubgraphResponse.TransactionRewardData>;
   getGetTransactionStake: (
     address: Address,
-    contract: Address,
+    contract: Address[],
   ) => QueryResult<SubgraphResponse.TransactionRewardData>;
 }
 
@@ -37,16 +37,16 @@ export const subgraphService: IService = {
       query: DashboardBitgetQuery,
       fetchPolicy: 'no-cache',
     }),
-  getGetTransactionReward: (address: Address, contract: Address) =>
+  getGetTransactionReward: (address: Address, contract: Address[]) =>
     subgraphClient.query({
       query: TransactionRewardQuery,
-      variables: { address, contract },
+      variables: { address, contracts: contract },
       fetchPolicy: 'no-cache',
     }),
-  getGetTransactionStake: (address: Address, contract: Address) =>
+  getGetTransactionStake: (address: Address, contract: Address[]) =>
     subgraphClient.query({
       query: TransactionStakeQuery,
-      variables: { address, contract },
+      variables: { address, contracts: contract },
       fetchPolicy: 'no-cache',
     }),
 };

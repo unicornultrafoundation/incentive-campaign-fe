@@ -9,7 +9,6 @@ import ConnectWalletButton from '@/components/ConnectWalletButton/ConnectWalletB
 import Button from '@/components/Button';
 import { usePUSDT } from '@/hooks/usePUsdt';
 import { formatDisplayedTokenAmount, toNumberNoRound } from '@/utils';
-import { useStake } from '@/hooks/useStake';
 import ApproveModal from '@/components/Modal/ApproveModal';
 import { FormState } from '@/types/form';
 import FormMessageValidate from '@/components/Form/FormMessageValidate';
@@ -19,6 +18,7 @@ import {
 } from '@/hooks/useMutationApi';
 import { toast } from '@/store/ui';
 import { CAMPAIGN_TYPE } from '@/config/env';
+import { useStakeV2 } from '@/hooks/useStakeV2';
 
 interface Option {
   value: number;
@@ -28,8 +28,8 @@ interface Option {
 
 export default function FormStaking() {
   const { allowancePUSDT, balanceOfUsdt } = usePUSDT();
-  const { rewardsRatePerSecond, endTime } = useStake(); //endTime
-  const onStaking = useStake();
+  const { rewardsRatePerSecond, endTime } = useStakeV2(); //endTime
+  const onStaking = useStakeV2();
   const { onStake, isPending, isSuccess, isError, totalStaked } = onStaking;
   const [isOpenApprove, setIsOpenApprove] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState<number>(Date.now());

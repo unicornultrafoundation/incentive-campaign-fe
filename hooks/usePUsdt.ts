@@ -14,7 +14,7 @@ export const usePUSDT = () => {
       {
         ...contracts.pUSDT,
         functionName: 'allowance',
-        args: [address as Address, contracts.stakePublic.address as Address],
+        args: [address as Address, contracts.stakePublicV2.address as Address],
       },
       {
         ...contracts.pUSDT,
@@ -50,7 +50,7 @@ export const usePUSDT = () => {
     const txhash = await method.writeContractAsync({
       ...contracts.pUSDT,
       functionName: 'approve',
-      args: [contracts.stakePublic.address, maxUint256],
+      args: [contracts.stakePublicV2.address, maxUint256],
     });
     return waitForTransaction(txhash);
   };

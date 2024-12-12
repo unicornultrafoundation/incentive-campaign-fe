@@ -1,0 +1,18 @@
+@tailwind components;
+
+@layer components {
+  .swiper-for-buy-phone {
+    &-horizontal {
+      @apply absolute inset-x-0;
+      @apply flex flex-row items-center justify-center gap-3 bottom-0 -mb-5 tablet:mb-[2rem];
+    }
+
+    &-pagination {
+      @apply bg-gray-500 rounded-full size-3 transition-all duration-300 z-20 cursor-pointer;
+
+      &-active {
+        @apply bg-white drop-shadow-[0px_0px_8px_#FFFFFF];
+      }
+    }
+  }
+}

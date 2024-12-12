@@ -1,5 +1,4 @@
 import { DocumentNode, gql } from '@apollo/client';
-import { Address } from 'viem';
 
 export const DashboardPublicQuery = gql(`
   query DashboardPublic {
@@ -13,8 +12,8 @@ export const DashboardPublicQuery = gql(`
 `);
 
 export const TransactionRewardQuery: DocumentNode = gql(`
-query TransactionReward($contract: String, $address: String, $limit: Int = 10, $skip: Int = 0) {
-  transactionPools(where: {to: $address, event: HARVEST, contract: $contract}, 
+query TransactionReward($contracts: [String!], $address: String, $limit: Int = 10, $skip: Int = 0) {
+  transactionPools(where: {to: $address, event: HARVEST, contract_in: $contracts}, 
   first: $limit,
   skip: $skip,
     orderBy: timestamp,
@@ -32,10 +31,11 @@ query TransactionReward($contract: String, $address: String, $limit: Int = 10, $
 }`);
 
 export const TransactionStakeQuery: DocumentNode = gql(`
-query TransactionReward($contract: String, $address: String, $limit: Int = 10, $skip: Int = 0) {
-  transactionPools(where: {to: $address, event: STAKE, contract: $contract}, 
-  first: $limit,
-  skip: $skip,
+query TransactionReward($contracts: [String!], $address: String, $limit: Int = 10, $skip: Int = 0) {
+  transactionPools(
+    where: { to: $address, event: STAKE, contract_in: $contracts }, 
+    first: $limit,
+    skip: $skip,
     orderBy: timestamp,
     orderDirection: desc
   ) {
