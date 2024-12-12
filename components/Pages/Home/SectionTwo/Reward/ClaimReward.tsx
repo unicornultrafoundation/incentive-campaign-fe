@@ -161,7 +161,19 @@ export default function ClaimReward() {
   //   return { days, hours, minutes, seconds };
   // }, [currentDate, claimableTime]);
 
-  const isClaimable = false;
+  const isClaimable = useMemo(() => {
+    const rewards = Number(formatUnits(BigInt(Number(pendingReward) || 0), 18));
+    if (rewards > 0) return false;
+    return true;
+  }, [pendingReward]);
+
+  const isClaimableV2 = useMemo(() => {
+    const rewards = Number(
+      formatUnits(BigInt(Number(pendingRewardV2) || 0), 18),
+    );
+    if (rewards > 0) return false;
+    return true;
+  }, [pendingRewardV2]);
   // const isClaimable = useMemo(() => {
   //   const currentTime = currentDate / 1000;
   //   return currentTime < Number(claimableTime);
@@ -290,15 +302,15 @@ export default function ClaimReward() {
               {/*    </p>*/}
               {/*  </div>*/}
               {/*)}*/}
-              {isClaimable && (
-                <div className="w-full flex items-center gap-2 mt-6">
-                  <Icon.IconWarning width={24} height={24} />
-                  <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">
-                    Note: Rewards can be instantly claimed after TGE 7 days (
-                    approximately in the middle of December)
-                  </p>
-                </div>
-              )}
+              {/*{isClaimable && (*/}
+              {/*  <div className="w-full flex items-center gap-2 mt-6">*/}
+              {/*    <Icon.IconWarning width={24} height={24} />*/}
+              {/*    <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">*/}
+              {/*      Note: Rewards can be instantly claimed after TGE 7 days (*/}
+              {/*      approximately in the middle of December)*/}
+              {/*    </p>*/}
+              {/*  </div>*/}
+              {/*)}*/}
             </div>
             <hr className="border-[#4A4A4A]" />
             <div className="flex items-center gap-6 mt-4">
@@ -417,15 +429,15 @@ export default function ClaimReward() {
               {/*    </p>*/}
               {/*  </div>*/}
               {/*)}*/}
-              {isClaimable && (
-                <div className="w-full flex items-center gap-2 mt-6">
-                  <Icon.IconWarning width={24} height={24} />
-                  <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">
-                    Note: Rewards can be instantly claimed after TGE 7 days (
-                    approximately in the middle of December)
-                  </p>
-                </div>
-              )}
+              {/*{isClaimableV2 && (*/}
+              {/*  <div className="w-full flex items-center gap-2 mt-6">*/}
+              {/*    <Icon.IconWarning width={24} height={24} />*/}
+              {/*    <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">*/}
+              {/*      Note: Rewards can be instantly claimed after TGE 7 days (*/}
+              {/*      approximately in the middle of December)*/}
+              {/*    </p>*/}
+              {/*  </div>*/}
+              {/*)}*/}
             </div>
             <hr className="border-[#4A4A4A]" />
             <div className="flex items-center gap-6 mt-4">
@@ -435,7 +447,7 @@ export default function ClaimReward() {
               >
                 <Button
                   loading={isPending || isLoading}
-                  disabled={isClaimable}
+                  disabled={isClaimableV2}
                   loadingText={'Claiming...'}
                   scale="md"
                   className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
@@ -617,15 +629,15 @@ export default function ClaimReward() {
                       {/*    </p>*/}
                       {/*  </div>*/}
                       {/*)}*/}
-                      {isClaimable && (
-                        <div className="w-full flex items-center gap-2 mt-6">
-                          <Icon.IconWarning width={24} height={24} />
-                          <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">
-                            Note: Rewards can be instantly claimed after TGE 7
-                            days ( approximately in the middle of December)
-                          </p>
-                        </div>
-                      )}
+                      {/*{isClaimable && (*/}
+                      {/*  <div className="w-full flex items-center gap-2 mt-6">*/}
+                      {/*    <Icon.IconWarning width={24} height={24} />*/}
+                      {/*    <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">*/}
+                      {/*      Note: Rewards can be instantly claimed after TGE 7*/}
+                      {/*      days ( approximately in the middle of December)*/}
+                      {/*    </p>*/}
+                      {/*  </div>*/}
+                      {/*)}*/}
                     </div>
                     <hr className="border-[#4A4A4A]" />
                     <div className="flex items-center gap-6 mt-4">
@@ -755,15 +767,15 @@ export default function ClaimReward() {
                       {/*    </p>*/}
                       {/*  </div>*/}
                       {/*)}*/}
-                      {isClaimable && (
-                        <div className="w-full flex items-center gap-2 mt-6">
-                          <Icon.IconWarning width={24} height={24} />
-                          <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">
-                            Note: Rewards can be instantly claimed after TGE 7
-                            days ( approximately in the middle of December)
-                          </p>
-                        </div>
-                      )}
+                      {/*{isClaimableV2 && (*/}
+                      {/*  <div className="w-full flex items-center gap-2 mt-6">*/}
+                      {/*    <Icon.IconWarning width={24} height={24} />*/}
+                      {/*    <p className="text-sm laptop:text-base font-semibold text-[#FF72B4]">*/}
+                      {/*      Note: Rewards can be instantly claimed after TGE 7*/}
+                      {/*      days ( approximately in the middle of December)*/}
+                      {/*    </p>*/}
+                      {/*  </div>*/}
+                      {/*)}*/}
                     </div>
                     <hr className="border-[#4A4A4A]" />
                     <div className="flex items-center gap-6 mt-4">
@@ -773,7 +785,7 @@ export default function ClaimReward() {
                       >
                         <Button
                           loading={isPending || isLoading}
-                          disabled={isClaimable}
+                          disabled={isClaimableV2}
                           loadingText={'Claiming...'}
                           scale="md"
                           className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
