@@ -83,10 +83,12 @@ export default function SignConnectMessageModal({ isOpen, onClose }: Props) {
             </div>
             <a
               data-tooltip-id="error-report-msg"
-              data-tooltip-content={error?.message || authError}
+              data-tooltip-content={
+                error?.message?.split('.')[0] || authError?.split('.')[0]
+              }
             >
               <div className="max-w-full text-secondary text-center text-ellipsis">
-                {error?.message || authError}
+                {error?.message?.split('.')[0] || authError?.split('.')[0]}
               </div>
             </a>
             <Icon.ToastFail className="mx-auto" />

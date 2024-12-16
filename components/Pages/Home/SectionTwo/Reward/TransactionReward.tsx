@@ -92,16 +92,20 @@ export default function TransactionReward() {
                           U2U
                         </td>
                         <td className="cursor-pointer text-left laptop:text-right py-4 pr-4 laptop:pr-0 text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
-                          <a
-                            target="_blank"
-                            href={`${U2U_SCAN_URL}/${transaction.txHash}`}
-                          >
-                            {shortenAddress(transaction.txHash)}
-                          </a>
+                          <div className="flex items-center justify-end gap-1">
+                            <a
+                              className="underline"
+                              target="_blank"
+                              href={`${U2U_SCAN_URL}/${transaction.txHash}`}
+                            >
+                              {shortenAddress(transaction.txHash)}
+                            </a>
+                            {/*<Icon.ArrowRightIcon className="size-7 text-white" />*/}
+                          </div>
                         </td>
                       </tr>
                     ))
-                  : ''}
+                  : null}
               </tbody>
             </table>
             {!transactions?.length && (

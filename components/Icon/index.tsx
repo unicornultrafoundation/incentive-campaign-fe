@@ -69,6 +69,7 @@ import ErrorWallet from '@/components/Icon/error.png';
 import ToastSuccess from '@/components/Icon/toast-success.png';
 import ToastFail from '@/components/Icon/toast-fail.png';
 import IconStart from '@/components/Icon/IconStart';
+import ArrowLink from '@/components/Icon/ArrowLink';
 
 export type IconProps = React.SVGProps<SVGSVGElement>;
 //
@@ -105,6 +106,9 @@ Icon.U2UWallet = (props: IconProps) => <U2UWalletIcon {...props} />;
 Icon.StakingTabActive = (props: IconProps) => <StakingTabActive {...props} />;
 Icon.StakingTabNotActive = (props: IconProps) => (
   <StakingTabNotActive {...props} />
+);
+Icon.ArrowLink = (props: IconProps) => (
+  <ArrowLink {...props} />
 );
 
 Icon.Cards = (props: Omit<ImageProps, 'src' | 'alt'>) => (

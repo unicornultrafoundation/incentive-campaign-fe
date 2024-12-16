@@ -36,6 +36,7 @@ export default function ClaimReward() {
   } = onStakingV2;
   const [currentDate, setCurrentDate] = useState<number>(Date.now());
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoadingV2, setIsLoadingV2] = useState<boolean>(false);
   const [isLoadingUnStake, setIsLoadingUnStake] = useState<boolean>(false);
   const [isLoadingUnStakeV2, setIsLoadingUnStakeV2] = useState<boolean>(false);
   const { address } = useAccount();
@@ -52,12 +53,12 @@ export default function ClaimReward() {
   };
   const handleClaimV2 = async () => {
     try {
-      setIsLoading(true);
+      setIsLoadingV2(true);
       await onClaimV2();
     } catch (e) {
       console.log(e);
     } finally {
-      setIsLoading(false);
+      setIsLoadingV2(false);
     }
   };
   const handleUnStakeV1 = async () => {
@@ -319,7 +320,7 @@ export default function ClaimReward() {
                 className="flex justify-center h-12 laptop:h-[64px] !rounded-xl laptop:!rounded-2xl"
               >
                 <Button
-                  loading={isPending || isLoading}
+                  loading={isLoading}
                   disabled={isClaimable}
                   loadingText={'Claiming...'}
                   scale="md"
@@ -332,7 +333,7 @@ export default function ClaimReward() {
 
               {!isWithdraw ? (
                 <Button
-                  loading={isPending || isLoadingUnStake}
+                  // loading={isPending || isLoadingUnStake}
                   disabled={true}
                   loadingText={'Processing...'}
                   scale="md"
@@ -347,7 +348,7 @@ export default function ClaimReward() {
                   className="flex justify-center h-12 laptop:h-[64px] !rounded-xl laptop:!rounded-2xl"
                 >
                   <Button
-                    loading={isPending || isLoadingUnStake}
+                    loading={isLoadingUnStake}
                     disabled={false}
                     loadingText={'Processing...'}
                     scale="md"
@@ -446,7 +447,7 @@ export default function ClaimReward() {
                 className="flex justify-center h-12 laptop:h-[64px] !rounded-xl laptop:!rounded-2xl"
               >
                 <Button
-                  loading={isPending || isLoading}
+                  loading={isLoadingV2}
                   disabled={isClaimableV2}
                   loadingText={'Claiming...'}
                   scale="md"
@@ -459,7 +460,7 @@ export default function ClaimReward() {
 
               {!isWithdraw ? (
                 <Button
-                  loading={isPendingV2 || isLoadingUnStakeV2}
+                  // loading={isPendingV2 || isLoadingUnStakeV2}
                   disabled={true}
                   loadingText={'Processing...'}
                   scale="md"
@@ -474,7 +475,7 @@ export default function ClaimReward() {
                   className="flex justify-center h-12 laptop:h-[64px] !rounded-xl laptop:!rounded-2xl"
                 >
                   <Button
-                    loading={isPendingV2 || isLoadingUnStakeV2}
+                    loading={isLoadingUnStakeV2}
                     disabled={false}
                     loadingText={'Processing...'}
                     scale="md"
@@ -646,7 +647,7 @@ export default function ClaimReward() {
                         className="flex justify-center h-12 laptop:h-[64px] !rounded-xl laptop:!rounded-2xl"
                       >
                         <Button
-                          loading={isPending || isLoading}
+                          loading={isLoading}
                           disabled={isClaimable}
                           loadingText={'Claiming...'}
                           scale="md"
@@ -659,7 +660,7 @@ export default function ClaimReward() {
 
                       {!isWithdraw ? (
                         <Button
-                          loading={isPending || isLoadingUnStake}
+                          // loading={isPending || isLoadingUnStake}
                           disabled={true}
                           loadingText={'Processing...'}
                           scale="md"
@@ -674,7 +675,7 @@ export default function ClaimReward() {
                           className="flex justify-center h-12 laptop:h-[64px] !rounded-xl laptop:!rounded-2xl"
                         >
                           <Button
-                            loading={isPending || isLoadingUnStake}
+                            loading={isLoadingUnStake}
                             disabled={false}
                             loadingText={'Processing...'}
                             scale="md"
@@ -784,7 +785,7 @@ export default function ClaimReward() {
                         className="flex justify-center h-12 laptop:h-[64px] !rounded-xl laptop:!rounded-2xl"
                       >
                         <Button
-                          loading={isPending || isLoading}
+                          loading={isLoadingV2}
                           disabled={isClaimableV2}
                           loadingText={'Claiming...'}
                           scale="md"
@@ -797,7 +798,7 @@ export default function ClaimReward() {
 
                       {!isWithdraw ? (
                         <Button
-                          loading={isPendingV2 || isLoadingUnStakeV2}
+                          // loading={isPendingV2 || isLoadingUnStakeV2}
                           disabled={true}
                           loadingText={'Processing...'}
                           scale="md"
@@ -812,7 +813,7 @@ export default function ClaimReward() {
                           className="flex justify-center h-12 laptop:h-[64px] !rounded-xl laptop:!rounded-2xl"
                         >
                           <Button
-                            loading={isPendingV2 || isLoadingUnStakeV2}
+                            loading={isLoadingUnStakeV2}
                             disabled={false}
                             loadingText={'Processing...'}
                             scale="md"

@@ -2,7 +2,7 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 // import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react'; // Import useRouter từ Next.js
+import React, { useMemo, useState } from 'react'; // Import useRouter từ Next.js
 import { FormProvider, useForm } from 'react-hook-form';
 import { useAccount } from 'wagmi';
 
@@ -103,18 +103,51 @@ const LandingHeader = () => {
           {/* Action Buttons */}
           <div className="desktop:flex laptop:flex hidden flex-1 justify-end gap-3">
             {!isClaimed && (
-              <Button
-                onClick={() => {
-                  if (!isValidSession) {
-                    setOpen(true);
-                    return;
-                  }
-                  setOpenAidropModal(!isOpenAirdropModal);
-                }}
-                className="disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:border-none disabled:text-[#92929299] font-semibold !text-sm tablet:text-sm text-center text-nowrap cursor-pointer px-10 !py-2 tablet:px-4 bg-[#4651F6] !border-[#4651F6] items-center gap-1 rounded-[32px] text-[white] hover:brightness-75 transition-all"
-              >
-                Claim your Gas fee
-              </Button>
+              <>
+                {isValidSession && userClaimStatus?.isEligibility === false ? (
+                  <Button
+                    style={{
+                      pointerEvents: 'none',
+                      filter: 'grayscale(100%) brightness(60%)',
+                    }}
+                    onClick={() => {
+                      if (!isValidSession) {
+                        setOpen(true);
+                        return;
+                      }
+                      setOpenAidropModal(!isOpenAirdropModal);
+                    }}
+                    className="disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:border-none disabled:text-[#92929299] font-semibold !text-sm tablet:text-sm text-center text-nowrap cursor-pointer px-10 !py-2 tablet:px-4 bg-[#4651F6] !border-[#4651F6] items-center gap-1 rounded-[32px] text-[white] hover:brightness-75 transition-all"
+                  >
+                    Claim Free Gas
+                  </Button>
+                ) : (
+                  <Button
+                    style={{
+                      pointerEvents:
+                        isValidSession &&
+                        userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
+                          ? 'none'
+                          : 'auto',
+                      filter:
+                        isValidSession &&
+                        userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
+                          ? 'grayscale(100%) brightness(60%)'
+                          : 'none',
+                    }}
+                    onClick={() => {
+                      if (!isValidSession) {
+                        setOpen(true);
+                        return;
+                      }
+                      setOpenAidropModal(!isOpenAirdropModal);
+                    }}
+                    className="disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:border-none disabled:text-[#92929299] font-semibold !text-sm tablet:text-sm text-center text-nowrap cursor-pointer px-10 !py-2 tablet:px-4 bg-[#4651F6] !border-[#4651F6] items-center gap-1 rounded-[32px] text-[white] hover:brightness-75 transition-all"
+                  >
+                    Claim Free Gas
+                  </Button>
+                )}
+              </>
             )}
             <div className="gap-2 mt-4 tablet:mt-0 hidden laptop:flex">
               <ConnectWalletButton
