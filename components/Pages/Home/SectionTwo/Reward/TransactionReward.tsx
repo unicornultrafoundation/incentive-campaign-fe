@@ -3,7 +3,7 @@ import { useAccount } from 'wagmi';
 import { Address, formatUnits } from 'viem';
 import { format } from 'date-fns';
 
-import { shortenAddress } from '@/utils/string';
+import { classNames, shortenAddress } from '@/utils/string';
 import {
   CAMPAIGN_TYPE,
   CONTRACT_BITGET_ADDRESS,
@@ -59,7 +59,7 @@ export default function TransactionReward() {
     <>
       <div className="flex justify-center gap-6 laptop:gap-4 flex-col w-full">
         <h3 className="font-jockey text-2xl">Reward Transactions</h3>
-        <div className="p-5 laptop:p-8 flex justify-center flex-col w-full gap-6 rounded-2xl bg-[#14141480] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
+        <div className="hidden laptop:flex p-5 laptop:p-8 justify-center flex-col w-full gap-6 rounded-2xl bg-[#14141480] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
           <div className="h-[300px] w-full overflow-y-scroll">
             <table className="w-full border-collapse">
               <thead>
@@ -169,6 +169,135 @@ export default function TransactionReward() {
           {/*      'rounded-lg text-gray-500 hover:text-indigo-500 hover:bg-gray-200 p-[9px] transition-all duration-300',*/}
           {/*    )}*/}
           {/*    activeLinkClassName="!text-[#7EFFC5] font-normal"*/}
+          {/*  />*/}
+          {/*</div>*/}
+        </div>
+
+        <div className="flex tablet:hidden flex-col items-center w-full gap-6 overflow-auto">
+          {transactions &&
+            transactions.length > 0 &&
+            transactions.map((transaction, index) => {
+              return (
+                <div
+                  key={`mobile-${index}`}
+                  className={classNames(
+                    'flex flex-col items-center justify-center gap-4 w-full',
+                    'rounded-2xl bg-[#141414] p-5',
+                  )}
+                >
+                  {/* Type */}
+
+                  {/* Node Type */}
+                  <div className="flex flex-row items-center justify-between gap-4 w-full">
+                    <div className="font-roboto font-normal text-sm text-[#929292]">
+                      Timestamp
+                    </div>
+                    <div className="flex flex-row items-center justify-start font-inter font-bold text-base text-[#FFF]">
+                      {format(
+                        new Date(1000 * Number(transaction.timestamp)),
+                        'yyyy-MM-dd HH:mm:ss',
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Qty */}
+                  <div className="flex flex-row items-center justify-between gap-4 w-full">
+                    <div className="font-roboto font-normal text-sm text-[#929292]">
+                      Amount
+                    </div>
+                    <div className="flex flex-row items-center justify-start font-inter font-bold text-base text-[#FFF]">
+                      {toNumberNoRound(
+                        Number(
+                          formatUnits(
+                            BigInt(Number(transaction.amount) || 0),
+                            18,
+                          ),
+                        ),
+                        4,
+                      )}{' '}
+                      U2U
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row items-center justify-between gap-4 w-full">
+                    <div className="font-roboto font-normal text-sm text-[#929292]">
+                      TxHash
+                    </div>
+                    <div className="flex flex-row items-center justify-start font-inter font-bold text-base text-[#FFF]">
+                      <div className="flex items-center justify-end gap-1">
+                        <a
+                          className="underline"
+                          target="_blank"
+                          href={`${U2U_SCAN_URL}/${transaction.txHash}`}
+                        >
+                          {shortenAddress(transaction.txHash)}
+                        </a>
+                        {/*<Icon.ArrowRightIcon className="size-7 text-white" />*/}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          {transactions?.length === 0 && (
+            <div className="w-full flex py-20 justify-center h-full uppercase">
+              <p>No Data</p>
+            </div>
+          )}
+
+          {/*<div className="mt-4 pb-6">*/}
+          {/*  <ReactPaginate*/}
+          {/*    forcePage={queryParams.page - 1}*/}
+          {/*    pageCount={Math.ceil(*/}
+          {/*      (queryListOrder?.data?.data?.total ?? 1) / queryParams.limit,*/}
+          {/*    )}*/}
+          {/*    pageRangeDisplayed={2}*/}
+          {/*    marginPagesDisplayed={3}*/}
+          {/*    renderOnZeroPageCount={null}*/}
+          {/*    onPageChange={(data) => {*/}
+          {/*      setQueryParams({ ...queryParams, page: data.selected + 1 });*/}
+          {/*    }}*/}
+          {/*    // ----*/}
+          {/*    previousLabel={*/}
+          {/*      <div*/}
+          {/*        className={classNames(*/}
+          {/*          'cursor-pointer rounded-l-lg bg-[#141414] p-[9px]',*/}
+          {/*          'group-[.disabled]:cursor-not-allowed',*/}
+          {/*        )}*/}
+          {/*      >*/}
+          {/*        <FaAngleLeft*/}
+          {/*          width={24}*/}
+          {/*          height={24}*/}
+          {/*          className="fill-[#929292]"*/}
+          {/*        />*/}
+          {/*      </div>*/}
+          {/*    }*/}
+          {/*    breakLabel="..."*/}
+          {/*    nextLabel={*/}
+          {/*      <div*/}
+          {/*        className={classNames(*/}
+          {/*          'cursor-pointer rounded-r-lg bg-[#141414] p-[9px] ',*/}
+          {/*          'group-[.disabled]:cursor-not-allowed',*/}
+          {/*        )}*/}
+          {/*      >*/}
+          {/*        <FaAngleRight*/}
+          {/*          width={24}*/}
+          {/*          height={24}*/}
+          {/*          className="fill-[#929292]"*/}
+          {/*        />*/}
+          {/*      </div>*/}
+          {/*    }*/}
+          {/*    // ----*/}
+          {/*    containerClassName="w-full flex flex-row items-center justify-center rounded-lg bg-[#141414]"*/}
+          {/*    previousClassName="group"*/}
+          {/*    breakLinkClassName={classNames(*/}
+          {/*      'rounded-lg text-gray-500 hover:text-indigo-500 p-[9px] transition-all duration-300',*/}
+          {/*    )}*/}
+          {/*    nextClassName="group"*/}
+          {/*    pageLinkClassName={classNames(*/}
+          {/*      'rounded-lg text-gray-500 hover:text-indigo-500 hover:bg-gray-200 p-[9px] transition-all duration-300',*/}
+          {/*    )}*/}
+          {/*    activeLinkClassName="text-white font-normal"*/}
           {/*  />*/}
           {/*</div>*/}
         </div>
