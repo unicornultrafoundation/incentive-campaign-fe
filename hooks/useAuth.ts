@@ -99,12 +99,17 @@ export const useWrongNetwork = () => {
 export const useAccountChange = () => {
   const { address } = useAccount();
   const { onSignMessage } = useAuth();
-  const profileAddress = localStorage.getItem('addressProfile');
+  const profileAddress =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('addressProfile') || null
+      : null;
+
   useEffect(() => {
     if (!address || !profileAddress) return;
     if (address !== profileAddress) {
       onSignMessage();
     }
   }, [address, profileAddress]);
+
   return;
 };

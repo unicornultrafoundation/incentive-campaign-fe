@@ -1,7 +1,7 @@
 'use client';
 
 // import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Marquee from 'react-fast-marquee';
 import { Tooltip } from 'react-tooltip';
 

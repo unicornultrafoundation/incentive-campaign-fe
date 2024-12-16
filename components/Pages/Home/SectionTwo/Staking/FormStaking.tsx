@@ -280,6 +280,15 @@ export default function FormStaking() {
                     id=""
                     placeholder="Ex. 10000"
                     className="outline-none w-full flex gap-4 justify-between px-4 py-2 border min-w-full !border-solid rounded-lg border-[#4A4A4A] mt-4 laptop:mt-8 bg-transparent"
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setSelectedType(0);
+                    }}
+                    onKeyPress={(e) => {
+                      if (!/^\d*\.?\d*$/.test(e.key)) {
+                        e.preventDefault();
+                      }
+                    }}
                   />
                 )}
               />

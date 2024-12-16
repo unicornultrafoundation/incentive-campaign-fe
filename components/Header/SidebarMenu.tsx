@@ -1,12 +1,16 @@
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import Icon from '@/components/Icon';
 import { useAuth } from '@/hooks/useAuth';
 import useWalletStore from '@/store/connect-wallet';
 import Button from '@/components/Button';
+import { ClaimStatus } from '@/types/entities';
+import useUserStore from '@/store/auth';
 
 import AirdropModal from '../Modal/airdrop-modal';
+import { shortenAddress } from '@/utils/string';
+import { useAccount } from 'wagmi';
 
 interface SlideMenuProps {
   isOpen?: boolean;
@@ -19,7 +23,8 @@ const SlideMenu = ({ isOpen, onClose }: SlideMenuProps) => {
   const { isValidSession } = useAuth();
   const { setOpen } = useWalletStore();
   const [isOpenAirdropModal, setOpenAidropModal] = useState(false);
-
+  const { userClaimStatus } = useUserStore();
+  const { address } = useAccount();
   // const handleNavigation = (path: string) => {
   //   if (!isValidSession) {
   //     setOpen(true);
@@ -71,20 +76,73 @@ const SlideMenu = ({ isOpen, onClose }: SlideMenuProps) => {
           <li />
         </ul>
         <div className="w-full">
-          <Button
-            onClick={() => {
-              if (!isValidSession) {
-                setOpen(true);
-                return;
-              }
-              setOpenAidropModal(true);
-            }}
-            className="w-full p-4 hover:bg-gray-500 bg-[#141414] flex items-center justify-center gap-1 border border-solid border-[#8C8C99] rounded-lg text-[#000]"
-          >
-            <span className="text-xl text-[#7EFFC5] font-semibold">
-              Claim your Gas fee
-            </span>
-          </Button>
+          {/*<Button*/}
+          {/*  onClick={() => {*/}
+          {/*    if (!isValidSession) {*/}
+          {/*      setOpen(true);*/}
+          {/*      return;*/}
+          {/*    }*/}
+          {/*    setOpenAidropModal(true);*/}
+          {/*  }}*/}
+          {/*  className="w-full p-4 hover:bg-gray-500 bg-[#141414] flex items-center justify-center gap-1 border border-solid border-[#8C8C99] rounded-lg text-[#000]"*/}
+          {/*>*/}
+          {/*  <span className="text-xl text-[#7EFFC5] font-semibold">*/}
+          {/*    Claim your Gas fee*/}
+          {/*  </span>*/}
+          {/*</Button>*/}
+          {address && (
+            <div className="w-full p-4 border border-solid border-[#7effc5] rounded-lg text-2xl justify-center flex gap-1 items-center mb-6">
+              <p>Address:</p>
+              <p>{shortenAddress(address)}</p>
+            </div>
+          )}
+          {isValidSession && userClaimStatus?.isEligibility === false ? (
+            <Button
+              style={{
+                pointerEvents: 'none',
+                filter: 'grayscale(100%) brightness(60%)',
+              }}
+              onClick={() => {
+                if (!isValidSession) {
+                  setOpen(true);
+                  return;
+                }
+                setOpenAidropModal(!isOpenAirdropModal);
+              }}
+              className="w-full p-4 hover:bg-gray-500 bg-[#141414] flex items-center justify-center gap-1 border border-solid border-[#8C8C99] rounded-lg text-[#000]"
+            >
+              <span className="text-xl text-[#7EFFC5] font-semibold">
+                Claim your Gas fee
+              </span>
+            </Button>
+          ) : (
+            <Button
+              style={{
+                pointerEvents:
+                  isValidSession &&
+                  userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
+                    ? 'none'
+                    : 'auto',
+                filter:
+                  isValidSession &&
+                  userClaimStatus?.claimStatus === ClaimStatus.SUCCESS
+                    ? 'grayscale(100%) brightness(60%)'
+                    : 'none',
+              }}
+              onClick={() => {
+                if (!isValidSession) {
+                  setOpen(true);
+                  return;
+                }
+                setOpenAidropModal(!isOpenAirdropModal);
+              }}
+              className="w-full p-4 hover:bg-gray-500 bg-[#141414] flex items-center justify-center gap-1 border border-solid border-[#8C8C99] rounded-lg text-[#000]"
+            >
+              <span className="text-xl text-[#7EFFC5] font-semibold">
+                Claim your Gas fee
+              </span>
+            </Button>
+          )}
           {isValidSession ? (
             <Button
               scale="md"
