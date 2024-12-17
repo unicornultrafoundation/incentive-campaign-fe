@@ -16,7 +16,6 @@ import {
 import { toNumberNoRound } from '@/utils';
 import { subgraphService } from '@/services/subgraph';
 import { TransactionReward } from '@/types/subgraph.response';
-import Icon from '@/components/Icon';
 
 export default function TransactionStake() {
   // const [queryParams, setQueryParams] = useState<APIParams.Pagination>({

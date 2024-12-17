@@ -107,9 +107,7 @@ Icon.StakingTabActive = (props: IconProps) => <StakingTabActive {...props} />;
 Icon.StakingTabNotActive = (props: IconProps) => (
   <StakingTabNotActive {...props} />
 );
-Icon.ArrowLink = (props: IconProps) => (
-  <ArrowLink {...props} />
-);
+Icon.ArrowLink = (props: IconProps) => <ArrowLink {...props} />;
 
 Icon.Cards = (props: Omit<ImageProps, 'src' | 'alt'>) => (
   <Image alt="attention" src={Cards} {...props} />
