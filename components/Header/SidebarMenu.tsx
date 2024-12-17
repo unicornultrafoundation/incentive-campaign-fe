@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
+import { useAccount } from 'wagmi';
 
 import Icon from '@/components/Icon';
 import { useAuth } from '@/hooks/useAuth';
@@ -7,10 +8,9 @@ import useWalletStore from '@/store/connect-wallet';
 import Button from '@/components/Button';
 import { ClaimStatus } from '@/types/entities';
 import useUserStore from '@/store/auth';
+import { shortenAddress } from '@/utils/string';
 
 import AirdropModal from '../Modal/airdrop-modal';
-import { shortenAddress } from '@/utils/string';
-import { useAccount } from 'wagmi';
 
 interface SlideMenuProps {
   isOpen?: boolean;

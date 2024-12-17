@@ -16,8 +16,7 @@ import { useStakeV2 } from '@/hooks/useStakeV2';
 export default function ClaimReward() {
   const { rewardsRatePerSecond, endTime, pendingReward } = useStake(); //endTime
   const onStaking = useStake();
-  const { onClaim, isPending, isSuccess, isError, totalStaked, totalClaimed } =
-    onStaking;
+  const { onClaim, isSuccess, isError, totalStaked, totalClaimed } = onStaking;
 
   const {
     rewardsRatePerSecond: rewardsRatePerSecondV2,
@@ -28,7 +27,6 @@ export default function ClaimReward() {
     onUnStakeV1,
     onUnStakeV2,
     onClaim: onClaimV2,
-    isPending: isPendingV2,
     isSuccess: isSuccessV2,
     isError: isErrorV2,
     totalStaked: totalStakedV2,
