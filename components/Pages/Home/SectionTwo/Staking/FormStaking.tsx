@@ -340,7 +340,7 @@ export default function FormStaking() {
                 </p>
               </div>
               <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
-                {toNumberNoRound(currentRate, 3)} U2U/day
+                {toNumberNoRound(currentRate, 3)} $U2U/day
               </p>
             </div>
           </div>

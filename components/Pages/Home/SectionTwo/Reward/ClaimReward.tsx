@@ -284,7 +284,7 @@ export default function ClaimReward() {
                     Current rate
                   </p>
                   <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
-                    {toNumberNoRound(estimateRewardsPerDay, 3)} U2U/day
+                    {toNumberNoRound(estimateRewardsPerDay, 3)} $U2U/day
                   </p>
                 </div>
               </div>
@@ -411,7 +411,7 @@ export default function ClaimReward() {
                     Current rate
                   </p>
                   <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
-                    {toNumberNoRound(estimateRewardsPerDayV2, 3)} U2U/day
+                    {toNumberNoRound(estimateRewardsPerDayV2, 3)} $U2U/day
                   </p>
                 </div>
               </div>
@@ -554,7 +554,7 @@ export default function ClaimReward() {
               </div>
 
               <SwiperSlide className="relative w-full flex flex-col justify-center items-center">
-                <div className="flex justify-center max-w-[297px] items-center gap-8">
+                <div className="flex justify-center w-full items-center gap-8">
                   <div className="p-5 laptop:p-8 flex flex-col w-full gap-8 rounded-2xl bg-[#14141480] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
                     <div className="">
                       <div className="flex flex-col gap-5">
@@ -611,7 +611,7 @@ export default function ClaimReward() {
                             Current rate
                           </p>
                           <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
-                            {toNumberNoRound(estimateRewardsPerDay, 3)} U2U/day
+                            {toNumberNoRound(estimateRewardsPerDay, 3)} $U2U/day
                           </p>
                         </div>
                       </div>
@@ -691,7 +691,7 @@ export default function ClaimReward() {
                 </div>
               </SwiperSlide>
               <SwiperSlide className="relative w-full flex flex-col justify-center items-center">
-                <div className="flex justify-center max-w-[297px] items-center gap-8">
+                <div className="flex justify-center w-full items-center gap-8">
                   <div className="p-5 laptop:p-8 flex flex-col w-full gap-8 rounded-2xl bg-[#14141480] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
                     <div className="">
                       <div className="flex flex-col gap-5">
@@ -749,7 +749,7 @@ export default function ClaimReward() {
                           </p>
                           <p className="text-lg laptop:text-2xl font-bold text-[#7EFFC5]">
                             {toNumberNoRound(estimateRewardsPerDayV2, 3)}{' '}
-                            U2U/day
+                            $U2U/day
                           </p>
                         </div>
                       </div>

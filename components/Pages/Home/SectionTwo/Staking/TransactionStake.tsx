@@ -61,27 +61,29 @@ export default function TransactionStake() {
     <>
       <div className="flex justify-center gap-6 laptop:gap-4 flex-col w-full">
         <h3 className="font-jockey text-2xl">Transactions</h3>
-        <div className="hidden laptop:flex p-5 laptop:p-8 justify-center flex-col w-full gap-6 rounded-2xl bg-[#14141480] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
-          <div className="h-[300px] w-full overflow-y-scroll">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="text-[#929292]">
-                  <th className="text-left w-1/3">Timestamp</th>
+        <div className="hidden laptop:flex overflow-auto relative p-5 laptop:p-8 justify-center flex-col w-full gap-6 rounded-2xl bg-[#14141480] backdrop-blur-[2px] border border-solid border-[#4A4A4A]">
+          <div className="h-[300px] w-full flex flex-col justify-between items-center">
+            <table className="border-collapse w-full table-auto">
+              <thead className="sticky -top-[32px] rounded-xl">
+                <tr className="text-[#929292] bg-[#1F1F1F] *:py-4">
+                  <th className="pl-2 text-left w-1/3">Timestamp</th>
                   <th className="text-left laptop:text-center w-1/3">Amount</th>
-                  <th className="text-left laptop:text-right w-1/3">TxHash</th>
+                  <th className="pr-2 text-left laptop:text-right w-1/3">
+                    TxHash
+                  </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="h-full">
                 {transactions?.length
                   ? transactions?.map((transaction, index) => (
                       <tr key={index}>
-                        <td className="py-4 pr-4 laptop:pr-0 text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
+                        <td className="py-4 pr-4 laptop:px-2 text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
                           {format(
                             new Date(1000 * Number(transaction.timestamp)),
                             'yyyy-MM-dd HH:mm:ss',
                           )}
                         </td>
-                        <td className="py-4 pr-4 laptop:pr-0 text-left laptop:text-center text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
+                        <td className="py-4 pr-4 laptop:px-2 text-left laptop:text-center text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
                           {toNumberNoRound(
                             Number(
                               formatUnits(
@@ -91,9 +93,9 @@ export default function TransactionStake() {
                             ),
                             3,
                           )}{' '}
-                          pUSDT
+                          $pUSDT
                         </td>
-                        <td className="cursor-pointer text-left laptop:text-right py-4 pr-4 laptop:pr-0 text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
+                        <td className="cursor-pointer text-left laptop:text-right py-4 pr-4 laptop:px-2 text-base laptop:text-lg border-b border-[#4a4a4a80] ...">
                           <div className="flex items-center justify-end gap-1">
                             <a
                               className="underline"
@@ -110,22 +112,6 @@ export default function TransactionStake() {
                   : null}
               </tbody>
             </table>
-            {/*{isLoading ? (*/}
-            {/*  <div className="w-full justify-center">*/}
-            {/*    <svg*/}
-            {/*      className="animate-spin h-5 w-5 mr-3 ..."*/}
-            {/*      viewBox="0 0 24 24"*/}
-            {/*    />*/}
-            {/*  </div>*/}
-            {/*) : (*/}
-            {/*  <>*/}
-            {/*    {!transactions?.length && (*/}
-            {/*      <div className="flex justify-center items-center h-full w-full">*/}
-            {/*        <p className="text-[#929292]">No transaction found</p>*/}
-            {/*      </div>*/}
-            {/*    )}*/}
-            {/*  </>*/}
-            {/*)}*/}
             {!transactions?.length && (
               <div className="flex justify-center items-center h-full w-full">
                 <p className="text-[#929292]">No transaction found</p>
@@ -227,12 +213,12 @@ export default function TransactionStake() {
                         Number(
                           formatUnits(
                             BigInt(Number(transaction.amount) || 0),
-                            18,
+                            6,
                           ),
                         ),
-                        4,
+                        3,
                       )}{' '}
-                      U2U
+                      $pUSDT
                     </div>
                   </div>
 

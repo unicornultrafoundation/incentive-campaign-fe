@@ -166,27 +166,26 @@ const SectionMarquee = () => {
           Deposit locked until campaign ended.
         </div>
         <div className="w-[45px] aspect-square">
-          <Icon.Star />
+          <Icon.StarsIcon key="1" />
         </div>
         <div className="h-full flex items-center">
           Join before campaign ends
         </div>
         <div className="w-[45px] aspect-square">
-          <Icon.Star />
+          <Icon.StarsIcon key="2" />
         </div>
         <div className="h-full flex items-center">
           Deposit locked until campaign ended.
         </div>
         <div className="w-[45px] aspect-square">
-          <Icon.Star />
+          <Icon.StarsIcon key="3" />
         </div>
         <div className="h-full flex items-center">
           Join before campaign ends
         </div>
         <div className="w-[45px] aspect-square">
-          <Icon.Star />
+          <Icon.StarsIcon key="4" />
         </div>
-        &nbsp;
       </div>
     </Marquee>
   );
@@ -289,7 +288,7 @@ export default function SectionOne() {
     },
     {
       title: 'Stake & Earn Big - Boost Your U2U Rewards',
-      description: 'Stake your $USDT to earn U2U tokens instantly!',
+      description: 'Stake your $USDT to earn $U2U tokens instantly!',
       isCompleted: false,
       type: 'Stake',
       actionButton: (

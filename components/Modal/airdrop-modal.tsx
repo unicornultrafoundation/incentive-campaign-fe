@@ -68,7 +68,7 @@ const ClaimGasFeeModal = ({
             <Icon.StarPurple className="w-[30px]" />
           </div>
           <div className="flex-1 flex items-center">
-            Simple transaction, get 5 U2U instantly
+            Simple transaction, get 5 $U2U instantly
           </div>
         </div>
         <div className="w-full flex items-center gap-5">
