@@ -160,23 +160,28 @@ export default function ClaimReward() {
   //   return { days, hours, minutes, seconds };
   // }, [currentDate, claimableTime]);
 
+  // const isClaimable = useMemo(() => {
+  //   const rewards = Number(formatUnits(BigInt(Number(pendingReward) || 0), 18));
+  //   if (rewards > 0) return false;
+  //   return true;
+  // }, [pendingReward]);
+
+  // const isClaimableV2 = useMemo(() => {
+  //   const rewards = Number(
+  //     formatUnits(BigInt(Number(pendingRewardV2) || 0), 18),
+  //   );
+  //   if (rewards > 0) return false;
+  //   return true;
+  // }, [pendingRewardV2]);
   const isClaimable = useMemo(() => {
-    const rewards = Number(formatUnits(BigInt(Number(pendingReward) || 0), 18));
-    if (rewards > 0) return false;
-    return true;
-  }, [pendingReward]);
+    const currentTime = currentDate / 1000;
+    return currentTime < Number(1734508800);
+  }, [currentDate]);
 
   const isClaimableV2 = useMemo(() => {
-    const rewards = Number(
-      formatUnits(BigInt(Number(pendingRewardV2) || 0), 18),
-    );
-    if (rewards > 0) return false;
-    return true;
-  }, [pendingRewardV2]);
-  // const isClaimable = useMemo(() => {
-  //   const currentTime = currentDate / 1000;
-  //   return currentTime < Number(claimableTime);
-  // }, [currentDate, claimableTime]);
+    const currentTime = currentDate / 1000;
+    return currentTime < Number(1734508800);
+  }, [currentDate]);
 
   const isWithdraw = useMemo(() => {
     const currentTime = currentDate / 1000;
@@ -319,7 +324,7 @@ export default function ClaimReward() {
               >
                 <Button
                   loading={isLoading}
-                  disabled={true} //isClaimable
+                  disabled={isClaimable}
                   loadingText={'Claiming...'}
                   scale="md"
                   className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
@@ -446,7 +451,7 @@ export default function ClaimReward() {
               >
                 <Button
                   loading={isLoadingV2}
-                  disabled={true} //isClaimableV2
+                  disabled={isClaimableV2}
                   loadingText={'Claiming...'}
                   scale="md"
                   className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
@@ -646,7 +651,7 @@ export default function ClaimReward() {
                       >
                         <Button
                           loading={isLoading}
-                          disabled={true} //isClaimable
+                          disabled={isClaimable}
                           loadingText={'Claiming...'}
                           scale="md"
                           className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
@@ -784,7 +789,7 @@ export default function ClaimReward() {
                       >
                         <Button
                           loading={isLoadingV2}
-                          disabled={true} //isClaimableV2
+                          disabled={isClaimableV2}
                           loadingText={'Claiming...'}
                           scale="md"
                           className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
