@@ -91,7 +91,7 @@ const SlideMenu = ({ isOpen, onClose }: SlideMenuProps) => {
           {/*  </span>*/}
           {/*</Button>*/}
           {address && (
-            <div className="w-full p-4 border border-solid border-[#7effc5] rounded-lg text-2xl justify-center flex gap-1 items-center mb-6">
+            <div className="w-full p-4 border border-solid border-[#7effc5] rounded-lg text-xl justify-center flex gap-1 items-center mb-6">
               <p>Address:</p>
               <p>{shortenAddress(address)}</p>
             </div>
