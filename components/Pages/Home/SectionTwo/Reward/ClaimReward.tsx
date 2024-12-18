@@ -319,7 +319,7 @@ export default function ClaimReward() {
               >
                 <Button
                   loading={isLoading}
-                  disabled={isClaimable}
+                  disabled={true} //isClaimable
                   loadingText={'Claiming...'}
                   scale="md"
                   className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
@@ -446,7 +446,7 @@ export default function ClaimReward() {
               >
                 <Button
                   loading={isLoadingV2}
-                  disabled={isClaimableV2}
+                  disabled={true} //isClaimableV2
                   loadingText={'Claiming...'}
                   scale="md"
                   className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
@@ -646,7 +646,7 @@ export default function ClaimReward() {
                       >
                         <Button
                           loading={isLoading}
-                          disabled={isClaimable}
+                          disabled={true} //isClaimable
                           loadingText={'Claiming...'}
                           scale="md"
                           className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
@@ -784,7 +784,7 @@ export default function ClaimReward() {
                       >
                         <Button
                           loading={isLoadingV2}
-                          disabled={isClaimableV2}
+                          disabled={true} //isClaimableV2
                           loadingText={'Claiming...'}
                           scale="md"
                           className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#7EFFC5] hover:!bg-transparent text-[#141414] hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#8C8C99]"
