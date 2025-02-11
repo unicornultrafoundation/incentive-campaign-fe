@@ -188,6 +188,22 @@ export default function ClaimReward() {
     return currentTime > Number(endTime);
   }, []);
 
+  const isWithdrawUsdtV2 = useMemo(() => {
+    const rewards = Number(
+      formatDisplayedTokenAmount(Number(totalStakedV2 || 0), 6),
+    );
+    if (rewards > 0) return false;
+    return true;
+  }, [totalStakedV2]);
+
+  const isWithdrawUsdtV1 = useMemo(() => {
+    const rewards = Number(
+      formatDisplayedTokenAmount(Number(totalStaked || 0), 6),
+    );
+    if (rewards > 0) return false;
+    return true;
+  }, [totalStaked]);
+
   return (
     <>
       <div className="flex flex-col gap-4 laptop:gap-6 w-full">
@@ -352,7 +368,7 @@ export default function ClaimReward() {
                 >
                   <Button
                     loading={isLoadingUnStake}
-                    disabled={false}
+                    disabled={isWithdrawUsdtV1}
                     loadingText={'Processing...'}
                     scale="md"
                     className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#4651F6] hover:!bg-transparent text-white hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
@@ -479,7 +495,7 @@ export default function ClaimReward() {
                 >
                   <Button
                     loading={isLoadingUnStakeV2}
-                    disabled={false}
+                    disabled={isWithdrawUsdtV2}
                     loadingText={'Processing...'}
                     scale="md"
                     className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#4651F6] hover:!bg-transparent text-white hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
@@ -679,7 +695,7 @@ export default function ClaimReward() {
                         >
                           <Button
                             loading={isLoadingUnStake}
-                            disabled={false}
+                            disabled={isWithdrawUsdtV1}
                             loadingText={'Processing...'}
                             scale="md"
                             className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#4651F6] hover:!bg-transparent text-white hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
@@ -817,7 +833,7 @@ export default function ClaimReward() {
                         >
                           <Button
                             loading={isLoadingUnStakeV2}
-                            disabled={false}
+                            disabled={isWithdrawUsdtV2}
                             loadingText={'Processing...'}
                             scale="md"
                             className="h-12 laptop:h-[64px] disabled:bg-[#4A4A4A] disabled:!shadow-none disabled:text-[#92929299] disabled:!border-[#8C8C99] p-4 w-full !rounded-xl laptop:!rounded-2xl bg-[#4651F6] hover:!bg-transparent text-white hover:text-[#7EFFC5]  flex items-center justify-center gap-1 border border-solid hover:!border-[#7EFFC5] !border-[#4651F6]"
